@@ -42,7 +42,7 @@
 > O instalador **não tem assinatura de código** (o certificado é pago). Na primeira execução, o SmartScreen mostra "O Windows protegeu o computador": clique em **Mais informações → Executar assim mesmo**. Alguns antivírus podem acusar um **falso positivo**, comum em otimizadores porque eles alteram registro e serviços. Para conferir o arquivo, compare o SHA-256 com o `.sha256` publicado no release:
 >
 > ```powershell
-> Get-FileHash .\GueibsOptimizer-Setup-2.2.exe -Algorithm SHA256
+> Get-FileHash .\GueibsOptimizer-Setup-2.2.1.exe -Algorithm SHA256
 > ```
 >
 > Se preferir, compile você mesmo (veja abaixo).

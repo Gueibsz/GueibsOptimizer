@@ -4,7 +4,7 @@
 ; Saída: dist\GueibsOptimizer-Setup-<versão>.exe
 
 #ifndef AppVersion
-  #define AppVersion "2.2"
+  #define AppVersion "2.2.1"
 #endif
 #ifndef SourceExe
   #define SourceExe "..\dist\GueibsOptimizer.exe"
@@ -69,7 +69,7 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 Filename: "{app}\{#AppExe}"; Parameters: "--migrate-legacy"; Flags: runhidden waituntilterminated; StatusMsg: "Atualizando itens da versão anterior..."
 ; A opção marcada é executada pelo próprio app (mesmo código usado na tela do Windows).
 Filename: "{app}\{#AppExe}"; Parameters: "--defender-add"; Tasks: defender; Flags: runhidden waituntilterminated; StatusMsg: "Adicionando a exclusão do Defender..."
-Filename: "{app}\{#AppExe}"; Description: "Abrir o {#AppName}"; Flags: postinstall nowait skipifsilent
+Filename: "{app}\{#AppExe}"; Description: "Abrir o {#AppName}"; Flags: postinstall nowait skipifsilent shellexec
 
 [UninstallRun]
 ; Remove a tarefa de início automático, a revisão semanal e a exclusão do Defender (se existirem).

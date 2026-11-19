@@ -75,6 +75,15 @@ public class InstallerScriptTests
         Assert.Contains("UninstallSilent()", Iss);
     }
 
+    // O app exige administrador no manifesto. Sem shellexec, o Inno Setup abre o exe com CreateProcess como o usuário
+    // original (sem elevação) e o Windows recusa com o erro 740.
+    [Fact]
+    public void OpenAfterInstallGoesThroughShellExecuteSoUacCanElevate()
+    {
+        var line = Iss.Split('\n').Single(l => l.Contains("Flags: postinstall", StringComparison.Ordinal));
+        Assert.Contains("shellexec", line);
+    }
+
     [Fact]
     public void TasksCallTheAppCommandsThatExist()
     {
