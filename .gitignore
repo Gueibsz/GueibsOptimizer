@@ -1,0 +1,35 @@
+## .NET / WPF
+bin/
+obj/
+dist/
+release/
+publish/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+*.cache
+*.log
+TestResults/
+coverage*/
+*.nupkg
+*.snupkg
+artifacts/
+
+## Saídas locais de testes e referências da máquina de desenvolvimento
+testes/
+referencia-powerplan.txt
+*.etl
+
+## Arquivos de trabalho local (não fazem parte do projeto)
+BLOQUEIO.md
+PROMPT-*.md
+.claude/settings.local.json
+
+## Binários de terceiros: são baixados pelo usuário (veja o README)
+PresentMon*.exe
+*-Setup-*.exe
+*.msi

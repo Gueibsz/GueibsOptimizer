@@ -1,0 +1,10 @@
+{
+  "Buscar por nome, descrição ou ID do winget...": "Buscar por nombre, descripción o ID de winget...",
+  "{0} (adaptador virtual)": "{0} (adaptador virtual)",
+  "Clock e potência da CPU: indisponíveis sem o driver PawnIO": "Reloj y potencia de la CPU: no disponibles sin el controlador PawnIO",
+  "SFC: encontrou violações de integridade (só verificação). Rode o sfc /scannow para reparar.": "SFC: encontró infracciones de integridad (solo verificación). Ejecuta sfc /scannow para reparar.",
+  "DISM: a imagem do Windows tem problemas que não podem ser reparados por aqui.": "DISM: la imagen de Windows tiene problemas que no se pueden reparar desde aquí.",
+  "DISM: a imagem do Windows tem problemas que podem ser reparados. Rode o DISM /RestoreHealth.": "DISM: la imagen de Windows tiene problemas que se pueden reparar. Ejecuta DISM /RestoreHealth.",
+  "Verificando...": "Comprobando...",
+  "Limpar seleção": "Borrar selección"
+}

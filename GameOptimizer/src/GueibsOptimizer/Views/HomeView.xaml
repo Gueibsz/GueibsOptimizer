@@ -1,0 +1,372 @@
+﻿<UserControl x:Class="GueibsOptimizer.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:GueibsOptimizer.Core"
+             xmlns:c="clr-namespace:GueibsOptimizer.Views.Controls">
+    <UserControl.Resources>
+        <!-- Título de cartão com ícone -->
+        <Style x:Key="CardTitle" TargetType="TextBlock" BasedOn="{StaticResource SectionText}">
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24">
+            <!-- Saudação e selo de estado -->
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Border BorderThickness="1" CornerRadius="12" Padding="12,4" HorizontalAlignment="Right">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding BadgeLevel}" Value="AlmostThere">
+                                        <Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding BadgeLevel}" Value="Optimized">
+                                        <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <TextBlock FontWeight="SemiBold" AutomationProperties.Name="Estado do sistema" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="BadgeText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </Border>
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Right" Margin="0,4,0,0" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ScoreText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TitleText}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Greeting" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    <TextBlock Style="{StaticResource SubtitleText}"
+                               Text="{l:T 'Painel com o estado real do seu PC. Os números são medidos agora; o resultado de qualquer otimização depende do hardware.'}" />
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Aviso: revisão de integridade com mais de 7 dias (8.5) -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="16,10" BorderThickness="1" BorderBrush="{DynamicResource WarningBrush}"
+                    Visibility="{Binding ReviewDueText, Converter={StaticResource NotEmptyToVisibility}}">
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" Content="{l:T 'Abrir Manutenção'}" Command="{Binding OpenMaintenanceCommand}" VerticalAlignment="Center"
+                            AutomationProperties.Name="Abrir Manutenção" />
+                    <TextBlock Style="{StaticResource IconText}" Text="&#xE7BA;" Foreground="{DynamicResource WarningBrush}" Margin="0,0,10,0" VerticalAlignment="Center" />
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" FontSize="12.5" Margin="0,0,12,0" AutomationProperties.Name="Aviso de revisão" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ReviewDueText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                </DockPanel>
+            </Border>
+
+            <!-- Medidor + Boost -->
+            <Grid Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="340" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Pontuação de otimização'}" />
+                            <c:InfoButton Title="{l:T 'Pontuação'}" Margin="0,-6,0,0"
+                                          Text="{l:T 'Soma dos pesos dos ajustes que estão realmente aplicados no Windows (lidos agora, não de uma lista salva). 90 ou mais: Sistema otimizado. 60 a 89: Quase lá. Abaixo de 60: Precisa de atenção. A pontuação mede a configuração, não o FPS: o resultado nos jogos depende do hardware.'}" />
+                        </StackPanel>
+                        <c:SemiGauge Width="280" Height="190" Value="{Binding Score}"
+                                     LowBrush="{DynamicResource DangerBrush}" MediumBrush="{DynamicResource WarningBrush}"
+                                     HighBrush="{DynamicResource SuccessBrush}" TrackBrush="{DynamicResource SurfaceAltBrush}"
+                                     TextBrush="{DynamicResource TextBrush}" MutedBrush="{DynamicResource TextMutedBrush}"
+                                     AutomationProperties.Name="Medidor de pontuação" />
+                        <TextBlock HorizontalAlignment="Center" FontWeight="SemiBold" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ScoreCaption" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Foreground="{DynamicResource TextMutedBrush}" FontSize="12"
+                                   TextWrapping="Wrap" TextAlignment="Center" Margin="0,4,0,0" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="SummaryLine" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        <Button Content="{l:T 'Recalcular'}" Command="{Binding RefreshCommand}" Margin="0,10,0,0" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="16,0,0,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Boost em 1 Clique'}" />
+                        <TextBlock Style="{StaticResource SubtitleText}"
+                                   Text="{l:T 'Aplica os ajustes recomendados (risco Baixo e Médio). Tudo pode ser desfeito na aba Restauração. O resultado depende do hardware.'}" />
+                        <CheckBox Content="{l:T 'Criar ponto de restauração antes'}" IsChecked="{Binding CreateRestorePoint}" Margin="0,8,0,0" Foreground="{DynamicResource TextBrush}"
+                                  AutomationProperties.Name="Criar ponto de restauração antes do Boost" />
+                        <WrapPanel Margin="0,16,0,0">
+                            <Button Style="{StaticResource BoostButton}" Command="{Binding BoostCommand}" Margin="0,0,10,8"
+                                    AutomationProperties.Name="Boost agora">
+                                <TextBlock Text="{l:T '⚡ Boost agora'}" />
+                            </Button>
+                            <Button Content="{l:T 'Check-up'}" Command="{Binding OpenCheckupCommand}" Margin="0,0,10,8" VerticalAlignment="Center"
+                                    AutomationProperties.Name="Abrir o Check-up" />
+                            <c:InfoButton Title="{l:T 'Check-up'}" Margin="0,0,0,8"
+                                          Text="{l:T 'Abre Hardware > Check-up: verifica Dual Channel (estimativa), XMP/EXPO (estimativa), link PCIe da placa de vídeo, plano de energia, Modo de Jogo, HAGS e taxa de atualização do monitor. Só lê; não altera nada.'}" />
+                        </WrapPanel>
+                        <StackPanel Margin="0,10,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+                            <ProgressBar Value="{Binding ProgressValue}" Maximum="100" />
+                            <TextBlock Margin="0,6,0,0" Foreground="{DynamicResource TextMutedBrush}" FontSize="12" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ProgressText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        </StackPanel>
+                        <TextBlock Margin="0,12,0,0" FontWeight="SemiBold" FontSize="15"
+                                   Foreground="{DynamicResource AccentTextBrush}"
+                                   Visibility="{Binding SummaryTitle, Converter={StaticResource NotEmptyToVisibility}}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="SummaryTitle" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Nível de desempenho (8.4) -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                <StackPanel>
+                    <DockPanel>
+                        <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Content="{l:T 'Aplicar nível'}"
+                                Command="{Binding ApplyLevelCommand}" VerticalAlignment="Center" AutomationProperties.Name="Aplicar nível" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Nível de desempenho'}" />
+                            <c:InfoButton Title="{l:T 'Nível de desempenho'}" Margin="0,-6,0,0"
+                                          Text="{l:T 'Cada nível é um conjunto fixo de ajustes do app, e cada nível inclui o anterior. Baixo: risco Baixo de Energia e Jogos. Médio: + risco Baixo de GPU e Periféricos. Alto: todos os ajustes de risco Baixo. Máximo: + risco Médio (o mesmo conjunto do Boost) e pede confirmação. Ajustes de risco Alto nunca entram em um nível. O nível atual é calculado lendo o estado real do Windows. Aplicar um nível cria um ponto de restauração antes e não desfaz ajustes já aplicados. O resultado depende do hardware.'}" />
+                            <Border Style="{StaticResource Badge}" BorderThickness="1" BorderBrush="{DynamicResource AccentBrush}" Margin="10,0,0,4" VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource AccentTextBrush}" FontWeight="SemiBold" FontSize="12" AutomationProperties.Name="Nível atual" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="CurrentLevelText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </DockPanel>
+                    <ItemsControl ItemsSource="{Binding Levels}" Margin="0,10,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="0,0,8,0" Padding="12,8" HorizontalContentAlignment="Left"
+                                        Command="{Binding DataContext.SelectLevelCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}" AutomationProperties.Name="{Binding Title, StringFormat='Nível {0}'}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Title" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                        <TextBlock FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}">
+                                            <Run><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="CountText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                                        </TextBlock>
+                                        <TextBlock FontSize="11.5" Foreground="{DynamicResource SuccessBrush}" Text="{l:T 'atual'}"
+                                                   Visibility="{Binding IsCurrent, Converter={StaticResource BoolToVisibility}}" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource SubtitleText}" FontSize="12.5" Margin="0,10,0,0" TextWrapping="Wrap" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="SelectedLevel.Description" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    <CheckBox x:Name="ShowLevelTweaks" Content="{l:T 'Ver os ajustes deste nível'}" Margin="0,6,0,0" FontSize="12"
+                              Foreground="{DynamicResource AccentTextBrush}" Cursor="Hand" />
+                    <ItemsControl ItemsSource="{Binding SelectedLevel.TweakNames}" Margin="0,4,0,0"
+                                  Visibility="{Binding IsChecked, ElementName=ShowLevelTweaks, Converter={StaticResource BoolToVisibility}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><UniformGrid Columns="2" /></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="12" Margin="0,1" TextTrimming="CharacterEllipsis">
+                                    <Run Text="• " /><Run><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Cartões vivos -->
+            <UniformGrid Columns="4" Margin="-8,16,-8,0">
+                <!-- Pontos de restauração -->
+                <Border Style="{StaticResource Card}" Margin="8,0">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE777;" Foreground="{DynamicResource AccentTextBrush}" DockPanel.Dock="Left" Margin="0,2,8,4" VerticalAlignment="Top" />
+                            
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Pontos de restauração'}" TextWrapping="Wrap" />
+                        </DockPanel>
+                        <TextBlock TextWrapping="Wrap" FontSize="12.5" MinHeight="34" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="RestoreText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        <Button Content="{l:T 'Criar ponto'}" Command="{Binding CreateRestorePointCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"
+                                IsEnabled="{Binding IsCreatingRestorePoint, Converter={StaticResource InverseBool}}" />
+                        <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}" Margin="0,6,0,0"
+                                   Visibility="{Binding RestoreStatus, Converter={StaticResource NotEmptyToVisibility}}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="RestoreStatus" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Arquivos para limpar -->
+                <Border Style="{StaticResource Card}" Margin="8,0">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE74D;" Foreground="{DynamicResource AccentTextBrush}" DockPanel.Dock="Left" Margin="0,2,8,4" VerticalAlignment="Top" />
+                            <c:InfoButton DockPanel.Dock="Right" VerticalAlignment="Top" Title="{l:T 'Arquivos para limpar'}" Margin="0,-6,0,0"
+                                          Text="{l:T 'Tamanho calculado só lendo as pastas das categorias padrão da Limpeza (temporários, cache de shaders, cache do Windows Update etc.). Nada é apagado aqui: o botão abre a tela de Limpeza, que mostra o detalhe e pede confirmação.'}" />
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Arquivos para limpar'}" TextWrapping="Wrap" />
+                        </DockPanel>
+                        <TextBlock TextWrapping="Wrap" FontSize="12.5" MinHeight="34" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="CleanupText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        <Button Content="{l:T 'Limpeza'}" Command="{Binding OpenCleanupCommand}" HorizontalAlignment="Left" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Memória -->
+                <Border Style="{StaticResource Card}" Margin="8,0">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE964;" Foreground="{DynamicResource AccentTextBrush}" DockPanel.Dock="Left" Margin="0,2,8,4" VerticalAlignment="Top" />
+                            
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Memória RAM'}" TextWrapping="Wrap" />
+                        </DockPanel>
+                        <TextBlock FontSize="12.5">
+                            <Run FontWeight="SemiBold" FontSize="16" ><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="MemoryPercent" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run><Run Text="{l:T '% em uso'}" />
+                        </TextBlock>
+                        <ProgressBar Value="{Binding MemoryPercent, Mode=OneWay}" Maximum="100" Margin="0,4,0,2" AutomationProperties.Name="Memória em uso" />
+                        <TextBlock FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="MemoryText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        <Button Content="{l:T 'Limpar memória'}" Command="{Binding CleanMemoryCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"
+                                IsEnabled="{Binding IsCleaningMemory, Converter={StaticResource InverseBool}}" />
+                        <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}" Margin="0,6,0,0"
+                                   Visibility="{Binding MemoryStatus, Converter={StaticResource NotEmptyToVisibility}}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="MemoryStatus" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- CPU -->
+                <Border Style="{StaticResource Card}" Margin="8,0">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE9D9;" Foreground="{DynamicResource AccentTextBrush}" DockPanel.Dock="Left" Margin="0,2,8,4" VerticalAlignment="Top" />
+                            
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Desempenho em tempo real'}" TextWrapping="Wrap" />
+                        </DockPanel>
+                        <TextBlock FontSize="12.5">
+                            <Run Text="{l:T 'CPU '}" /><Run FontWeight="SemiBold" FontSize="16" ><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="CpuText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                        </TextBlock>
+                        <c:Sparkline Height="48" Margin="0,6,0,0" Values="{Binding CpuValues}" Maximum="100" Stroke="{DynamicResource AccentBrush}" />
+                        <TextBlock Text="{l:T 'Uso total do processador nos últimos 2 minutos (medido a cada 2 s).'}" FontSize="11" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextMutedBrush}" Margin="0,4,0,0" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Seu PC foi reconhecido + Windows recém-formatado -->
+            <Grid Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource Card}" Padding="18,12">
+                    <StackPanel>
+                        <DockPanel>
+                            <Border DockPanel.Dock="Right" Style="{StaticResource Badge}" BorderThickness="1" BorderBrush="{DynamicResource AccentBrush}"
+                                    Visibility="{Binding PcRecognized, Converter={StaticResource BoolToVisibility}}">
+                                <TextBlock Foreground="{DynamicResource AccentTextBrush}" FontWeight="SemiBold" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="PcTierText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                            </Border>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE7F8;" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,10,0" />
+                            <StackPanel>
+                                <TextBlock Text="{l:T 'Seu PC foi reconhecido'}" FontWeight="SemiBold" />
+                                <TextBlock Style="{StaticResource SubtitleText}" FontSize="12.5" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="PcSummary" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                        <CheckBox x:Name="ShowDetails" Content="{l:T 'Ver o porquê do nível e recomendações'}" Margin="0,8,0,0" FontSize="12"
+                                  Foreground="{DynamicResource AccentTextBrush}" Cursor="Hand"
+                                  Visibility="{Binding PcRecognized, Converter={StaticResource BoolToVisibility}}" />
+                        <ItemsControl ItemsSource="{Binding PcDetails}" Margin="0,6,0,0"
+                                      Visibility="{Binding IsChecked, ElementName=ShowDetails, Converter={StaticResource BoolToVisibility}}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" FontSize="12.5" Margin="0,2" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Style="{StaticResource SubtitleText}" FontSize="11" Margin="0,6,0,0"
+                                   Text="{l:T 'As recomendações são só informativas: nada é aplicado automaticamente.'}"
+                                   Visibility="{Binding IsChecked, ElementName=ShowDetails, Converter={StaticResource BoolToVisibility}}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="16,0,0,0">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource IconText}" Text="&#xE770;" Foreground="{DynamicResource AccentTextBrush}" DockPanel.Dock="Left" Margin="0,2,8,4" VerticalAlignment="Top" />
+                            
+                            <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Windows recém-formatado?'}" TextWrapping="Wrap" />
+                        </DockPanel>
+                        <TextBlock Style="{StaticResource SubtitleText}" FontSize="12"
+                                   Text="{l:T 'Assistente em passos: escolher apps, ponto de restauração, instalar, Boost e privacidade. Pode ser retomado se o app fechar.'}" />
+                        <Button Content="{l:T 'Abrir assistente'}" Command="{Binding OpenWizardCommand}" HorizontalAlignment="Left" Margin="0,10,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Resumo do Boost + Atividade -->
+            <Grid Margin="0,16,0,0" Height="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource Card}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource SectionText}" Text="{l:T 'Resumo do último Boost'}" />
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource SubtitleText}" Text="{l:T 'Execute o Boost para ver o resultado aqui.'}"
+                                   Visibility="{Binding SummaryTitle, Converter={StaticResource NotEmptyToVisibility}, ConverterParameter=invert}" />
+                        <StackPanel DockPanel.Dock="Top" Margin="0,4,0,8" Grid.IsSharedSizeScope="True"
+                                    Visibility="{Binding ComparisonTitle, Converter={StaticResource NotEmptyToVisibility}}">
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextMutedBrush}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ComparisonTitle" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                            <Grid Margin="0,4,0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="CmpLabel" />
+                                    <ColumnDefinition SharedSizeGroup="CmpBefore" />
+                                    <ColumnDefinition SharedSizeGroup="CmpAfter" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" FontSize="12" FontWeight="SemiBold" Margin="12,0" Text="{l:T 'Antes'}" />
+                                <TextBlock Grid.Column="2" FontSize="12" FontWeight="SemiBold" Margin="12,0" Text="{l:T 'Depois'}" />
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding Comparison}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition SharedSizeGroup="CmpLabel" />
+                                                <ColumnDefinition SharedSizeGroup="CmpBefore" />
+                                                <ColumnDefinition SharedSizeGroup="CmpAfter" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="12" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Label" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                            <TextBlock Grid.Column="1" FontSize="12" Margin="12,0" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Before" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                            <TextBlock Grid.Column="2" FontSize="12" Margin="12,0" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="AfterText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock FontSize="11" Foreground="{DynamicResource TextMutedBrush}" Margin="0,4,0,0" TextWrapping="Wrap"
+                                       Text="{l:T 'Só números medidos. Alguns ajustes só têm efeito após reiniciar; o tempo de boot muda apenas no próximo boot.'}" />
+                        </StackPanel>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding SummaryLines}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="0,3">
+                                            <TextBlock Style="{StaticResource IconText}" FontSize="13" Width="22" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Icon" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                            <TextBlock TextWrapping="Wrap" FontSize="12.5" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Text" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="16,0,0,0">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource SectionText}" Text="{l:T 'Atividade'}" />
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding Activity}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="0,2" TextWrapping="Wrap" FontSize="12" FontFamily="Cascadia Mono, Consolas">
+                                            <Run Text="{Binding Time, StringFormat=HH:mm:ss, Mode=OneWay}" Foreground="{DynamicResource TextMutedBrush}" />
+                                            <Run Foreground="{DynamicResource AccentTextBrush}" ><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="LevelText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                                            <Run ><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Message" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

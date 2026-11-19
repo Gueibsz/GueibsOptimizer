@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "tweaks": [
+    {
+      "id": "privacy.activity-history-off",
+      "category": "Privacy", "risk": "Low", "points": 3, "level": "Baixo", "inBoost": true,
+      "name": "Desativar o Histórico de atividades",
+      "description": "Impede que o Windows registre e envie à Microsoft os apps, arquivos e sites que você abre (Linha do Tempo / Histórico de atividades).",
+      "info": {
+        "long": "Políticas oficiais do Windows (Diretiva de Grupo \"Sistema > Políticas do SO\"): desligam o feed de atividades e impedem publicar e enviar atividades do usuário.",
+        "benefit": "Menos dados de uso coletados e enviados; um pouco menos de trabalho em segundo plano.",
+        "risk": "Baixo. A Linha do Tempo e o \"continuar de onde parou\" entre dispositivos deixam de funcionar.",
+        "notes": "Valores documentados pela Microsoft em Policy CSP / Privacy e nas Diretivas de Grupo."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "EnableActivityFeed", "type": "DWord", "value": 0, "default": null },
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "PublishUserActivities", "type": "DWord", "value": 0, "default": null },
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "UploadUserActivities", "type": "DWord", "value": 0, "default": null }
+      ]
+    },
+    {
+      "id": "privacy.consumer-features-off",
+      "category": "Privacy", "risk": "Low", "points": 2, "level": "Baixo", "inBoost": true,
+      "name": "Desativar recursos para consumidores",
+      "description": "Política que impede o Windows de instalar sozinho apps sugeridos e conteúdo patrocinado no Menu Iniciar.",
+      "notice": "A política só tem efeito garantido no Windows Enterprise e Education; nas edições Home e Pro o ajuste \"Desativar anúncios e sugestões\" cobre o mesmo comportamento.",
+      "info": {
+        "long": "Grava a política DisableWindowsConsumerFeatures (\"Desativar as experiências do consumidor da Microsoft\"). Complementa o ajuste de anúncios e sugestões, que já desliga as chaves do ContentDeliveryManager do usuário.",
+        "benefit": "Menos apps instalados sem pedir e menos conteúdo promocional.",
+        "risk": "Baixo. Não remove apps já instalados.",
+        "notes": "Valor documentado pela Microsoft (CloudContent)."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "name": "DisableWindowsConsumerFeatures", "type": "DWord", "value": 1, "default": null }
+      ]
+    },
+    {
+      "id": "privacy.location-off",
+      "category": "Privacy", "risk": "Medium", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "Desativar o rastreamento de localização",
+      "description": "Política que desliga a localização do Windows para todos os apps e deixa o serviço de geolocalização (lfsvc) em inicialização manual.",
+      "notice": "Apps de mapas, clima automático, \"Encontrar meu dispositivo\" e o fuso horário automático deixam de saber onde você está.",
+      "info": {
+        "long": "Grava a política DisableLocation (\"Desativar localização\") e coloca o serviço lfsvc em Manual. O valor anterior do serviço é guardado para o desfazer.",
+        "benefit": "Privacidade: nenhum app recebe a sua localização.",
+        "risk": "Médio: recursos que dependem de localização param de funcionar. Fora do Boost.",
+        "notes": "Valores documentados pela Microsoft (LocationAndSensors)."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors", "name": "DisableLocation", "type": "DWord", "value": 1, "default": null }
+      ],
+      "services": [
+        { "name": "lfsvc", "startup": "Manual", "default": "Manual" }
+      ]
+    },
+    {
+      "id": "privacy.powershell-telemetry-off",
+      "category": "Privacy", "risk": "Low", "points": 1, "level": "Baixo", "inBoost": true,
+      "name": "Desativar a telemetria do PowerShell 7",
+      "description": "Define a variável de ambiente do sistema POWERSHELL_TELEMETRY_OPTOUT=1, que impede o PowerShell 7 de enviar dados de uso.",
+      "notice": "Vale para janelas do PowerShell abertas depois do ajuste.",
+      "info": {
+        "long": "Cria a variável de ambiente de máquina POWERSHELL_TELEMETRY_OPTOUT com valor 1 (documentada pela Microsoft em about_Telemetry). Não afeta o Windows PowerShell 5.1.",
+        "benefit": "O PowerShell 7 deixa de enviar telemetria ao iniciar.",
+        "risk": "Baixo.",
+        "notes": "Se o PowerShell 7 não estiver instalado, a variável simplesmente não é usada."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment", "name": "POWERSHELL_TELEMETRY_OPTOUT", "type": "String", "value": "1", "default": null }
+      ]
+    },
+    {
+      "id": "privacy.background-apps-off",
+      "category": "Privacy", "risk": "Medium", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "Bloquear apps em segundo plano",
+      "description": "Impede que apps da Microsoft Store rodem em segundo plano (política LetAppsRunInBackground e a chave do usuário).",
+      "notice": "Alguns apps (e-mail, calendário, mensageiros da Store) deixam de mostrar notificações enquanto estão fechados.",
+      "info": {
+        "long": "Grava a política LetAppsRunInBackground = 2 (\"forçar negar\") e GlobalUserDisabled = 1 para o usuário. Programas comuns (.exe) não são afetados.",
+        "benefit": "Menos processos de apps da Store consumindo CPU, RAM e rede em segundo plano.",
+        "risk": "Médio: notificações e sincronização de apps da Store param. Fora do Boost.",
+        "notes": "Valores documentados pela Microsoft (AppPrivacy)."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy", "name": "LetAppsRunInBackground", "type": "DWord", "value": 2, "default": null },
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications", "name": "GlobalUserDisabled", "type": "DWord", "value": 1, "default": null }
+      ]
+    },
+    {
+      "id": "windows.taskbar-end-task",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "windowsVersions": [ 11 ], "minBuild": 22631,
+      "name": "\"Finalizar tarefa\" no botão direito da barra de tarefas",
+      "description": "Adiciona a opção Finalizar tarefa ao clicar com o botão direito num app da barra de tarefas (Windows 11 23H2 ou mais novo).",
+      "info": {
+        "long": "Liga a mesma opção de Configurações > Sistema > Para desenvolvedores > Finalizar tarefa (valor TaskbarEndTask).",
+        "benefit": "Fecha um jogo ou app travado sem abrir o Gerenciador de Tarefas.",
+        "risk": "Baixo. É só uma opção a mais no menu.",
+        "notes": "Somente Windows 11."
+      },
+      "registry": [
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings", "name": "TaskbarEndTask", "type": "DWord", "value": 1, "default": null }
+      ]
+    },
+    {
+      "id": "power.hibernate-off",
+      "category": "Power", "risk": "Medium", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "Desativar a hibernação",
+      "description": "Desliga a hibernação (powercfg /hibernate off) e apaga o arquivo hiberfil.sys, liberando alguns GB no disco do sistema.",
+      "notice": "Desativa também a Inicialização Rápida. Em notebooks a hibernação protege o trabalho quando a bateria acaba; prefira mantê-la.",
+      "info": {
+        "long": "Executa powercfg /hibernate off. O estado real é lido do valor HibernateEnabled. Desfazer executa powercfg /hibernate on.",
+        "benefit": "Libera o espaço do hiberfil.sys (em geral 40% da RAM) e evita problemas de dual boot.",
+        "risk": "Médio: some a hibernação e a Inicialização Rápida. Fora do Boost.",
+        "notes": "Oposto de \"Manter a hibernação ativada\"; aplique só um dos dois."
+      },
+      "commands": [ "hibernate-off" ]
+    },
+    {
+      "id": "power.hibernate-on",
+      "category": "Power", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Manter a hibernação ativada",
+      "description": "Garante que a hibernação e a Inicialização Rápida estejam ligadas (powercfg /hibernate on). Recomendado para notebooks.",
+      "info": {
+        "long": "Executa powercfg /hibernate on. O estado real é lido do valor HibernateEnabled. Desfazer executa powercfg /hibernate off.",
+        "benefit": "O notebook salva o trabalho quando a bateria acaba, e o Windows liga mais rápido.",
+        "risk": "Baixo. Usa alguns GB do disco do sistema (hiberfil.sys).",
+        "notes": "Oposto de \"Desativar a hibernação\"; aplique só um dos dois."
+      },
+      "commands": [ "hibernate-on" ]
+    },
+    {
+      "id": "windows.storage-sense-off",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Desativar o Sensor de Armazenamento",
+      "description": "Política que impede a limpeza automática do Sensor de Armazenamento (lixeira, temporários e Downloads apagados sozinhos).",
+      "info": {
+        "long": "Grava a política AllowStorageSenseGlobal = 0. A limpeza passa a ser só manual (pela tela Manutenção do app ou pelo Windows).",
+        "benefit": "Nada é apagado sem você pedir; útil para quem guarda arquivos na pasta Downloads.",
+        "risk": "Baixo. O disco pode encher mais rápido se você nunca limpar.",
+        "notes": "Valor documentado pela Microsoft (StorageSense)."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense", "name": "AllowStorageSenseGlobal", "type": "DWord", "value": 0, "default": null }
+      ]
+    },
+    {
+      "id": "edge.startup-boost-off",
+      "category": "Privacy", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "name": "Edge: desativar o impulso de inicialização",
+      "description": "Política do Microsoft Edge que impede o navegador de ficar carregado em segundo plano desde o logon (Startup boost). Não desinstala o Edge.",
+      "info": { "long": "Grava a política StartupBoostEnabled = 0.", "benefit": "Menos RAM e processos do Edge com o navegador fechado.", "risk": "Baixo. O Edge pode demorar um pouco mais para abrir.", "notes": "Política documentada pela Microsoft (Edge)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Edge", "name": "StartupBoostEnabled", "type": "DWord", "value": 0, "default": null } ]
+    },
+    {
+      "id": "edge.background-mode-off",
+      "category": "Privacy", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "name": "Edge: não continuar rodando ao fechar",
+      "description": "Política do Microsoft Edge que fecha de verdade o navegador e suas extensões quando a última janela é fechada. Não desinstala o Edge.",
+      "info": { "long": "Grava a política BackgroundModeEnabled = 0.", "benefit": "O Edge não fica consumindo recursos depois de fechado.", "risk": "Baixo. Extensões que precisam rodar em segundo plano param ao fechar o navegador.", "notes": "Política documentada pela Microsoft (Edge)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Edge", "name": "BackgroundModeEnabled", "type": "DWord", "value": 0, "default": null } ]
+    },
+    {
+      "id": "edge.recommendations-off",
+      "category": "Privacy", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "name": "Edge: desativar sugestões e promoções",
+      "description": "Política do Microsoft Edge que desliga recomendações e notificações promocionais do navegador. Não desinstala o Edge.",
+      "info": { "long": "Grava a política ShowRecommendationsEnabled = 0.", "benefit": "Menos pop-ups e sugestões dentro do Edge.", "risk": "Baixo.", "notes": "Política documentada pela Microsoft (Edge)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Edge", "name": "ShowRecommendationsEnabled", "type": "DWord", "value": 0, "default": null } ]
+    },
+    {
+      "id": "edge.diagnostic-data-off",
+      "category": "Privacy", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "name": "Edge: desativar relatórios de dados",
+      "description": "Política do Microsoft Edge que desliga o envio de dados de diagnóstico e uso do navegador. Não desinstala o Edge.",
+      "info": { "long": "Grava a política DiagnosticData = 0 (desligado).", "benefit": "O Edge deixa de enviar dados de uso à Microsoft.", "risk": "Baixo.", "notes": "Política documentada pela Microsoft (Edge 86 ou mais novo)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Edge", "name": "DiagnosticData", "type": "DWord", "value": 0, "default": null } ]
+    },
+    {
+      "id": "edge.sidebar-off",
+      "category": "Privacy", "risk": "Low", "points": 0, "level": "Medio", "inBoost": false,
+      "name": "Edge: ocultar a barra lateral",
+      "description": "Política do Microsoft Edge que remove a barra lateral (Copilot, ferramentas e apps) do navegador. Não desinstala o Edge.",
+      "info": { "long": "Grava a política HubsSidebarEnabled = 0.", "benefit": "Interface mais limpa e menos integração com o Copilot dentro do Edge.", "risk": "Baixo.", "notes": "Política documentada pela Microsoft (Edge)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Edge", "name": "HubsSidebarEnabled", "type": "DWord", "value": 0, "default": null } ]
+    },
+    {
+      "id": "pref.show-file-extensions",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Mostrar extensões de arquivos",
+      "description": "Mostra a extensão dos arquivos (.exe, .txt, .jpg) no Explorador.",
+      "info": { "long": "Grava HideFileExt = 0. Ajuda a reconhecer arquivos disfarçados, como foto.jpg.exe.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "HideFileExt", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.show-hidden-files",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Mostrar arquivos ocultos",
+      "description": "Mostra arquivos e pastas ocultos no Explorador (os protegidos do sistema continuam ocultos).",
+      "info": { "long": "Grava Hidden = 1 (o padrão do Windows é 2, não mostrar).", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Hidden", "type": "DWord", "value": 1, "default": 2 } ]
+    },
+    {
+      "id": "pref.numlock-on",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "NumLock ligado ao entrar",
+      "description": "Liga o NumLock automaticamente quando você entra no Windows.",
+      "info": { "long": "Grava InitialKeyboardIndicators = 2 para o seu usuário. Na tela de bloqueio o comportamento pode depender do firmware (BIOS).", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Control Panel\\Keyboard", "name": "InitialKeyboardIndicators", "type": "String", "value": "2", "default": "0" } ]
+    },
+    {
+      "id": "pref.dark-theme",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Tema escuro do Windows",
+      "description": "Usa o modo escuro nos apps e no sistema (barra de tarefas, Iniciar, Configurações).",
+      "info": { "long": "Grava AppsUseLightTheme = 0 e SystemUsesLightTheme = 0 (o padrão é 1, claro).", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "AppsUseLightTheme", "type": "DWord", "value": 0, "default": 1 }, { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "SystemUsesLightTheme", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.detailed-bsod",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Tela azul detalhada",
+      "description": "Mostra o código e os parâmetros do erro na tela azul (BSoD), o que ajuda a descobrir a causa.",
+      "info": { "long": "Grava DisplayParameters = 1 em CrashControl. Vale a partir do próximo reinício.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKLM", "path": "SYSTEM\\CurrentControlSet\\Control\\CrashControl", "name": "DisplayParameters", "type": "DWord", "value": 1, "default": null } ]
+    },
+    {
+      "id": "pref.verbose-logon",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Mensagens detalhadas ao ligar e desligar",
+      "description": "Mostra o que o Windows está fazendo nas telas de entrada e desligamento (ex.: \"Aplicando configurações do usuário\").",
+      "info": { "long": "Grava a política VerboseStatus = 1.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", "name": "VerboseStatus", "type": "DWord", "value": 1, "default": null } ]
+    },
+    {
+      "id": "pref.taskbar-left",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "windowsVersions": [ 11 ],
+      "name": "Barra de tarefas alinhada à esquerda",
+      "description": "Alinha os ícones da barra de tarefas à esquerda, como no Windows 10 (somente Windows 11).",
+      "info": { "long": "Grava TaskbarAl = 0 (o padrão do Windows 11 é 1, centralizado).", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAl", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.taskbar-search-hidden",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Ocultar a pesquisa da barra de tarefas",
+      "description": "Esconde o botão/caixa de pesquisa da barra de tarefas. A pesquisa continua no Menu Iniciar (é só digitar).",
+      "info": { "long": "Grava SearchboxTaskbarMode = 0 (padrão do Windows: 1 no Windows 11, ícone).", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "SearchboxTaskbarMode", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.taskbar-taskview-hidden",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Ocultar o botão Visão de Tarefas",
+      "description": "Esconde o botão Visão de Tarefas da barra (Win+Tab continua funcionando).",
+      "info": { "long": "Grava ShowTaskViewButton = 0.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowTaskViewButton", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.snap-off",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Desativar o encaixe de janelas (Snap)",
+      "description": "Desliga o encaixe automático de janelas ao arrastá-las para as bordas da tela.",
+      "info": { "long": "Grava WindowArrangementActive = 0.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Control Panel\\Desktop", "name": "WindowArrangementActive", "type": "String", "value": "0", "default": "1" } ]
+    },
+    {
+      "id": "pref.snap-assist-off",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Desativar sugestões do Snap Assist",
+      "description": "Ao encaixar uma janela, o Windows deixa de sugerir as outras para preencher o espaço.",
+      "info": { "long": "Grava SnapAssist = 0.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "SnapAssist", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "pref.snap-layouts-off",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Maximo", "inBoost": false,
+      "windowsVersions": [ 11 ],
+      "name": "Desativar layouts de encaixe no botão Maximizar",
+      "description": "Remove o painel de layouts que aparece ao passar o mouse sobre o botão Maximizar (somente Windows 11).",
+      "info": { "long": "Grava EnableSnapAssistFlyout = 0.", "benefit": "Preferência pessoal: não muda o desempenho.", "risk": "Baixo. Pode ser desfeito a qualquer momento.", "notes": "Alguns itens só aparecem depois de reiniciar o Explorer (botão no topo da página)." },
+      "registry": [ { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "EnableSnapAssistFlyout", "type": "DWord", "value": 0, "default": 1 } ]
+    },
+    {
+      "id": "net.prefer-ipv4",
+      "category": "Windows", "risk": "Medium", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "Preferir IPv4 em vez de IPv6",
+      "description": "Faz o Windows tentar IPv4 antes de IPv6 nas conexões, sem desligar o IPv6.",
+      "notice": "Exige reiniciar. Em redes que só funcionam bem com IPv6 algumas conexões podem ficar mais lentas.",
+      "info": { "long": "Grava DisabledComponents = 0x20 (32) em Tcpip6\\Parameters, valor documentado pela Microsoft para \"preferir IPv4 a IPv6\".", "benefit": "Pode evitar atrasos em redes com IPv6 mal configurado.", "risk": "Médio: alguns apps e redes dependem de IPv6. Fora do Boost.", "notes": "Não use junto com \"Desativar IPv6\" (o último aplicado vale)." },
+      "registry": [ { "hive": "HKLM", "path": "SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters", "name": "DisabledComponents", "type": "DWord", "value": 32, "default": null } ]
+    },
+    {
+      "id": "net.disable-ipv6",
+      "category": "Windows", "risk": "Medium", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Desativar IPv6",
+      "description": "Desliga o IPv6 em todas as interfaces (exceto a de loopback).",
+      "notice": "Exige reiniciar. Recursos que precisam de IPv6 (algumas VPNs, Xbox/Teredo, redes domésticas modernas) podem parar de funcionar.",
+      "info": { "long": "Grava DisabledComponents = 0xFF (255) em Tcpip6\\Parameters, valor documentado pela Microsoft. A Microsoft recomenda preferir IPv4 em vez de desativar o IPv6.", "benefit": "Pode resolver problemas raros de conexão ligados ao IPv6.", "risk": "Médio: alguns apps e redes quebram sem IPv6. Fora do Boost.", "notes": "Não use junto com \"Preferir IPv4\" (o último aplicado vale)." },
+      "registry": [ { "hive": "HKLM", "path": "SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters", "name": "DisabledComponents", "type": "DWord", "value": 255, "default": null } ]
+    },
+    {
+      "id": "debloat.onedrive-sync-off",
+      "category": "Windows", "risk": "Medium", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "OneDrive: desativar a sincronização por política",
+      "description": "Política oficial que impede o OneDrive de sincronizar arquivos e de iniciar. Não desinstala o OneDrive.",
+      "notice": "Arquivos que estão só na nuvem (ícone de nuvem) deixam de aparecer no PC até você desfazer. Confira antes se o que importa está salvo localmente.",
+      "info": { "long": "Grava a política DisableFileSyncNGSC = 1 (\"Impedir o uso do OneDrive para armazenamento de arquivos\").", "benefit": "O OneDrive para de rodar e de usar rede e disco em segundo plano.", "risk": "Médio: arquivos apenas online ficam inacessíveis pelo Explorador enquanto a política estiver ativa. Fora do Boost.", "notes": "Política documentada pela Microsoft (OneDrive)." },
+      "registry": [ { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive", "name": "DisableFileSyncNGSC", "type": "DWord", "value": 1, "default": null } ]
+    },
+    {
+      "id": "windows.visual-effects-performance",
+      "category": "Windows", "risk": "Low", "points": 0, "level": "Alto", "inBoost": false,
+      "name": "Efeitos visuais para desempenho",
+      "description": "Desliga animações de janelas e da barra de tarefas, sombras e transparência da seleção, mantendo a suavização das fontes.",
+      "notice": "Algumas mudanças só aparecem depois de sair e entrar de novo no Windows.",
+      "info": { "long": "Coloca os efeitos visuais em \"Personalizado\" (VisualFXSetting = 3) e desliga MinAnimate, TaskbarAnimations, ListviewAlphaSelect, ListviewShadow e EnableAeroPeek. A suavização de fontes (FontSmoothing) não é alterada.", "benefit": "Interface mais rápida em PCs fracos. Em PCs modernos o efeito em jogos é praticamente nulo.", "risk": "Baixo: o Windows fica com visual mais simples.", "notes": "Os mesmos itens da tela Propriedades do Sistema > Desempenho." },
+      "registry": [
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects", "name": "VisualFXSetting", "type": "DWord", "value": 3, "default": 0 },
+        { "hive": "HKCU", "path": "Control Panel\\Desktop\\WindowMetrics", "name": "MinAnimate", "type": "String", "value": "0", "default": "1" },
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAnimations", "type": "DWord", "value": 0, "default": 1 },
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ListviewAlphaSelect", "type": "DWord", "value": 0, "default": 1 },
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ListviewShadow", "type": "DWord", "value": 0, "default": 1 },
+        { "hive": "HKCU", "path": "Software\\Microsoft\\Windows\\DWM", "name": "EnableAeroPeek", "type": "DWord", "value": 0, "default": 1 }
+      ]
+    },
+    {
+      "id": "windows.rtc-utc",
+      "category": "Windows", "risk": "Medium", "points": 0, "level": "Maximo", "inBoost": false,
+      "name": "Relógio do hardware em UTC (dual boot)",
+      "description": "Faz o Windows tratar o relógio da placa-mãe como UTC, igual ao Linux. Evita a hora errada ao alternar entre Windows e Linux.",
+      "notice": "Só use se você tem dual boot com Linux. Exige reiniciar; sem Linux, a hora pode ficar adiantada ou atrasada.",
+      "info": { "long": "Grava RealTimeIsUniversal = 1 em TimeZoneInformation. O Linux usa UTC no relógio do hardware por padrão e o Windows usa a hora local; com este ajuste os dois concordam.", "benefit": "Hora certa nos dois sistemas.", "risk": "Médio: em PCs só com Windows não há benefício. Fora do Boost.", "notes": "Desfazer remove o valor (o Windows volta à hora local)." },
+      "registry": [ { "hive": "HKLM", "path": "SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation", "name": "RealTimeIsUniversal", "type": "DWord", "value": 1, "default": null } ]
+    },
+    {
+      "id": "services.intel-lms-off",
+      "category": "Windows", "risk": "Medium", "points": 0, "level": "Maximo", "inBoost": false, "notOnDomain": true,
+      "name": "Desativar o Intel LMS (vPro)",
+      "description": "Desativa o serviço Intel Local Management Service, usado só para gerenciamento remoto corporativo (Intel AMT/vPro). Aparece apenas se o serviço existir e o PC não estiver num domínio.",
+      "notice": "Em PCs de empresa gerenciados remotamente, não desative.",
+      "info": { "long": "Coloca o serviço LMS em Desativado; o tipo original fica guardado para o desfazer.", "benefit": "Um serviço a menos em PCs domésticos.", "risk": "Médio: o gerenciamento remoto Intel AMT deixa de funcionar. Fora do Boost.", "notes": "Não aparece em PCs ligados a um domínio." },
+      "services": [ { "name": "LMS", "startup": "Disabled", "default": "Automatic" } ]
+    }
+  ]
+}

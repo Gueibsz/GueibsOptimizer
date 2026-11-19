@@ -1,0 +1,67 @@
+name: Relatar um bug
+description: Algo não funciona como deveria
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por relatar. **Não inclua** nome de usuário, caminhos pessoais, números de série ou outros dados da sua máquina.
+        Problemas de segurança: use o relato privado descrito em SECURITY.md, não esta issue.
+  - type: input
+    id: app-version
+    attributes:
+      label: Versão do app
+      description: Aparece no rodapé do menu lateral (ex.: 2.2).
+    validations:
+      required: true
+  - type: input
+    id: windows-version
+    attributes:
+      label: Versão do Windows
+      description: "Ex.: Windows 11 23H2, build 22631 (Win + R, digite winver)."
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Edição do Windows
+      options:
+        - Home
+        - Pro
+        - Enterprise / Education
+        - Outra / não sei
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: O que aconteceu
+      description: Tela, ajuste ou botão envolvido e a mensagem exibida.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Abrir ...
+        2. Clicar em ...
+        3. Ver o erro ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: O que era esperado
+  - type: textarea
+    id: logs
+    attributes:
+      label: Trecho do log (opcional)
+      description: "%AppData%\\GueibsOptimizer\\logs. Revise e apague dados pessoais antes de colar."
+      render: text
+  - type: checkboxes
+    id: dry-run
+    attributes:
+      label: Modo simulação
+      options:
+        - label: O problema também acontece com --dry-run

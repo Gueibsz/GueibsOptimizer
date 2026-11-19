@@ -1,0 +1,41 @@
+﻿AVISOS DE TERCEIROS
+===================
+
+O GueibsOptimizer.exe inclui os componentes abaixo, sem modificações. Cada um
+continua sob a sua própria licença.
+
+.NET Runtime, WPF e Windows Forms ............ MIT — https://github.com/dotnet/runtime
+System.Management, System.CodeDom,
+System.IO.Ports, System.Threading.AccessControl MIT — https://github.com/dotnet/runtime
+CommunityToolkit.Mvvm 8.3.2 .................. MIT — https://github.com/CommunityToolkit/dotnet
+Mono.Posix.NETStandard 1.0.0 ................. MIT — https://github.com/mono/mono
+HidSharp 2.6.4 ............................... Apache License 2.0 — Copyright 2010-2025 James F. Bellinger
+                                               http://software.seekye.com/hidsharp
+
+Componentes sob Mozilla Public License 2.0 (MPL-2.0). O código-fonte de cada um
+está disponível nos endereços abaixo; o texto da licença está em
+https://www.mozilla.org/MPL/2.0/
+
+LibreHardwareMonitorLib 0.9.6 ................ https://github.com/LibreHardwareMonitor/LibreHardwareMonitor
+DiskInfoToolkit 1.1.2 ........................ https://github.com/Blacktempel/DiskInfoToolkit
+RAMSPDToolkit-NDD 1.4.2 ...................... https://github.com/Blacktempel/RAMSPDToolkit
+BlackSharp.Core 1.0.7 ........................ https://github.com/Blacktempel/BlackSharp
+
+Programas externos que o app pode baixar/instalar a pedido do usuário (não
+estão incluídos no executável):
+- Intel PresentMon — MIT — https://github.com/GameTechDev/PresentMon
+- PawnIO (driver) — freeware — https://pawnio.eu/
+- Programas do catálogo — instalados pelo winget, cada um com a sua licença.
+
+Texto da licença MIT
+--------------------
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions: The above copyright notice and this
+permission notice shall be included in all copies or substantial portions of the
+Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0

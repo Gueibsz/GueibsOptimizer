@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Publicar e criar o release
+    runs-on: windows-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: GameOptimizer
+    env:
+      DOTNET_NOLOGO: "true"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+      TAG: ${{ github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Instalar .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: GameOptimizer/global.json
+
+      - name: Testes
+        run: >
+          dotnet test GueibsOptimizer.sln -c Release
+          --filter "Category!=RequiresHardware&Category!=RequiresAdmin&Category!=RequiresHKLM"
+
+      - name: Publicar (single-file, self-contained, win-x64)
+        run: >
+          dotnet publish src/GueibsOptimizer -c Release -r win-x64 --self-contained true
+          -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
+
+      # O release publica só o instalador (e o .sha256 dele). Sem Inno Setup, o job falha em vez de sair incompleto.
+      - name: Instalador (Inno Setup via Chocolatey)
+        run: |
+          $iscc = Get-Command iscc -ErrorAction SilentlyContinue
+          if (-not $iscc) {
+            choco install innosetup -y --no-progress
+            $iscc = @("${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe", "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+                      "${env:ProgramFiles(x86)}\Inno Setup 7\ISCC.exe", "$env:ProgramFiles\Inno Setup 7\ISCC.exe") |
+                    Where-Object { Test-Path $_ } | Select-Object -First 1
+          } else { $iscc = $iscc.Source }
+          if (-not $iscc) { throw "Inno Setup indisponível no runner." }
+          $version = $env:TAG.TrimStart('v')
+          $exe = (Resolve-Path dist/GueibsOptimizer.exe).Path
+          & $iscc "/DAppVersion=$version" "/DSourceExe=$exe" installer/GueibsOptimizer.iss
+          if ($LASTEXITCODE -ne 0) { throw "iscc falhou ($LASTEXITCODE)" }
+          New-Item -ItemType Directory -Force out | Out-Null
+          $setup = "dist/GueibsOptimizer-Setup-$version.exe"
+          Copy-Item $setup out/
+          $hash = (Get-FileHash $setup -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  GueibsOptimizer-Setup-$version.exe" | Set-Content -Encoding ascii "out/GueibsOptimizer-Setup-$version.exe.sha256"
+          Get-Content "out/GueibsOptimizer-Setup-$version.exe.sha256"
+
+      - name: Criar o release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $notes = @"
+          Gueibs Optimizer $env:TAG para Windows 10/11 x64.
+
+          **Aviso:** o executável **não tem assinatura de código**. O Windows SmartScreen pode mostrar um alerta ("Mais informações" > "Executar assim mesmo") e alguns antivírus podem acusar um falso positivo. Confira o SHA-256 com o arquivo .sha256 deste release antes de executar:
+
+              Get-FileHash .\GueibsOptimizer-Setup-$($env:TAG.TrimStart('v')).exe -Algorithm SHA256
+
+          O app altera o Windows (com backup e desfazer para cada ajuste); use por sua conta e risco. Teste primeiro com --dry-run.
+          "@
+          $files = Get-ChildItem out -File | ForEach-Object { $_.FullName }
+          gh release create $env:TAG @files --repo $env:GITHUB_REPOSITORY --title "Gueibs Optimizer $env:TAG" --notes $notes --verify-tag

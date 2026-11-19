@@ -1,0 +1,285 @@
+Google.Chrome	Google Chrome	Navegadores	Navegador rápido do Google com sincronização de conta.
+Mozilla.Firefox	Mozilla Firefox	Navegadores	Navegador de código aberto focado em privacidade.
+Mozilla.Firefox.ESR	Firefox ESR	Navegadores	Versão de suporte estendido do Firefox, com menos mudanças.
+Mozilla.Firefox.DeveloperEdition	Firefox Developer Edition	Navegadores	Firefox com ferramentas extras para desenvolvedores web.
+Brave.Brave	Brave	Navegadores	Navegador com bloqueio de anúncios e rastreadores embutido.
+Opera.Opera	Opera	Navegadores	Navegador com VPN gratuita e barra lateral de mensageiros.
+Opera.OperaGX	Opera GX	Navegadores	Navegador para gamers com limites de CPU, RAM e rede.
+Vivaldi.Vivaldi	Vivaldi	Navegadores	Navegador altamente personalizável com abas empilhadas.
+Microsoft.Edge	Microsoft Edge	Navegadores	Navegador da Microsoft baseado em Chromium.
+LibreWolf.LibreWolf	LibreWolf	Navegadores	Variante do Firefox com foco total em privacidade.
+TorProject.TorBrowser	Tor Browser	Navegadores	Navegação anônima pela rede Tor.
+Waterfox.Waterfox	Waterfox	Navegadores	Navegador baseado no Firefox com foco em privacidade.
+Ablaze.Floorp	Floorp	Navegadores	Navegador baseado no Firefox com muitas opções de layout.
+Zen-Team.Zen-Browser	Zen Browser	Navegadores	Navegador baseado no Firefox com abas verticais.
+Hibbiki.Chromium	Chromium	Navegadores	Versão de código aberto do Chromium.
+Yandex.Browser	Yandex Browser	Navegadores	Navegador da Yandex baseado em Chromium.
+Google.Chrome.Beta	Google Chrome Beta	Navegadores	Versão beta do Chrome com recursos antecipados.
+Mullvad.MullvadBrowser	Mullvad Browser	Navegadores	Navegador anti-rastreamento feito com o Tor Project.
+TheBrowserCompany.Arc	Arc	Navegadores	Navegador com espaços de trabalho e barra lateral.
+Maxthon.Maxthon	Maxthon	Navegadores	Navegador leve com recursos de nuvem.
+Valve.Steam	Steam	Jogos e Launchers	Loja e biblioteca de jogos da Valve.
+EpicGames.EpicGamesLauncher	Epic Games Launcher	Jogos e Launchers	Loja da Epic com jogos grátis semanais.
+ElectronicArts.EADesktop	EA app	Jogos e Launchers	Launcher oficial dos jogos da EA.
+Ubisoft.Connect	Ubisoft Connect	Jogos e Launchers	Launcher oficial dos jogos da Ubisoft.
+Blizzard.BattleNet	Battle.net	Jogos e Launchers	Launcher dos jogos da Blizzard e Activision.
+GOG.Galaxy	GOG Galaxy	Jogos e Launchers	Biblioteca de jogos sem DRM da GOG.
+Amazon.Games	Amazon Games	Jogos e Launchers	Jogos do Prime Gaming.
+Playnite.Playnite	Playnite	Jogos e Launchers	Une as bibliotecas de todos os launchers em um só lugar.
+HeroicGamesLauncher.HeroicGamesLauncher	Heroic Games Launcher	Jogos e Launchers	Alternativa aberta para Epic, GOG e Amazon.
+Mojang.MinecraftLauncher	Minecraft Launcher	Jogos e Launchers	Launcher oficial do Minecraft.
+PrismLauncher.PrismLauncher	Prism Launcher	Jogos e Launchers	Gerencia várias instâncias e mods do Minecraft.
+Overwolf.CurseForge	CurseForge	Jogos e Launchers	Gerenciador de mods para vários jogos.
+ItchIo.Itch	itch.io	Jogos e Launchers	Loja de jogos independentes.
+RiotGames.LeagueOfLegends.BR	League of Legends (BR)	Jogos e Launchers	Cliente do League of Legends para o servidor brasileiro.
+RiotGames.Valorant.BR	VALORANT (BR)	Jogos e Launchers	Cliente do VALORANT para o servidor brasileiro.
+Parsec.Parsec	Parsec	Jogos e Launchers	Jogue e acesse seu PC remotamente com baixa latência.
+MoonlightGameStreamingProject.Moonlight	Moonlight	Jogos e Launchers	Cliente de streaming de jogos do seu PC.
+LizardByte.Sunshine	Sunshine	Jogos e Launchers	Servidor de streaming de jogos para o Moonlight.
+Nvidia.GeForceNow	GeForce NOW	Jogos e Launchers	Jogos na nuvem da NVIDIA.
+Libretro.RetroArch	RetroArch	Jogos e Launchers	Frontend para emuladores de consoles clássicos.
+DolphinEmulator.Dolphin	Dolphin	Jogos e Launchers	Emulador de GameCube e Wii.
+PCSX2Team.PCSX2	PCSX2	Jogos e Launchers	Emulador de PlayStation 2.
+Cemu.Cemu	Cemu	Jogos e Launchers	Emulador de Wii U.
+ppy.osu	osu!	Jogos e Launchers	Jogo de ritmo gratuito.
+RockstarGames.RockstarGamesLauncher	Rockstar Games Launcher	Jogos e Launchers	Launcher dos jogos da Rockstar.
+Discord.Discord	Discord	Comunicação	Chat de voz, vídeo e texto para comunidades e jogos.
+Discord.Discord.PTB	Discord PTB	Comunicação	Versão de testes públicos do Discord.
+TeamSpeakSystems.TeamSpeakClient	TeamSpeak 3	Comunicação	Chat de voz de baixa latência para jogos.
+Mumble.Mumble.Client	Mumble	Comunicação	Chat de voz de código aberto e baixa latência.
+Zoom.Zoom	Zoom	Comunicação	Videoconferências e reuniões online.
+Microsoft.Teams	Microsoft Teams	Comunicação	Chat e reuniões da Microsoft.
+SlackTechnologies.Slack	Slack	Comunicação	Comunicação em equipe por canais.
+Telegram.TelegramDesktop	Telegram	Comunicação	Mensageiro rápido com grupos e canais.
+OpenWhisperSystems.Signal	Signal	Comunicação	Mensageiro com criptografia de ponta a ponta.
+Element.Element	Element	Comunicação	Cliente da rede descentralizada Matrix.
+Rakuten.Viber	Viber	Comunicação	Mensagens e chamadas gratuitas.
+Mozilla.Thunderbird	Thunderbird	Comunicação	Cliente de e-mail de código aberto.
+Ferdium.Ferdium	Ferdium	Comunicação	Reúne vários mensageiros em uma janela.
+eMClient.eMClient	eM Client	Comunicação	Cliente de e-mail, agenda e contatos.
+Jitsi.Meet	Jitsi Meet	Comunicação	Videoconferência de código aberto.
+WhatsApp.WhatsApp	WhatsApp	Comunicação	Mensageiro do WhatsApp para desktop.
+Zulip.Zulip	Zulip	Comunicação	Chat em equipe organizado por tópicos.
+Beeper.Beeper	Beeper	Comunicação	Vários mensageiros em um só aplicativo.
+TeamSpeakSystems.TeamSpeak	TeamSpeak	Comunicação	Nova versão do cliente TeamSpeak.
+Guilded.Guilded	Guilded	Comunicação	Chat para comunidades de jogos.
+Rambox.Rambox	Rambox	Comunicação	Espaço de trabalho com vários apps web.
+7zip.7zip	7-Zip	Utilitários	Compactador de arquivos gratuito e leve.
+RARLab.WinRAR	WinRAR	Utilitários	Compactador de arquivos RAR e ZIP.
+M2Team.NanaZip	NanaZip	Utilitários	Versão moderna do 7-Zip integrada ao Windows 11.
+voidtools.Everything	Everything	Utilitários	Busca instantânea de arquivos por nome.
+Microsoft.PowerToys	PowerToys	Utilitários	Utilitários extras da Microsoft para o Windows.
+Notepad++.Notepad++	Notepad++	Utilitários	Editor de texto e código leve.
+ShareX.ShareX	ShareX	Utilitários	Capturas e gravações de tela com muitos recursos.
+Greenshot.Greenshot	Greenshot	Utilitários	Ferramenta simples de captura de tela.
+WinDirStat.WinDirStat	WinDirStat	Utilitários	Mostra o que ocupa espaço no disco.
+AntibodySoftware.WizTree	WizTree	Utilitários	Análise muito rápida de uso de disco.
+CodeSector.TeraCopy	TeraCopy	Utilitários	Cópia de arquivos mais rápida e com verificação.
+Rufus.Rufus	Rufus	Utilitários	Cria pendrives de instalação do Windows e Linux.
+Balena.Etcher	balenaEtcher	Utilitários	Grava imagens em pendrives e cartões SD.
+Ventoy.Ventoy	Ventoy	Utilitários	Pendrive com várias ISOs inicializáveis.
+BleachBit.BleachBit	BleachBit	Utilitários	Limpeza de arquivos temporários e privacidade.
+RevoUninstaller.RevoUninstaller	Revo Uninstaller	Utilitários	Desinstala programas removendo restos.
+Klocman.BulkCrapUninstaller	Bulk Crap Uninstaller	Utilitários	Desinstala vários programas de uma vez.
+Bitsum.ProcessLasso	Process Lasso	Utilitários	Ajusta prioridades e afinidade de processos.
+Microsoft.Sysinternals.ProcessExplorer	Process Explorer	Utilitários	Gerenciador de tarefas avançado da Sysinternals.
+Microsoft.Sysinternals.Autoruns	Autoruns	Utilitários	Mostra tudo que inicia com o Windows.
+AutoHotkey.AutoHotkey	AutoHotkey	Utilitários	Automação de teclado e mouse por scripts.
+Flow-Launcher.Flow-Launcher	Flow Launcher	Utilitários	Lançador rápido de apps e arquivos.
+File-New-Project.EarTrumpet	EarTrumpet	Utilitários	Controle de volume por aplicativo na bandeja.
+QL-Win.QuickLook	QuickLook	Utilitários	Pré-visualização de arquivos com a barra de espaço.
+Files-Community.Files	Files	Utilitários	Gerenciador de arquivos moderno com abas.
+AnyDesk.AnyDesk	AnyDesk	Utilitários	Acesso remoto rápido.
+TeamViewer.TeamViewer	TeamViewer	Utilitários	Acesso e suporte remoto.
+RustDesk.RustDesk	RustDesk	Utilitários	Acesso remoto de código aberto.
+Google.GoogleDrive	Google Drive	Utilitários	Sincronização de arquivos com o Google Drive.
+Dropbox.Dropbox	Dropbox	Utilitários	Armazenamento e sincronização na nuvem.
+Microsoft.OneDrive	OneDrive	Utilitários	Armazenamento na nuvem da Microsoft.
+qBittorrent.qBittorrent	qBittorrent	Utilitários	Cliente BitTorrent de código aberto sem anúncios.
+AppWork.JDownloader	JDownloader 2	Utilitários	Gerenciador de downloads.
+Microsoft.WindowsTerminal	Windows Terminal	Utilitários	Terminal moderno com abas.
+DuongDieuPhap.ImageGlass	ImageGlass	Utilitários	Visualizador de imagens leve.
+Ditto.Ditto	Ditto	Utilitários	Histórico da área de transferência.
+LocalSend.LocalSend	LocalSend	Utilitários	Envia arquivos entre dispositivos na rede local.
+Nilesoft.Shell	Nilesoft Shell	Utilitários	Personaliza o menu de contexto do Windows.
+Piriform.Recuva	Recuva	Utilitários	Recupera arquivos apagados.
+Piriform.Speccy	Speccy	Utilitários	Informações detalhadas do hardware.
+Wagnardsoft.DisplayDriverUninstaller	Display Driver Uninstaller	Utilitários	Remove completamente drivers de vídeo antigos.
+Microsoft.Sysinternals.TCPView	TCPView	Utilitários	Mostra as conexões de rede de cada processo.
+Lexikos.AutoHotkey	AutoHotkey (Lexikos)	Utilitários	Automação de teclado e mouse.
+Bopsoft.Listary	Listary	Utilitários	Busca rápida de arquivos e apps.
+Microsoft.Sysinternals.Suite	Sysinternals Suite	Utilitários	Coleção completa de ferramentas Sysinternals.
+CPUID.CPU-Z	CPU-Z	Monitoramento	Informações de CPU, placa-mãe e memória.
+TechPowerUp.GPU-Z	GPU-Z	Monitoramento	Informações e sensores da placa de vídeo.
+REALiX.HWiNFO	HWiNFO	Monitoramento	Sensores detalhados de todo o hardware.
+CPUID.HWMonitor	HWMonitor	Monitoramento	Temperaturas, tensões e ventoinhas.
+LibreHardwareMonitor.LibreHardwareMonitor	Libre Hardware Monitor	Monitoramento	Monitor de sensores de código aberto.
+Guru3D.Afterburner	MSI Afterburner	Monitoramento	Overclock da GPU e overlay de desempenho.
+Guru3D.RTSS	RivaTuner Statistics Server	Monitoramento	Limitador de FPS e overlay de estatísticas.
+CrystalDewWorld.CrystalDiskInfo	CrystalDiskInfo	Monitoramento	Saúde (S.M.A.R.T.) e temperatura dos discos.
+CrystalDewWorld.CrystalDiskMark	CrystalDiskMark	Monitoramento	Teste de velocidade de discos.
+FinalWire.AIDA64.Extreme	AIDA64 Extreme	Monitoramento	Diagnóstico e benchmarks completos.
+Intel.PresentMon	Intel PresentMon	Monitoramento	Captura de FPS e latência por eventos ETW.
+Rem0o.FanControl	Fan Control	Monitoramento	Controle de ventoinhas por curvas de temperatura.
+OCBase.OCCT	OCCT	Monitoramento	Teste de estabilidade de CPU, GPU e fonte.
+Unigine.HeavenBenchmark	Unigine Heaven	Monitoramento	Benchmark gráfico clássico.
+Unigine.SuperpositionBenchmark	Unigine Superposition	Monitoramento	Benchmark gráfico e teste de estabilidade.
+Ookla.Speedtest.Desktop	Speedtest by Ookla	Monitoramento	Teste de velocidade da internet.
+Ookla.Speedtest.CLI	Speedtest CLI	Monitoramento	Teste de velocidade pela linha de comando.
+Resplendence.LatencyMon	LatencyMon	Monitoramento	Detecta drivers que causam latência de áudio e travadas.
+CXWorld.CapFrameX	CapFrameX	Monitoramento	Captura e análise de frame times.
+Microsoft.Sysinternals.ProcessMonitor	Process Monitor	Monitoramento	Monitora em tempo real arquivos, registro e processos.
+PrimateLabs.Geekbench.6	Geekbench 6	Monitoramento	Benchmark de CPU e GPU multiplataforma.
+Maxon.CinebenchR23	Cinebench R23	Monitoramento	Benchmark de renderização da CPU.
+Mersenne.Prime95	Prime95	Monitoramento	Teste de estresse da CPU.
+Microsoft.VCRedist.2015+.x64	Visual C++ 2015-2022 (x64)	Drivers e Runtimes	Bibliotecas exigidas pela maioria dos jogos (64 bits).
+Microsoft.VCRedist.2015+.x86	Visual C++ 2015-2022 (x86)	Drivers e Runtimes	Bibliotecas exigidas pela maioria dos jogos (32 bits).
+Microsoft.VCRedist.2013.x64	Visual C++ 2013 (x64)	Drivers e Runtimes	Bibliotecas para jogos e apps antigos (64 bits).
+Microsoft.VCRedist.2013.x86	Visual C++ 2013 (x86)	Drivers e Runtimes	Bibliotecas para jogos e apps antigos (32 bits).
+Microsoft.VCRedist.2012.x64	Visual C++ 2012 (x64)	Drivers e Runtimes	Bibliotecas para jogos e apps antigos (64 bits).
+Microsoft.VCRedist.2012.x86	Visual C++ 2012 (x86)	Drivers e Runtimes	Bibliotecas para jogos e apps antigos (32 bits).
+Microsoft.VCRedist.2010.x64	Visual C++ 2010 (x64)	Drivers e Runtimes	Bibliotecas para jogos antigos (64 bits).
+Microsoft.VCRedist.2010.x86	Visual C++ 2010 (x86)	Drivers e Runtimes	Bibliotecas para jogos antigos (32 bits).
+Microsoft.VCRedist.2008.x64	Visual C++ 2008 (x64)	Drivers e Runtimes	Bibliotecas para jogos antigos (64 bits).
+Microsoft.VCRedist.2008.x86	Visual C++ 2008 (x86)	Drivers e Runtimes	Bibliotecas para jogos antigos (32 bits).
+Microsoft.VCRedist.2005.x64	Visual C++ 2005 (x64)	Drivers e Runtimes	Bibliotecas para jogos muito antigos (64 bits).
+Microsoft.VCRedist.2005.x86	Visual C++ 2005 (x86)	Drivers e Runtimes	Bibliotecas para jogos muito antigos (32 bits).
+Microsoft.DirectX	DirectX End-User Runtime	Drivers e Runtimes	Componentes legados do DirectX 9 exigidos por jogos antigos.
+Microsoft.DotNet.DesktopRuntime.8	.NET Desktop Runtime 8	Drivers e Runtimes	Necessário para apps .NET 8 com interface.
+Microsoft.DotNet.DesktopRuntime.9	.NET Desktop Runtime 9	Drivers e Runtimes	Necessário para apps .NET 9 com interface.
+Microsoft.DotNet.DesktopRuntime.10	.NET Desktop Runtime 10	Drivers e Runtimes	Necessário para apps .NET 10 com interface.
+Microsoft.DotNet.DesktopRuntime.6	.NET Desktop Runtime 6	Drivers e Runtimes	Necessário para apps .NET 6 com interface.
+Microsoft.DotNet.Runtime.8	.NET Runtime 8	Drivers e Runtimes	Runtime .NET 8 para apps de console.
+Microsoft.DotNet.Framework.DeveloperPack_4	.NET Framework 4.8 Developer Pack	Drivers e Runtimes	.NET Framework 4.x para apps antigos.
+Microsoft.XNARedist	XNA Framework	Drivers e Runtimes	Necessário para jogos independentes antigos feitos em XNA.
+Oracle.JavaRuntimeEnvironment	Java Runtime (Oracle)	Drivers e Runtimes	Java 8 para programas e jogos antigos.
+EclipseAdoptium.Temurin.21.JRE	Java 21 (Temurin)	Drivers e Runtimes	Java 21 de código aberto.
+EclipseAdoptium.Temurin.17.JRE	Java 17 (Temurin)	Drivers e Runtimes	Java 17 de código aberto.
+EclipseAdoptium.Temurin.8.JRE	Java 8 (Temurin)	Drivers e Runtimes	Java 8 de código aberto.
+OpenAL.OpenAL	OpenAL	Drivers e Runtimes	Biblioteca de áudio 3D usada por alguns jogos.
+Nvidia.PhysX	NVIDIA PhysX	Drivers e Runtimes	Física acelerada em jogos com PhysX.
+Nvidia.GeForceExperience	GeForce Experience	Drivers e Runtimes	Atualização de drivers NVIDIA (legado).
+Nvidia.NvidiaApp	NVIDIA App	Drivers e Runtimes	Drivers e configurações da NVIDIA.
+Nvidia.CUDA	NVIDIA CUDA Toolkit	Drivers e Runtimes	Ferramentas CUDA para computação na GPU.
+AMD.RyzenMaster	AMD Ryzen Master	Drivers e Runtimes	Ajustes e overclock de CPUs Ryzen.
+Intel.IntelDriverAndSupportAssistant	Intel Driver & Support Assistant	Drivers e Runtimes	Atualiza drivers Intel.
+TechPowerUp.NVCleanstall	NVCleanstall	Drivers e Runtimes	Instala drivers NVIDIA só com o essencial.
+Microsoft.EdgeWebView2Runtime	WebView2 Runtime	Drivers e Runtimes	Componente usado por muitos apps modernos.
+Microsoft.UI.Xaml.2.8	Microsoft UI Xaml 2.8	Drivers e Runtimes	Componente de interface usado por apps do Windows.
+Microsoft.VCLibs.Desktop.14	VCLibs Desktop 14	Drivers e Runtimes	Bibliotecas para apps empacotados.
+KhronosGroup.VulkanRT	Vulkan Runtime	Drivers e Runtimes	Runtime da API gráfica Vulkan.
+VideoLAN.VLC	VLC	Mídia	Reproduz praticamente qualquer vídeo ou áudio.
+Spotify.Spotify	Spotify	Mídia	Streaming de músicas e podcasts.
+OBSProject.OBSStudio	OBS Studio	Mídia	Gravação e transmissão ao vivo.
+Streamlabs.Streamlabs	Streamlabs Desktop	Mídia	Transmissão ao vivo com alertas e temas.
+clsid2.mpc-hc	MPC-HC	Mídia	Player de vídeo leve e clássico.
+MPC-BE.MPC-BE	MPC-BE	Mídia	Player de vídeo leve com muitos codecs.
+Daum.PotPlayer	PotPlayer	Mídia	Player de vídeo com muitos recursos.
+CodecGuide.K-LiteCodecPack.Standard	K-Lite Codec Pack	Mídia	Pacote de codecs de áudio e vídeo.
+PeterPawlowski.foobar2000	foobar2000	Mídia	Player de áudio leve e personalizável.
+AIMP.AIMP	AIMP	Mídia	Player de áudio com equalizador.
+MusicBee.MusicBee	MusicBee	Mídia	Organizador e player de músicas.
+Audacity.Audacity	Audacity	Mídia	Editor de áudio gratuito.
+HandBrake.HandBrake	HandBrake	Mídia	Converte e comprime vídeos.
+Gyan.FFmpeg	FFmpeg	Mídia	Ferramenta de conversão de áudio e vídeo por linha de comando.
+yt-dlp.yt-dlp	yt-dlp	Mídia	Baixa vídeos de sites pela linha de comando.
+MoritzBunkus.MKVToolNix	MKVToolNix	Mídia	Cria e edita arquivos MKV.
+GIMP.GIMP.3	GIMP	Mídia	Editor de imagens gratuito.
+KDE.Krita	Krita	Mídia	Pintura digital e ilustração.
+KDE.Kdenlive	Kdenlive	Mídia	Editor de vídeo gratuito.
+Meltytech.Shotcut	Shotcut	Mídia	Editor de vídeo de código aberto.
+BlenderFoundation.Blender	Blender	Mídia	Modelagem 3D, animação e edição de vídeo.
+Inkscape.Inkscape	Inkscape	Mídia	Editor de imagens vetoriais.
+dotPDN.PaintDotNet	Paint.NET	Mídia	Editor de imagens simples e rápido.
+IrfanSkiljan.IrfanView	IrfanView	Mídia	Visualizador de imagens rápido.
+XnSoft.XnViewMP	XnView MP	Mídia	Visualizador e organizador de imagens.
+darktable.darktable	darktable	Mídia	Revelação de fotos RAW.
+XBMCFoundation.Kodi	Kodi	Mídia	Central de mídia para filmes, séries e músicas.
+Plex.Plex	Plex	Mídia	Assista sua biblioteca de mídia em qualquer lugar.
+Stremio.Stremio	Stremio	Mídia	Central de streaming de filmes e séries.
+Apple.iTunes	iTunes	Mídia	Música e sincronização de dispositivos Apple.
+Deezer.Deezer	Deezer	Mídia	Streaming de músicas.
+Nvidia.Broadcast	NVIDIA Broadcast	Mídia	Remove ruído do microfone e fundo da câmera com IA.
+Elgato.StreamDeck	Elgato Stream Deck	Mídia	Software do Stream Deck.
+VB-Audio.Voicemeeter	Voicemeeter	Mídia	Mixer de áudio virtual.
+VB-Audio.Voicemeeter.Banana	Voicemeeter Banana	Mídia	Mixer de áudio virtual avançado.
+BandicamCompany.Bandicam	Bandicam	Mídia	Gravador de tela e de jogos.
+Microsoft.VisualStudioCode	Visual Studio Code	Desenvolvimento	Editor de código leve e extensível.
+Git.Git	Git	Desenvolvimento	Controle de versão distribuído.
+GitHub.GitHubDesktop	GitHub Desktop	Desenvolvimento	Interface gráfica para Git e GitHub.
+GitHub.cli	GitHub CLI	Desenvolvimento	GitHub pela linha de comando.
+Python.Python.3.12	Python 3.12	Desenvolvimento	Linguagem Python 3.12.
+Python.Python.3.13	Python 3.13	Desenvolvimento	Linguagem Python 3.13.
+OpenJS.NodeJS.LTS	Node.js LTS	Desenvolvimento	JavaScript no servidor (versão de longo suporte).
+OpenJS.NodeJS	Node.js	Desenvolvimento	JavaScript no servidor (versão atual).
+Microsoft.DotNet.SDK.8	.NET SDK 8	Desenvolvimento	Kit de desenvolvimento .NET 8.
+Microsoft.DotNet.SDK.9	.NET SDK 9	Desenvolvimento	Kit de desenvolvimento .NET 9.
+Docker.DockerDesktop	Docker Desktop	Desenvolvimento	Contêineres no Windows.
+JetBrains.Toolbox	JetBrains Toolbox	Desenvolvimento	Gerencia as IDEs da JetBrains.
+JetBrains.IntelliJIDEA.Community	IntelliJ IDEA Community	Desenvolvimento	IDE para Java e Kotlin.
+JetBrains.PyCharm.Community	PyCharm Community	Desenvolvimento	IDE para Python.
+Microsoft.VisualStudio.2022.Community	Visual Studio 2022 Community	Desenvolvimento	IDE completa da Microsoft.
+Postman.Postman	Postman	Desenvolvimento	Testes de APIs.
+Insomnia.Insomnia	Insomnia	Desenvolvimento	Cliente de APIs REST e GraphQL.
+Neovim.Neovim	Neovim	Desenvolvimento	Editor de texto modal moderno.
+vim.vim	Vim	Desenvolvimento	Editor de texto clássico.
+SublimeHQ.SublimeText.4	Sublime Text 4	Desenvolvimento	Editor de código rápido.
+Rustlang.Rustup	Rustup	Desenvolvimento	Instalador da linguagem Rust.
+GoLang.Go	Go	Desenvolvimento	Linguagem Go.
+Kitware.CMake	CMake	Desenvolvimento	Sistema de build multiplataforma.
+Microsoft.PowerShell	PowerShell 7	Desenvolvimento	Shell e linguagem de automação moderna.
+WinSCP.WinSCP	WinSCP	Desenvolvimento	Cliente SFTP e FTP.
+PuTTY.PuTTY	PuTTY	Desenvolvimento	Cliente SSH e Telnet.
+Oracle.VirtualBox	VirtualBox	Desenvolvimento	Máquinas virtuais.
+dbeaver.dbeaver	DBeaver	Desenvolvimento	Cliente universal de bancos de dados.
+HeidiSQL.HeidiSQL	HeidiSQL	Desenvolvimento	Cliente de MySQL, PostgreSQL e SQL Server.
+Anysphere.Cursor	Cursor	Desenvolvimento	Editor de código com IA.
+GodotEngine.GodotEngine	Godot Engine	Desenvolvimento	Motor de jogos gratuito.
+Unity.UnityHub	Unity Hub	Desenvolvimento	Gerencia versões e projetos do Unity.
+ArduinoSA.IDE.stable	Arduino IDE	Desenvolvimento	Programação de placas Arduino.
+ZedIndustries.Zed	Zed	Desenvolvimento	Editor de código colaborativo.
+Hashicorp.Vagrant	Vagrant	Desenvolvimento	Ambientes de desenvolvimento reproduzíveis.
+Bitwarden.Bitwarden	Bitwarden	Segurança	Gerenciador de senhas de código aberto.
+KeePassXCTeam.KeePassXC	KeePassXC	Segurança	Gerenciador de senhas offline.
+DominikReichl.KeePass	KeePass	Segurança	Gerenciador de senhas offline clássico.
+AgileBits.1Password	1Password	Segurança	Gerenciador de senhas.
+Malwarebytes.Malwarebytes	Malwarebytes	Segurança	Remoção de malware.
+Proton.ProtonVPN	Proton VPN	Segurança	VPN com plano gratuito.
+Proton.ProtonPass	Proton Pass	Segurança	Gerenciador de senhas da Proton.
+MullvadVPN.MullvadVPN	Mullvad VPN	Segurança	VPN focada em privacidade.
+WireGuard.WireGuard	WireGuard	Segurança	Cliente VPN WireGuard.
+OpenVPNTechnologies.OpenVPN	OpenVPN	Segurança	Cliente VPN OpenVPN.
+IDRIX.VeraCrypt	VeraCrypt	Segurança	Criptografia de discos e arquivos.
+Cloudflare.Warp	Cloudflare WARP	Segurança	DNS 1.1.1.1 e VPN da Cloudflare.
+GnuPG.Gpg4win	Gpg4win	Segurança	Criptografia e assinatura com GnuPG.
+NordSecurity.NordVPN	NordVPN	Segurança	VPN comercial.
+SafingIO.Portmaster	Portmaster	Segurança	Firewall de aplicativos com bloqueio de rastreadores.
+Henry++.simplewall	simplewall	Segurança	Interface simples para o Firewall do Windows.
+Tailscale.Tailscale	Tailscale	Segurança	Rede privada entre seus dispositivos.
+ZeroTier.ZeroTierOne	ZeroTier One	Segurança	Rede virtual entre dispositivos.
+Malwarebytes.AdwCleaner	AdwCleaner	Segurança	Remove adware e barras de ferramentas.
+GlassWire.GlassWire	GlassWire	Segurança	Monitor de rede e firewall.
+TheDocumentFoundation.LibreOffice	LibreOffice	Produtividade	Pacote de escritório gratuito.
+ONLYOFFICE.DesktopEditors	ONLYOFFICE	Produtividade	Editores de documentos compatíveis com Office.
+Kingsoft.WPSOffice	WPS Office	Produtividade	Pacote de escritório.
+Adobe.Acrobat.Reader.64-bit	Adobe Acrobat Reader	Produtividade	Leitor de PDF da Adobe.
+SumatraPDF.SumatraPDF	SumatraPDF	Produtividade	Leitor de PDF muito leve.
+Foxit.FoxitReader	Foxit PDF Reader	Produtividade	Leitor de PDF.
+PDFsam.PDFsam	PDFsam Basic	Produtividade	Junta e divide arquivos PDF.
+KDE.Okular	Okular	Produtividade	Leitor de documentos.
+Notion.Notion	Notion	Produtividade	Notas, wikis e tarefas.
+Obsidian.Obsidian	Obsidian	Produtividade	Notas em Markdown conectadas.
+Joplin.Joplin	Joplin	Produtividade	Notas de código aberto com sincronização.
+Logseq.Logseq	Logseq	Produtividade	Notas em tópicos e diário.
+Evernote.Evernote	Evernote	Produtividade	Notas e organização.
+StandardNotes.StandardNotes	Standard Notes	Produtividade	Notas criptografadas.
+Zotero.Zotero	Zotero	Produtividade	Gerencia referências bibliográficas.
+Anki.Anki	Anki	Produtividade	Cartões de memorização.
+calibre.calibre	calibre	Produtividade	Organiza e converte e-books.
+Figma.Figma	Figma	Produtividade	Design de interfaces.
+Doist.Todoist	Todoist	Produtividade	Lista de tarefas.
+Toggl.TogglTrack	Toggl Track	Produtividade	Controle de tempo.
+Typora.Typora	Typora	Produtividade	Editor de Markdown.
+Microsoft.Office	Microsoft 365 (Office)	Produtividade	Word, Excel e PowerPoint.
+Miro.Miro	Miro	Produtividade	Quadro branco colaborativo.
+Anytype.Anytype	Anytype	Produtividade	Notas e bases de conhecimento locais.

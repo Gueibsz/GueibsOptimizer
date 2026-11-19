@@ -1,0 +1,16 @@
+{
+  "Limpeza de Disco do Windows": "Liberador de espacio de Windows",
+  "Usa a ferramenta nativa cleanmgr. Escolher categorias (cleanmgr /sageset:64) abre a janela do Windows para marcar o que limpar e não apaga nada. Executar (cleanmgr /sagerun:64) limpa as categorias escolhidas. Ela alcança itens que o app não limpa, como arquivos de atualizações antigas.": "Usa la herramienta nativa cleanmgr. Elegir categorías (cleanmgr /sageset:64) abre la ventana de Windows para marcar qué limpiar y no borra nada. Ejecutar (cleanmgr /sagerun:64) limpia las categorías elegidas. Alcanza elementos que la app no limpia, como archivos de actualizaciones antiguas.",
+  "Escolher categorias": "Elegir categorías",
+  "Estimativa do app para as categorias analisadas: {0}. A Limpeza de Disco pode encontrar outras categorias (ex.: arquivos de atualização).": "Estimación de la app para las categorías analizadas: {0}. El Liberador de espacio puede encontrar otras categorías (p. ej., archivos de actualización).",
+  "Clique em Analisar acima para ver uma estimativa do espaço.": "Haz clic en Analizar arriba para ver una estimación del espacio.",
+  "Abre a Limpeza de Disco do Windows para você marcar o que ela deve limpar (comando: cleanmgr {0}). Nada é apagado nesta etapa.": "Abre el Liberador de espacio de Windows para que marques qué debe limpiar (comando: cleanmgr {0}). No se borra nada en este paso.",
+  "Executa a Limpeza de Disco do Windows com as opções escolhidas em \"Escolher categorias\" (comando: cleanmgr {0}).": "Ejecuta el Liberador de espacio de Windows con las opciones elegidas en \"Elegir categorías\" (comando: cleanmgr {0}).",
+  "Continuar?": "¿Continuar?",
+  "Aguardando a janela da Limpeza de Disco...": "Esperando la ventana del Liberador de espacio...",
+  "Limpeza de Disco em andamento...": "Liberador de espacio en curso...",
+  "Simulação: cleanmgr {0} não foi executado.": "Simulación: cleanmgr {0} no se ejecutó.",
+  "A Limpeza de Disco demorou demais e foi interrompida.": "El Liberador de espacio tardó demasiado y se detuvo.",
+  "Categorias salvas. Agora use Executar.": "Categorías guardadas. Ahora usa Ejecutar.",
+  "Limpeza de Disco concluída.": "Liberador de espacio terminado."
+}

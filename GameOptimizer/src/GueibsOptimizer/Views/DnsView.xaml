@@ -1,0 +1,94 @@
+<UserControl x:Class="GueibsOptimizer.Views.DnsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:GueibsOptimizer.Core"
+             xmlns:c="clr-namespace:GueibsOptimizer.Views.Controls"
+             Loaded="OnLoaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TitleText}" Text="{l:T 'DNS e rede'}" />
+                <c:InfoButton Title="{l:T 'DNS e rede'}" Margin="4,0,0,0" VerticalAlignment="Center"
+                              Text="{l:T 'O DNS traduz nomes (como store.steampowered.com) em endereços. Trocar o DNS não aumenta FPS nem velocidade de download; pode acelerar um pouco a abertura de sites e evitar falhas do DNS do provedor. O app guarda o DNS atual de cada adaptador antes de mudar, e o desfazer fica na aba Restauração. O teste de latência mede, agora, quanto cada provedor demora para responder daqui (mediana de 4 consultas).'}" />
+            </StackPanel>
+            <TextBlock Style="{StaticResource SubtitleText}" Text="{l:T 'Escolha o DNS de cada adaptador, meça a latência dos provedores e ajuste o IPv6. O resultado depende da sua rede.'}" />
+
+            <!-- Adaptador e provedor -->
+            <Border Style="{StaticResource Card}" Margin="0,18,0,0">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'DNS do adaptador'}" />
+                    <Grid Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="{l:T 'Adaptador ativo'}" />
+                            <ComboBox ItemsSource="{Binding Adapters}" SelectedItem="{Binding SelectedAdapter}" DisplayMemberPath="Name" Margin="0,4,0,0"
+                                      AutomationProperties.Name="Adaptador de rede" />
+                            <TextBlock FontSize="12" Margin="0,6,0,0" TextWrapping="Wrap">
+                                <Run Text="{l:T 'DNS atual:'}" Foreground="{DynamicResource TextMutedBrush}" /><Run Text=" " /><Run><Run.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="SelectedAdapter.CurrentText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></Run.Text></Run>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="{l:T 'Novo DNS'}" />
+                            <ComboBox ItemsSource="{Binding ProviderNames}" SelectedItem="{Binding SelectedProvider}" Margin="0,4,0,0" AutomationProperties.Name="Provedor de DNS">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Text="{Binding CustomServers, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"
+                                     Visibility="{Binding IsCustom, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="DNS personalizado" />
+                            <TextBlock FontSize="12" Margin="0,6,0,0" TextWrapping="Wrap" Foreground="{DynamicResource TextMutedBrush}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ProviderAddresses" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Style="{StaticResource PrimaryButton}" Content="{l:T 'Aplicar ao adaptador'}" Command="{Binding ApplyCommand}" Margin="0,0,12,0"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" AutomationProperties.Name="Aplicar DNS ao adaptador" />
+                        <TextBlock VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource AccentTextBrush}" TextWrapping="Wrap" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Status" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Latência -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                <StackPanel>
+                    <DockPanel>
+                        <Button DockPanel.Dock="Right" Content="{l:T 'Testar latência'}" Command="{Binding TestLatencyCommand}"
+                                IsEnabled="{Binding IsTesting, Converter={StaticResource InverseBool}}" AutomationProperties.Name="Testar latência do DNS" />
+                        <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'Latência dos provedores (medida agora)'}" />
+                    </DockPanel>
+                    <ItemsControl ItemsSource="{Binding Latency}" Margin="0,8,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock x:Name="Res" Grid.Column="1" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Result" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsFastest}" Value="True">
+                                        <Setter TargetName="Res" Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+                                        <Setter TargetName="Res" Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource SubtitleText}" FontSize="11.5" Margin="0,6,0,0"
+                               Text="{l:T 'O mais rápido fica em verde. É só uma medida deste momento e desta rede; a escolha é sua.'}" />
+                </StackPanel>
+            </Border>
+
+            <!-- IPv6 -->
+            <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'IPv6'}" Margin="0,22,0,8" />
+            <ItemsControl ItemsSource="{Binding Network.Items}" ItemTemplate="{StaticResource TweakCard}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

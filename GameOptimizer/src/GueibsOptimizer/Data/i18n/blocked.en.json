@@ -1,0 +1,4 @@
+{
+  "O {0} não existe nesta instalação do Windows (algumas versões modificadas removem essa ferramenta).": "{0} does not exist in this Windows installation (some modified Windows versions remove this tool).",
+  "O Windows bloqueou a execução do {0} (acesso negado ao programa, mesmo como administrador). Algumas versões modificadas do Windows bloqueiam essa ferramenta; o app não contorna esse bloqueio.": "Windows blocked running {0} (access to the program denied, even as administrator). Some modified Windows versions block this tool; the app does not work around this block."
+}

@@ -1,0 +1,70 @@
+<UserControl x:Class="GueibsOptimizer.Views.DefenderAiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:GueibsOptimizer.Core"
+             xmlns:c="clr-namespace:GueibsOptimizer.Views.Controls"
+             Loaded="OnLoaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TitleText}" Text="{l:T 'Defender e IA'}" />
+                <c:InfoButton Title="{l:T 'Defender e IA'}" Margin="4,0,0,0" VerticalAlignment="Center"
+                              Text="{l:T 'O estado do Microsoft Defender é só lido (Get-MpComputerStatus): o Gueibs Optimizer nunca desliga o Defender, o Firewall ou o UAC. A única mudança possível aqui é colocar ou tirar a pasta do próprio app das exclusões. Os ajustes de IA e privacidade abaixo são os mesmos do Boost e da Otimização Completa, e cada um pode ser desfeito.'}" />
+            </StackPanel>
+            <TextBlock Style="{StaticResource SubtitleText}"
+                       Text="{l:T 'Proteção do Windows (só leitura) e controles de Copilot, Recall, sugestões e telemetria.'}" />
+
+            <!-- Defender -->
+            <Border Style="{StaticResource Card}" Margin="0,18,0,0">
+                <StackPanel>
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Button Content="{l:T 'Atualizar'}" Command="{Binding RefreshCommand}" Margin="0,0,8,0" />
+                            <Button Content="{l:T 'Abrir Segurança do Windows'}" Command="{Binding OpenWindowsSecurityCommand}"
+                                    AutomationProperties.Name="Abrir Segurança do Windows" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'Microsoft Defender'}" />
+                    </DockPanel>
+                    <Border Margin="0,10,0,4" Padding="12,8" CornerRadius="6" BorderThickness="1" BorderBrush="{DynamicResource WarningBrush}"
+                            Visibility="{Binding IsManaged, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock TextWrapping="Wrap" FontSize="12.5" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="StatusMessage" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                    </Border>
+                    <ItemsControl ItemsSource="{Binding Rows}" Margin="0,8,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="240" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="{DynamicResource TextMutedBrush}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Label" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    <TextBlock x:Name="Value" Grid.Column="1" TextWrapping="Wrap" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Value" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsProblem}" Value="True">
+                                        <Setter TargetName="Value" Property="Foreground" Value="{DynamicResource WarningBrush}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Margin="0,10,0,4" Text="{l:T 'Pasta do app:'}" />
+                    <TextBox Text="{Binding AppFolder, Mode=OneWay}" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas" FontSize="12" />
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding IsAvailable, Converter={StaticResource BoolToVisibility}}">
+                        <Button Style="{StaticResource PrimaryButton}" Content="{l:T 'Adicionar exclusão da pasta do app'}" Command="{Binding AddExclusionCommand}"
+                                Visibility="{Binding HasExclusion, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}" />
+                        <Button Style="{StaticResource DangerButton}" Content="{l:T 'Remover exclusão'}" Command="{Binding RemoveExclusionCommand}"
+                                Visibility="{Binding HasExclusion, Converter={StaticResource BoolToVisibility}}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource SubtitleText}" FontSize="12" Margin="0,8,0,0"
+                               Text="{l:T 'O Gueibs Optimizer nunca desliga o Defender. Para ajustar a proteção, use a Segurança do Windows.'}" />
+                </StackPanel>
+            </Border>
+
+            <!-- IA e privacidade (ITweaks existentes) -->
+            <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'Inteligência artificial e privacidade'}" Margin="0,22,0,2" />
+            <TextBlock Style="{StaticResource SubtitleText}" Margin="0,0,0,10" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Ai.Summary" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+            <ItemsControl ItemsSource="{Binding Ai.Items}" ItemTemplate="{StaticResource TweakCard}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

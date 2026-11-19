@@ -1,0 +1,10 @@
+{
+  "este PC": "este PC",
+  "Só existe no Windows 11": "Solo existe en Windows 11",
+  "Só existe no Windows 11 (o Windows 10 já usa o menu clássico)": "Solo existe en Windows 11 (Windows 10 ya usa el menú clásico)",
+  "Exige Windows 11 22H2 ou mais novo": "Requiere Windows 11 22H2 o más reciente",
+  "Exige Windows 11 24H2 ou mais novo": "Requiere Windows 11 24H2 o más reciente",
+  "Exige Windows 10 2004 ou mais novo": "Requiere Windows 10 2004 o más reciente",
+  "Confirmar de novo": "Confirmar de nuevo",
+  "Confirma mesmo aplicar \"{0}\"? Ele pode ser desfeito na aba Restauração.": "¿Seguro que quieres aplicar \"{0}\"? Se puede deshacer en la pestaña Restauración."
+}

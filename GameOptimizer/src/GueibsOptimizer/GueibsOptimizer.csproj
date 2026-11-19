@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>GueibsOptimizer</AssemblyName>
+    <RootNamespace>GueibsOptimizer</RootNamespace>
+    <Product>Gueibs Optimizer</Product>
+    <Version>2.2</Version>
+    <AssemblyTitle>Gueibs Optimizer</AssemblyTitle>
+    <Description>Otimizador de PC gamer para Windows 10/11 (uso pessoal)</Description>
+    <Company>Gueibs Optimizer</Company>
+    <Copyright>Uso pessoal e educacional</Copyright>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Publicação para distribuir: exe único comprimido, sem arquivo .pdb separado. -->
+  <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <SatelliteResourceLanguages>pt-BR;en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WinForms só é usado para o NotifyIcon da bandeja; evita conflito de nomes com WPF. -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.6" />
+    <PackageReference Include="System.Management" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\catalog.json" />
+    <EmbeddedResource Include="Data\debloat.json" />
+    <EmbeddedResource Include="Data\gamepresets.json" />
+    <EmbeddedResource Include="Data\tweaks.json" />
+    <EmbeddedResource Include="Data\services-manual.json" />
+    <!-- WithCulture=false: sem isso o MSBuild trata "tweaks.en.json" como recurso de cultura (satélite) e ele não fica no .exe. -->
+    <EmbeddedResource Include="Data\i18n\*.json" WithCulture="false" />
+    <!-- Variantes de cor do ícone (geradas por tools\make-icon.ps1), lidas via pack://application. -->
+    <Resource Include="Assets\Icons\*.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="GueibsOptimizer.Tests" />
+  </ItemGroup>
+
+</Project>
+
+

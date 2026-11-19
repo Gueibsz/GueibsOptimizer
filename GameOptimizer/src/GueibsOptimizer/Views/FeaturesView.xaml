@@ -1,0 +1,61 @@
+<UserControl x:Class="GueibsOptimizer.Views.FeaturesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:GueibsOptimizer.Core"
+             xmlns:c="clr-namespace:GueibsOptimizer.Views.Controls"
+             Loaded="OnLoaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="{l:T 'Atualizar'}" Command="{Binding RefreshCommand}" VerticalAlignment="Top" />
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TitleText}" Text="{l:T 'Recursos do Windows'}" />
+                        <c:InfoButton Title="{l:T 'Recursos do Windows'}" Margin="4,0,0,0" VerticalAlignment="Center"
+                                      Text="{l:T 'Recursos opcionais do próprio Windows, ligados e desligados pelo DISM (o comando exato aparece antes). O estado é lido agora (Win32_OptionalFeature). Hyper-V, Plataforma de Máquina Virtual e Sandbox ligam o hipervisor do Windows: isso pode reduzir um pouco o desempenho em jogos e alguns anti-cheats não funcionam com ele. Na edição Home, Hyper-V e Sandbox não existem e aparecem como indisponíveis. Cada mudança pode ser desfeita aqui ou na aba Restauração.'}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource SubtitleText}" Text="{l:T 'Ative ou desative recursos opcionais. Algumas mudanças pedem reinício.'}" />
+                </StackPanel>
+            </DockPanel>
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0" Padding="14,8" BorderThickness="1" BorderBrush="{DynamicResource WarningBrush}"
+                    Visibility="{Binding RebootPending, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="{l:T 'Reinicie o PC para concluir as mudanças nos recursos do Windows.'}" TextWrapping="Wrap" />
+            </Border>
+            <TextBlock FontSize="12" Foreground="{DynamicResource AccentTextBrush}" Margin="0,10,0,0" TextWrapping="Wrap" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Status" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+            <ItemsControl ItemsSource="{Binding Rows}" Margin="0,8,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,10" Padding="16,12">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="12,0,0,0">
+                                    <TextBlock x:Name="State" HorizontalAlignment="Right" FontSize="12" Margin="0,0,0,6" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="StateText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    <Button HorizontalAlignment="Right" Command="{Binding DataContext.ToggleCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding}" Visibility="{Binding IsAvailable, Converter={StaticResource BoolToVisibility}}"
+                                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" AutomationProperties.Name="{Binding Title, StringFormat='Alternar {0}'}">
+                                        <TextBlock><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="ActionText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock FontWeight="SemiBold" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Title" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    <TextBlock Style="{StaticResource SubtitleText}" FontSize="12.5" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Description" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    <TextBlock FontSize="12" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                               Visibility="{Binding Warning, Converter={StaticResource NotEmptyToVisibility}}" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Warning" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+                                    <TextBox Text="{Binding CommandText, Mode=OneWay}" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas" FontSize="11.5" Margin="0,6,0,0"
+                                             Visibility="{Binding IsAvailable, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="Comando do recurso" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                <Setter TargetName="State" Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                                <Setter TargetName="State" Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

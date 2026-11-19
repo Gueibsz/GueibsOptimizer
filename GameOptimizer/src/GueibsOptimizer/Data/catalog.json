@@ -1,0 +1,1590 @@
+{
+    "version":  1,
+    "validatedOn":  "2026-11-18",
+    "apps":  [
+                 {
+                     "name":  "Google Chrome",
+                     "wingetId":  "Google.Chrome",
+                     "category":  "Navegadores",
+                     "description":  "Navegador rápido do Google com sincronização de conta."
+                 },
+                 {
+                     "name":  "Mozilla Firefox",
+                     "wingetId":  "Mozilla.Firefox",
+                     "category":  "Navegadores",
+                     "description":  "Navegador de código aberto focado em privacidade."
+                 },
+                 {
+                     "name":  "Firefox ESR",
+                     "wingetId":  "Mozilla.Firefox.ESR",
+                     "category":  "Navegadores",
+                     "description":  "Versão de suporte estendido do Firefox, com menos mudanças."
+                 },
+                 {
+                     "name":  "Firefox Developer Edition",
+                     "wingetId":  "Mozilla.Firefox.DeveloperEdition",
+                     "category":  "Navegadores",
+                     "description":  "Firefox com ferramentas extras para desenvolvedores web."
+                 },
+                 {
+                     "name":  "Brave",
+                     "wingetId":  "Brave.Brave",
+                     "category":  "Navegadores",
+                     "description":  "Navegador com bloqueio de anúncios e rastreadores embutido."
+                 },
+                 {
+                     "name":  "Opera",
+                     "wingetId":  "Opera.Opera",
+                     "category":  "Navegadores",
+                     "description":  "Navegador com VPN gratuita e barra lateral de mensageiros."
+                 },
+                 {
+                     "name":  "Opera GX",
+                     "wingetId":  "Opera.OperaGX",
+                     "category":  "Navegadores",
+                     "description":  "Navegador para gamers com limites de CPU, RAM e rede."
+                 },
+                 {
+                     "name":  "Vivaldi",
+                     "wingetId":  "Vivaldi.Vivaldi",
+                     "category":  "Navegadores",
+                     "description":  "Navegador altamente personalizável com abas empilhadas."
+                 },
+                 {
+                     "name":  "Microsoft Edge",
+                     "wingetId":  "Microsoft.Edge",
+                     "category":  "Navegadores",
+                     "description":  "Navegador da Microsoft baseado em Chromium."
+                 },
+                 {
+                     "name":  "LibreWolf",
+                     "wingetId":  "LibreWolf.LibreWolf",
+                     "category":  "Navegadores",
+                     "description":  "Variante do Firefox com foco total em privacidade."
+                 },
+                 {
+                     "name":  "Tor Browser",
+                     "wingetId":  "TorProject.TorBrowser",
+                     "category":  "Navegadores",
+                     "description":  "Navegação anônima pela rede Tor."
+                 },
+                 {
+                     "name":  "Waterfox",
+                     "wingetId":  "Waterfox.Waterfox",
+                     "category":  "Navegadores",
+                     "description":  "Navegador baseado no Firefox com foco em privacidade."
+                 },
+                 {
+                     "name":  "Floorp",
+                     "wingetId":  "Ablaze.Floorp",
+                     "category":  "Navegadores",
+                     "description":  "Navegador baseado no Firefox com muitas opções de layout."
+                 },
+                 {
+                     "name":  "Zen Browser",
+                     "wingetId":  "Zen-Team.Zen-Browser",
+                     "category":  "Navegadores",
+                     "description":  "Navegador baseado no Firefox com abas verticais."
+                 },
+                 {
+                     "name":  "Chromium",
+                     "wingetId":  "Hibbiki.Chromium",
+                     "category":  "Navegadores",
+                     "description":  "Versão de código aberto do Chromium."
+                 },
+                 {
+                     "name":  "Yandex Browser",
+                     "wingetId":  "Yandex.Browser",
+                     "category":  "Navegadores",
+                     "description":  "Navegador da Yandex baseado em Chromium."
+                 },
+                 {
+                     "name":  "Google Chrome Beta",
+                     "wingetId":  "Google.Chrome.Beta",
+                     "category":  "Navegadores",
+                     "description":  "Versão beta do Chrome com recursos antecipados."
+                 },
+                 {
+                     "name":  "Arc",
+                     "wingetId":  "TheBrowserCompany.Arc",
+                     "category":  "Navegadores",
+                     "description":  "Navegador com espaços de trabalho e barra lateral."
+                 },
+                 {
+                     "name":  "Maxthon",
+                     "wingetId":  "Maxthon.Maxthon",
+                     "category":  "Navegadores",
+                     "description":  "Navegador leve com recursos de nuvem."
+                 },
+                 {
+                     "name":  "Steam",
+                     "wingetId":  "Valve.Steam",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Loja e biblioteca de jogos da Valve."
+                 },
+                 {
+                     "name":  "Epic Games Launcher",
+                     "wingetId":  "EpicGames.EpicGamesLauncher",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Loja da Epic com jogos grátis semanais."
+                 },
+                 {
+                     "name":  "EA app",
+                     "wingetId":  "ElectronicArts.EADesktop",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Launcher oficial dos jogos da EA."
+                 },
+                 {
+                     "name":  "Ubisoft Connect",
+                     "wingetId":  "Ubisoft.Connect",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Launcher oficial dos jogos da Ubisoft."
+                 },
+                 {
+                     "name":  "Battle.net",
+                     "wingetId":  "Blizzard.BattleNet",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Launcher dos jogos da Blizzard e Activision."
+                 },
+                 {
+                     "name":  "GOG Galaxy",
+                     "wingetId":  "GOG.Galaxy",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Biblioteca de jogos sem DRM da GOG."
+                 },
+                 {
+                     "name":  "Amazon Games",
+                     "wingetId":  "Amazon.Games",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Jogos do Prime Gaming."
+                 },
+                 {
+                     "name":  "Playnite",
+                     "wingetId":  "Playnite.Playnite",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Une as bibliotecas de todos os launchers em um só lugar."
+                 },
+                 {
+                     "name":  "Heroic Games Launcher",
+                     "wingetId":  "HeroicGamesLauncher.HeroicGamesLauncher",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Alternativa aberta para Epic, GOG e Amazon."
+                 },
+                 {
+                     "name":  "Minecraft Launcher",
+                     "wingetId":  "Mojang.MinecraftLauncher",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Launcher oficial do Minecraft."
+                 },
+                 {
+                     "name":  "Prism Launcher",
+                     "wingetId":  "PrismLauncher.PrismLauncher",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Gerencia várias instâncias e mods do Minecraft."
+                 },
+                 {
+                     "name":  "CurseForge",
+                     "wingetId":  "Overwolf.CurseForge",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Gerenciador de mods para vários jogos."
+                 },
+                 {
+                     "name":  "itch.io",
+                     "wingetId":  "ItchIo.Itch",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Loja de jogos independentes."
+                 },
+                 {
+                     "name":  "League of Legends (BR)",
+                     "wingetId":  "RiotGames.LeagueOfLegends.BR",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Cliente do League of Legends para o servidor brasileiro."
+                 },
+                 {
+                     "name":  "VALORANT (BR)",
+                     "wingetId":  "RiotGames.Valorant.BR",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Cliente do VALORANT para o servidor brasileiro."
+                 },
+                 {
+                     "name":  "Parsec",
+                     "wingetId":  "Parsec.Parsec",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Jogue e acesse seu PC remotamente com baixa latência."
+                 },
+                 {
+                     "name":  "Moonlight",
+                     "wingetId":  "MoonlightGameStreamingProject.Moonlight",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Cliente de streaming de jogos do seu PC."
+                 },
+                 {
+                     "name":  "Sunshine",
+                     "wingetId":  "LizardByte.Sunshine",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Servidor de streaming de jogos para o Moonlight."
+                 },
+                 {
+                     "name":  "GeForce NOW",
+                     "wingetId":  "Nvidia.GeForceNow",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Jogos na nuvem da NVIDIA."
+                 },
+                 {
+                     "name":  "RetroArch",
+                     "wingetId":  "Libretro.RetroArch",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Frontend para emuladores de consoles clássicos."
+                 },
+                 {
+                     "name":  "Dolphin",
+                     "wingetId":  "DolphinEmulator.Dolphin",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Emulador de GameCube e Wii."
+                 },
+                 {
+                     "name":  "PCSX2",
+                     "wingetId":  "PCSX2Team.PCSX2",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Emulador de PlayStation 2."
+                 },
+                 {
+                     "name":  "Cemu",
+                     "wingetId":  "Cemu.Cemu",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Emulador de Wii U."
+                 },
+                 {
+                     "name":  "osu!",
+                     "wingetId":  "ppy.osu",
+                     "category":  "Jogos e Launchers",
+                     "description":  "Jogo de ritmo gratuito."
+                 },
+                 {
+                     "name":  "Discord",
+                     "wingetId":  "Discord.Discord",
+                     "category":  "Comunicação",
+                     "description":  "Chat de voz, vídeo e texto para comunidades e jogos."
+                 },
+                 {
+                     "name":  "Discord PTB",
+                     "wingetId":  "Discord.Discord.PTB",
+                     "category":  "Comunicação",
+                     "description":  "Versão de testes públicos do Discord."
+                 },
+                 {
+                     "name":  "TeamSpeak 3",
+                     "wingetId":  "TeamSpeakSystems.TeamSpeakClient",
+                     "category":  "Comunicação",
+                     "description":  "Chat de voz de baixa latência para jogos."
+                 },
+                 {
+                     "name":  "Mumble",
+                     "wingetId":  "Mumble.Mumble.Client",
+                     "category":  "Comunicação",
+                     "description":  "Chat de voz de código aberto e baixa latência."
+                 },
+                 {
+                     "name":  "Zoom",
+                     "wingetId":  "Zoom.Zoom",
+                     "category":  "Comunicação",
+                     "description":  "Videoconferências e reuniões online."
+                 },
+                 {
+                     "name":  "Microsoft Teams",
+                     "wingetId":  "Microsoft.Teams",
+                     "category":  "Comunicação",
+                     "description":  "Chat e reuniões da Microsoft."
+                 },
+                 {
+                     "name":  "Slack",
+                     "wingetId":  "SlackTechnologies.Slack",
+                     "category":  "Comunicação",
+                     "description":  "Comunicação em equipe por canais."
+                 },
+                 {
+                     "name":  "Telegram",
+                     "wingetId":  "Telegram.TelegramDesktop",
+                     "category":  "Comunicação",
+                     "description":  "Mensageiro rápido com grupos e canais."
+                 },
+                 {
+                     "name":  "Signal",
+                     "wingetId":  "OpenWhisperSystems.Signal",
+                     "category":  "Comunicação",
+                     "description":  "Mensageiro com criptografia de ponta a ponta."
+                 },
+                 {
+                     "name":  "Element",
+                     "wingetId":  "Element.Element",
+                     "category":  "Comunicação",
+                     "description":  "Cliente da rede descentralizada Matrix."
+                 },
+                 {
+                     "name":  "Viber",
+                     "wingetId":  "Rakuten.Viber",
+                     "category":  "Comunicação",
+                     "description":  "Mensagens e chamadas gratuitas."
+                 },
+                 {
+                     "name":  "Thunderbird",
+                     "wingetId":  "Mozilla.Thunderbird",
+                     "category":  "Comunicação",
+                     "description":  "Cliente de e-mail de código aberto."
+                 },
+                 {
+                     "name":  "Ferdium",
+                     "wingetId":  "Ferdium.Ferdium",
+                     "category":  "Comunicação",
+                     "description":  "Reúne vários mensageiros em uma janela."
+                 },
+                 {
+                     "name":  "eM Client",
+                     "wingetId":  "eMClient.eMClient",
+                     "category":  "Comunicação",
+                     "description":  "Cliente de e-mail, agenda e contatos."
+                 },
+                 {
+                     "name":  "Jitsi Meet",
+                     "wingetId":  "Jitsi.Meet",
+                     "category":  "Comunicação",
+                     "description":  "Videoconferência de código aberto."
+                 },
+                 {
+                     "name":  "Zulip",
+                     "wingetId":  "Zulip.Zulip",
+                     "category":  "Comunicação",
+                     "description":  "Chat em equipe organizado por tópicos."
+                 },
+                 {
+                     "name":  "Beeper",
+                     "wingetId":  "Beeper.Beeper",
+                     "category":  "Comunicação",
+                     "description":  "Vários mensageiros em um só aplicativo."
+                 },
+                 {
+                     "name":  "Guilded",
+                     "wingetId":  "Guilded.Guilded",
+                     "category":  "Comunicação",
+                     "description":  "Chat para comunidades de jogos."
+                 },
+                 {
+                     "name":  "Rambox",
+                     "wingetId":  "Rambox.Rambox",
+                     "category":  "Comunicação",
+                     "description":  "Espaço de trabalho com vários apps web."
+                 },
+                 {
+                     "name":  "7-Zip",
+                     "wingetId":  "7zip.7zip",
+                     "category":  "Utilitários",
+                     "description":  "Compactador de arquivos gratuito e leve."
+                 },
+                 {
+                     "name":  "WinRAR",
+                     "wingetId":  "RARLab.WinRAR",
+                     "category":  "Utilitários",
+                     "description":  "Compactador de arquivos RAR e ZIP."
+                 },
+                 {
+                     "name":  "NanaZip",
+                     "wingetId":  "M2Team.NanaZip",
+                     "category":  "Utilitários",
+                     "description":  "Versão moderna do 7-Zip integrada ao Windows 11."
+                 },
+                 {
+                     "name":  "Everything",
+                     "wingetId":  "voidtools.Everything",
+                     "category":  "Utilitários",
+                     "description":  "Busca instantânea de arquivos por nome."
+                 },
+                 {
+                     "name":  "PowerToys",
+                     "wingetId":  "Microsoft.PowerToys",
+                     "category":  "Utilitários",
+                     "description":  "Utilitários extras da Microsoft para o Windows."
+                 },
+                 {
+                     "name":  "Notepad++",
+                     "wingetId":  "Notepad++.Notepad++",
+                     "category":  "Utilitários",
+                     "description":  "Editor de texto e código leve."
+                 },
+                 {
+                     "name":  "ShareX",
+                     "wingetId":  "ShareX.ShareX",
+                     "category":  "Utilitários",
+                     "description":  "Capturas e gravações de tela com muitos recursos."
+                 },
+                 {
+                     "name":  "Greenshot",
+                     "wingetId":  "Greenshot.Greenshot",
+                     "category":  "Utilitários",
+                     "description":  "Ferramenta simples de captura de tela."
+                 },
+                 {
+                     "name":  "WinDirStat",
+                     "wingetId":  "WinDirStat.WinDirStat",
+                     "category":  "Utilitários",
+                     "description":  "Mostra o que ocupa espaço no disco."
+                 },
+                 {
+                     "name":  "WizTree",
+                     "wingetId":  "AntibodySoftware.WizTree",
+                     "category":  "Utilitários",
+                     "description":  "Análise muito rápida de uso de disco."
+                 },
+                 {
+                     "name":  "TeraCopy",
+                     "wingetId":  "CodeSector.TeraCopy",
+                     "category":  "Utilitários",
+                     "description":  "Cópia de arquivos mais rápida e com verificação."
+                 },
+                 {
+                     "name":  "Rufus",
+                     "wingetId":  "Rufus.Rufus",
+                     "category":  "Utilitários",
+                     "description":  "Cria pendrives de instalação do Windows e Linux."
+                 },
+                 {
+                     "name":  "balenaEtcher",
+                     "wingetId":  "Balena.Etcher",
+                     "category":  "Utilitários",
+                     "description":  "Grava imagens em pendrives e cartões SD."
+                 },
+                 {
+                     "name":  "Ventoy",
+                     "wingetId":  "Ventoy.Ventoy",
+                     "category":  "Utilitários",
+                     "description":  "Pendrive com várias ISOs inicializáveis."
+                 },
+                 {
+                     "name":  "BleachBit",
+                     "wingetId":  "BleachBit.BleachBit",
+                     "category":  "Utilitários",
+                     "description":  "Limpeza de arquivos temporários e privacidade."
+                 },
+                 {
+                     "name":  "Revo Uninstaller",
+                     "wingetId":  "RevoUninstaller.RevoUninstaller",
+                     "category":  "Utilitários",
+                     "description":  "Desinstala programas removendo restos."
+                 },
+                 {
+                     "name":  "Bulk Crap Uninstaller",
+                     "wingetId":  "Klocman.BulkCrapUninstaller",
+                     "category":  "Utilitários",
+                     "description":  "Desinstala vários programas de uma vez."
+                 },
+                 {
+                     "name":  "Process Explorer",
+                     "wingetId":  "Microsoft.Sysinternals.ProcessExplorer",
+                     "category":  "Utilitários",
+                     "description":  "Gerenciador de tarefas avançado da Sysinternals."
+                 },
+                 {
+                     "name":  "Autoruns",
+                     "wingetId":  "Microsoft.Sysinternals.Autoruns",
+                     "category":  "Utilitários",
+                     "description":  "Mostra tudo que inicia com o Windows."
+                 },
+                 {
+                     "name":  "AutoHotkey",
+                     "wingetId":  "AutoHotkey.AutoHotkey",
+                     "category":  "Utilitários",
+                     "description":  "Automação de teclado e mouse por scripts."
+                 },
+                 {
+                     "name":  "Flow Launcher",
+                     "wingetId":  "Flow-Launcher.Flow-Launcher",
+                     "category":  "Utilitários",
+                     "description":  "Lançador rápido de apps e arquivos."
+                 },
+                 {
+                     "name":  "EarTrumpet",
+                     "wingetId":  "File-New-Project.EarTrumpet",
+                     "category":  "Utilitários",
+                     "description":  "Controle de volume por aplicativo na bandeja."
+                 },
+                 {
+                     "name":  "QuickLook",
+                     "wingetId":  "QL-Win.QuickLook",
+                     "category":  "Utilitários",
+                     "description":  "Pré-visualização de arquivos com a barra de espaço."
+                 },
+                 {
+                     "name":  "AnyDesk",
+                     "wingetId":  "AnyDesk.AnyDesk",
+                     "category":  "Utilitários",
+                     "description":  "Acesso remoto rápido."
+                 },
+                 {
+                     "name":  "TeamViewer",
+                     "wingetId":  "TeamViewer.TeamViewer",
+                     "category":  "Utilitários",
+                     "description":  "Acesso e suporte remoto."
+                 },
+                 {
+                     "name":  "Google Drive",
+                     "wingetId":  "Google.GoogleDrive",
+                     "category":  "Utilitários",
+                     "description":  "Sincronização de arquivos com o Google Drive."
+                 },
+                 {
+                     "name":  "Dropbox",
+                     "wingetId":  "Dropbox.Dropbox",
+                     "category":  "Utilitários",
+                     "description":  "Armazenamento e sincronização na nuvem."
+                 },
+                 {
+                     "name":  "OneDrive",
+                     "wingetId":  "Microsoft.OneDrive",
+                     "category":  "Utilitários",
+                     "description":  "Armazenamento na nuvem da Microsoft."
+                 },
+                 {
+                     "name":  "qBittorrent",
+                     "wingetId":  "qBittorrent.qBittorrent",
+                     "category":  "Utilitários",
+                     "description":  "Cliente BitTorrent de código aberto sem anúncios."
+                 },
+                 {
+                     "name":  "JDownloader 2",
+                     "wingetId":  "AppWork.JDownloader",
+                     "category":  "Utilitários",
+                     "description":  "Gerenciador de downloads."
+                 },
+                 {
+                     "name":  "Windows Terminal",
+                     "wingetId":  "Microsoft.WindowsTerminal",
+                     "category":  "Utilitários",
+                     "description":  "Terminal moderno com abas."
+                 },
+                 {
+                     "name":  "ImageGlass",
+                     "wingetId":  "DuongDieuPhap.ImageGlass",
+                     "category":  "Utilitários",
+                     "description":  "Visualizador de imagens leve."
+                 },
+                 {
+                     "name":  "Ditto",
+                     "wingetId":  "Ditto.Ditto",
+                     "category":  "Utilitários",
+                     "description":  "Histórico da área de transferência."
+                 },
+                 {
+                     "name":  "LocalSend",
+                     "wingetId":  "LocalSend.LocalSend",
+                     "category":  "Utilitários",
+                     "description":  "Envia arquivos entre dispositivos na rede local."
+                 },
+                 {
+                     "name":  "Nilesoft Shell",
+                     "wingetId":  "Nilesoft.Shell",
+                     "category":  "Utilitários",
+                     "description":  "Personaliza o menu de contexto do Windows."
+                 },
+                 {
+                     "name":  "Recuva",
+                     "wingetId":  "Piriform.Recuva",
+                     "category":  "Utilitários",
+                     "description":  "Recupera arquivos apagados."
+                 },
+                 {
+                     "name":  "Speccy",
+                     "wingetId":  "Piriform.Speccy",
+                     "category":  "Utilitários",
+                     "description":  "Informações detalhadas do hardware."
+                 },
+                 {
+                     "name":  "Display Driver Uninstaller",
+                     "wingetId":  "Wagnardsoft.DisplayDriverUninstaller",
+                     "category":  "Utilitários",
+                     "description":  "Remove completamente drivers de vídeo antigos."
+                 },
+                 {
+                     "name":  "TCPView",
+                     "wingetId":  "Microsoft.Sysinternals.TCPView",
+                     "category":  "Utilitários",
+                     "description":  "Mostra as conexões de rede de cada processo."
+                 },
+                 {
+                     "name":  "Listary",
+                     "wingetId":  "Bopsoft.Listary",
+                     "category":  "Utilitários",
+                     "description":  "Busca rápida de arquivos e apps."
+                 },
+                 {
+                     "name":  "Sysinternals Suite",
+                     "wingetId":  "Microsoft.Sysinternals.Suite",
+                     "category":  "Utilitários",
+                     "description":  "Coleção completa de ferramentas Sysinternals."
+                 },
+                 {
+                     "name":  "CPU-Z",
+                     "wingetId":  "CPUID.CPU-Z",
+                     "category":  "Monitoramento",
+                     "description":  "Informações de CPU, placa-mãe e memória."
+                 },
+                 {
+                     "name":  "GPU-Z",
+                     "wingetId":  "TechPowerUp.GPU-Z",
+                     "category":  "Monitoramento",
+                     "description":  "Informações e sensores da placa de vídeo."
+                 },
+                 {
+                     "name":  "HWiNFO",
+                     "wingetId":  "REALiX.HWiNFO",
+                     "category":  "Monitoramento",
+                     "description":  "Sensores detalhados de todo o hardware."
+                 },
+                 {
+                     "name":  "HWMonitor",
+                     "wingetId":  "CPUID.HWMonitor",
+                     "category":  "Monitoramento",
+                     "description":  "Temperaturas, tensões e ventoinhas."
+                 },
+                 {
+                     "name":  "Libre Hardware Monitor",
+                     "wingetId":  "LibreHardwareMonitor.LibreHardwareMonitor",
+                     "category":  "Monitoramento",
+                     "description":  "Monitor de sensores de código aberto."
+                 },
+                 {
+                     "name":  "MSI Afterburner",
+                     "wingetId":  "Guru3D.Afterburner",
+                     "category":  "Monitoramento",
+                     "description":  "Overclock da GPU e overlay de desempenho."
+                 },
+                 {
+                     "name":  "RivaTuner Statistics Server",
+                     "wingetId":  "Guru3D.RTSS",
+                     "category":  "Monitoramento",
+                     "description":  "Limitador de FPS e overlay de estatísticas."
+                 },
+                 {
+                     "name":  "CrystalDiskInfo",
+                     "wingetId":  "CrystalDewWorld.CrystalDiskInfo",
+                     "category":  "Monitoramento",
+                     "description":  "Saúde (S.M.A.R.T.) e temperatura dos discos."
+                 },
+                 {
+                     "name":  "CrystalDiskMark",
+                     "wingetId":  "CrystalDewWorld.CrystalDiskMark",
+                     "category":  "Monitoramento",
+                     "description":  "Teste de velocidade de discos."
+                 },
+                 {
+                     "name":  "AIDA64 Extreme",
+                     "wingetId":  "FinalWire.AIDA64.Extreme",
+                     "category":  "Monitoramento",
+                     "description":  "Diagnóstico e benchmarks completos."
+                 },
+                 {
+                     "name":  "Intel PresentMon",
+                     "wingetId":  "Intel.PresentMon",
+                     "category":  "Monitoramento",
+                     "description":  "Captura de FPS e latência por eventos ETW."
+                 },
+                 {
+                     "name":  "Fan Control",
+                     "wingetId":  "Rem0o.FanControl",
+                     "category":  "Monitoramento",
+                     "description":  "Controle de ventoinhas por curvas de temperatura."
+                 },
+                 {
+                     "name":  "Unigine Heaven",
+                     "wingetId":  "Unigine.HeavenBenchmark",
+                     "category":  "Monitoramento",
+                     "description":  "Benchmark gráfico clássico."
+                 },
+                 {
+                     "name":  "Unigine Superposition",
+                     "wingetId":  "Unigine.SuperpositionBenchmark",
+                     "category":  "Monitoramento",
+                     "description":  "Benchmark gráfico e teste de estabilidade."
+                 },
+                 {
+                     "name":  "Speedtest by Ookla",
+                     "wingetId":  "Ookla.Speedtest.Desktop",
+                     "category":  "Monitoramento",
+                     "description":  "Teste de velocidade da internet."
+                 },
+                 {
+                     "name":  "Speedtest CLI",
+                     "wingetId":  "Ookla.Speedtest.CLI",
+                     "category":  "Monitoramento",
+                     "description":  "Teste de velocidade pela linha de comando."
+                 },
+                 {
+                     "name":  "LatencyMon",
+                     "wingetId":  "Resplendence.LatencyMon",
+                     "category":  "Monitoramento",
+                     "description":  "Detecta drivers que causam latência de áudio e travadas."
+                 },
+                 {
+                     "name":  "CapFrameX",
+                     "wingetId":  "CXWorld.CapFrameX",
+                     "category":  "Monitoramento",
+                     "description":  "Captura e análise de frame times."
+                 },
+                 {
+                     "name":  "Process Monitor",
+                     "wingetId":  "Microsoft.Sysinternals.ProcessMonitor",
+                     "category":  "Monitoramento",
+                     "description":  "Monitora em tempo real arquivos, registro e processos."
+                 },
+                 {
+                     "name":  "Geekbench 6",
+                     "wingetId":  "PrimateLabs.Geekbench.6",
+                     "category":  "Monitoramento",
+                     "description":  "Benchmark de CPU e GPU multiplataforma."
+                 },
+                 {
+                     "name":  "Cinebench R23",
+                     "wingetId":  "Maxon.CinebenchR23",
+                     "category":  "Monitoramento",
+                     "description":  "Benchmark de renderização da CPU."
+                 },
+                 {
+                     "name":  "Visual C++ 2015-2022 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2015+.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas exigidas pela maioria dos jogos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2015-2022 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2015+.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas exigidas pela maioria dos jogos (32 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2013 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2013.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos e apps antigos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2013 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2013.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos e apps antigos (32 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2012 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2012.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos e apps antigos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2012 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2012.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos e apps antigos (32 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2010 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2010.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos antigos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2010 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2010.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos antigos (32 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2008 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2008.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos antigos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2008 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2008.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos antigos (32 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2005 (x64)",
+                     "wingetId":  "Microsoft.VCRedist.2005.x64",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos muito antigos (64 bits)."
+                 },
+                 {
+                     "name":  "Visual C++ 2005 (x86)",
+                     "wingetId":  "Microsoft.VCRedist.2005.x86",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para jogos muito antigos (32 bits)."
+                 },
+                 {
+                     "name":  "DirectX End-User Runtime",
+                     "wingetId":  "Microsoft.DirectX",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Componentes legados do DirectX 9 exigidos por jogos antigos."
+                 },
+                 {
+                     "name":  ".NET Desktop Runtime 8",
+                     "wingetId":  "Microsoft.DotNet.DesktopRuntime.8",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Necessário para apps .NET 8 com interface."
+                 },
+                 {
+                     "name":  ".NET Desktop Runtime 9",
+                     "wingetId":  "Microsoft.DotNet.DesktopRuntime.9",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Necessário para apps .NET 9 com interface."
+                 },
+                 {
+                     "name":  ".NET Desktop Runtime 10",
+                     "wingetId":  "Microsoft.DotNet.DesktopRuntime.10",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Necessário para apps .NET 10 com interface."
+                 },
+                 {
+                     "name":  ".NET Desktop Runtime 6",
+                     "wingetId":  "Microsoft.DotNet.DesktopRuntime.6",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Necessário para apps .NET 6 com interface."
+                 },
+                 {
+                     "name":  ".NET Runtime 8",
+                     "wingetId":  "Microsoft.DotNet.Runtime.8",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Runtime .NET 8 para apps de console."
+                 },
+                 {
+                     "name":  ".NET Framework 4.8 Developer Pack",
+                     "wingetId":  "Microsoft.DotNet.Framework.DeveloperPack_4",
+                     "category":  "Drivers e Runtimes",
+                     "description":  ".NET Framework 4.x para apps antigos."
+                 },
+                 {
+                     "name":  "XNA Framework",
+                     "wingetId":  "Microsoft.XNARedist",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Necessário para jogos independentes antigos feitos em XNA."
+                 },
+                 {
+                     "name":  "Java Runtime (Oracle)",
+                     "wingetId":  "Oracle.JavaRuntimeEnvironment",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Java 8 para programas e jogos antigos."
+                 },
+                 {
+                     "name":  "Java 21 (Temurin)",
+                     "wingetId":  "EclipseAdoptium.Temurin.21.JRE",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Java 21 de código aberto."
+                 },
+                 {
+                     "name":  "Java 17 (Temurin)",
+                     "wingetId":  "EclipseAdoptium.Temurin.17.JRE",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Java 17 de código aberto."
+                 },
+                 {
+                     "name":  "Java 8 (Temurin)",
+                     "wingetId":  "EclipseAdoptium.Temurin.8.JRE",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Java 8 de código aberto."
+                 },
+                 {
+                     "name":  "NVIDIA PhysX",
+                     "wingetId":  "Nvidia.PhysX",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Física acelerada em jogos com PhysX."
+                 },
+                 {
+                     "name":  "NVIDIA CUDA Toolkit",
+                     "wingetId":  "Nvidia.CUDA",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Ferramentas CUDA para computação na GPU."
+                 },
+                 {
+                     "name":  "Intel Driver \u0026 Support Assistant",
+                     "wingetId":  "Intel.IntelDriverAndSupportAssistant",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Atualiza drivers Intel."
+                 },
+                 {
+                     "name":  "NVCleanstall",
+                     "wingetId":  "TechPowerUp.NVCleanstall",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Instala drivers NVIDIA só com o essencial."
+                 },
+                 {
+                     "name":  "WebView2 Runtime",
+                     "wingetId":  "Microsoft.EdgeWebView2Runtime",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Componente usado por muitos apps modernos."
+                 },
+                 {
+                     "name":  "Microsoft UI Xaml 2.8",
+                     "wingetId":  "Microsoft.UI.Xaml.2.8",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Componente de interface usado por apps do Windows."
+                 },
+                 {
+                     "name":  "VCLibs Desktop 14",
+                     "wingetId":  "Microsoft.VCLibs.Desktop.14",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Bibliotecas para apps empacotados."
+                 },
+                 {
+                     "name":  "Vulkan Runtime",
+                     "wingetId":  "KhronosGroup.VulkanRT",
+                     "category":  "Drivers e Runtimes",
+                     "description":  "Runtime da API gráfica Vulkan."
+                 },
+                 {
+                     "name":  "VLC",
+                     "wingetId":  "VideoLAN.VLC",
+                     "category":  "Mídia",
+                     "description":  "Reproduz praticamente qualquer vídeo ou áudio."
+                 },
+                 {
+                     "name":  "Spotify",
+                     "wingetId":  "Spotify.Spotify",
+                     "category":  "Mídia",
+                     "description":  "Streaming de músicas e podcasts."
+                 },
+                 {
+                     "name":  "OBS Studio",
+                     "wingetId":  "OBSProject.OBSStudio",
+                     "category":  "Mídia",
+                     "description":  "Gravação e transmissão ao vivo."
+                 },
+                 {
+                     "name":  "Streamlabs Desktop",
+                     "wingetId":  "Streamlabs.Streamlabs",
+                     "category":  "Mídia",
+                     "description":  "Transmissão ao vivo com alertas e temas."
+                 },
+                 {
+                     "name":  "MPC-HC",
+                     "wingetId":  "clsid2.mpc-hc",
+                     "category":  "Mídia",
+                     "description":  "Player de vídeo leve e clássico."
+                 },
+                 {
+                     "name":  "MPC-BE",
+                     "wingetId":  "MPC-BE.MPC-BE",
+                     "category":  "Mídia",
+                     "description":  "Player de vídeo leve com muitos codecs."
+                 },
+                 {
+                     "name":  "PotPlayer",
+                     "wingetId":  "Daum.PotPlayer",
+                     "category":  "Mídia",
+                     "description":  "Player de vídeo com muitos recursos."
+                 },
+                 {
+                     "name":  "K-Lite Codec Pack",
+                     "wingetId":  "CodecGuide.K-LiteCodecPack.Standard",
+                     "category":  "Mídia",
+                     "description":  "Pacote de codecs de áudio e vídeo."
+                 },
+                 {
+                     "name":  "foobar2000",
+                     "wingetId":  "PeterPawlowski.foobar2000",
+                     "category":  "Mídia",
+                     "description":  "Player de áudio leve e personalizável."
+                 },
+                 {
+                     "name":  "AIMP",
+                     "wingetId":  "AIMP.AIMP",
+                     "category":  "Mídia",
+                     "description":  "Player de áudio com equalizador."
+                 },
+                 {
+                     "name":  "Audacity",
+                     "wingetId":  "Audacity.Audacity",
+                     "category":  "Mídia",
+                     "description":  "Editor de áudio gratuito."
+                 },
+                 {
+                     "name":  "HandBrake",
+                     "wingetId":  "HandBrake.HandBrake",
+                     "category":  "Mídia",
+                     "description":  "Converte e comprime vídeos."
+                 },
+                 {
+                     "name":  "FFmpeg",
+                     "wingetId":  "Gyan.FFmpeg",
+                     "category":  "Mídia",
+                     "description":  "Ferramenta de conversão de áudio e vídeo por linha de comando."
+                 },
+                 {
+                     "name":  "yt-dlp",
+                     "wingetId":  "yt-dlp.yt-dlp",
+                     "category":  "Mídia",
+                     "description":  "Baixa vídeos de sites pela linha de comando."
+                 },
+                 {
+                     "name":  "MKVToolNix",
+                     "wingetId":  "MoritzBunkus.MKVToolNix",
+                     "category":  "Mídia",
+                     "description":  "Cria e edita arquivos MKV."
+                 },
+                 {
+                     "name":  "GIMP",
+                     "wingetId":  "GIMP.GIMP.3",
+                     "category":  "Mídia",
+                     "description":  "Editor de imagens gratuito."
+                 },
+                 {
+                     "name":  "Krita",
+                     "wingetId":  "KDE.Krita",
+                     "category":  "Mídia",
+                     "description":  "Pintura digital e ilustração."
+                 },
+                 {
+                     "name":  "Kdenlive",
+                     "wingetId":  "KDE.Kdenlive",
+                     "category":  "Mídia",
+                     "description":  "Editor de vídeo gratuito."
+                 },
+                 {
+                     "name":  "Shotcut",
+                     "wingetId":  "Meltytech.Shotcut",
+                     "category":  "Mídia",
+                     "description":  "Editor de vídeo de código aberto."
+                 },
+                 {
+                     "name":  "Blender",
+                     "wingetId":  "BlenderFoundation.Blender",
+                     "category":  "Mídia",
+                     "description":  "Modelagem 3D, animação e edição de vídeo."
+                 },
+                 {
+                     "name":  "Inkscape",
+                     "wingetId":  "Inkscape.Inkscape",
+                     "category":  "Mídia",
+                     "description":  "Editor de imagens vetoriais."
+                 },
+                 {
+                     "name":  "Paint.NET",
+                     "wingetId":  "dotPDN.PaintDotNet",
+                     "category":  "Mídia",
+                     "description":  "Editor de imagens simples e rápido."
+                 },
+                 {
+                     "name":  "IrfanView",
+                     "wingetId":  "IrfanSkiljan.IrfanView",
+                     "category":  "Mídia",
+                     "description":  "Visualizador de imagens rápido."
+                 },
+                 {
+                     "name":  "XnView MP",
+                     "wingetId":  "XnSoft.XnViewMP",
+                     "category":  "Mídia",
+                     "description":  "Visualizador e organizador de imagens."
+                 },
+                 {
+                     "name":  "darktable",
+                     "wingetId":  "darktable.darktable",
+                     "category":  "Mídia",
+                     "description":  "Revelação de fotos RAW."
+                 },
+                 {
+                     "name":  "Kodi",
+                     "wingetId":  "XBMCFoundation.Kodi",
+                     "category":  "Mídia",
+                     "description":  "Central de mídia para filmes, séries e músicas."
+                 },
+                 {
+                     "name":  "Plex",
+                     "wingetId":  "Plex.Plex",
+                     "category":  "Mídia",
+                     "description":  "Assista sua biblioteca de mídia em qualquer lugar."
+                 },
+                 {
+                     "name":  "Stremio",
+                     "wingetId":  "Stremio.Stremio",
+                     "category":  "Mídia",
+                     "description":  "Central de streaming de filmes e séries."
+                 },
+                 {
+                     "name":  "iTunes",
+                     "wingetId":  "Apple.iTunes",
+                     "category":  "Mídia",
+                     "description":  "Música e sincronização de dispositivos Apple."
+                 },
+                 {
+                     "name":  "Deezer",
+                     "wingetId":  "Deezer.Deezer",
+                     "category":  "Mídia",
+                     "description":  "Streaming de músicas."
+                 },
+                 {
+                     "name":  "Elgato Stream Deck",
+                     "wingetId":  "Elgato.StreamDeck",
+                     "category":  "Mídia",
+                     "description":  "Software do Stream Deck."
+                 },
+                 {
+                     "name":  "Voicemeeter",
+                     "wingetId":  "VB-Audio.Voicemeeter",
+                     "category":  "Mídia",
+                     "description":  "Mixer de áudio virtual."
+                 },
+                 {
+                     "name":  "Voicemeeter Banana",
+                     "wingetId":  "VB-Audio.Voicemeeter.Banana",
+                     "category":  "Mídia",
+                     "description":  "Mixer de áudio virtual avançado."
+                 },
+                 {
+                     "name":  "Bandicam",
+                     "wingetId":  "BandicamCompany.Bandicam",
+                     "category":  "Mídia",
+                     "description":  "Gravador de tela e de jogos."
+                 },
+                 {
+                     "name":  "Visual Studio Code",
+                     "wingetId":  "Microsoft.VisualStudioCode",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de código leve e extensível."
+                 },
+                 {
+                     "name":  "Git",
+                     "wingetId":  "Git.Git",
+                     "category":  "Desenvolvimento",
+                     "description":  "Controle de versão distribuído."
+                 },
+                 {
+                     "name":  "GitHub Desktop",
+                     "wingetId":  "GitHub.GitHubDesktop",
+                     "category":  "Desenvolvimento",
+                     "description":  "Interface gráfica para Git e GitHub."
+                 },
+                 {
+                     "name":  "GitHub CLI",
+                     "wingetId":  "GitHub.cli",
+                     "category":  "Desenvolvimento",
+                     "description":  "GitHub pela linha de comando."
+                 },
+                 {
+                     "name":  "Python 3.12",
+                     "wingetId":  "Python.Python.3.12",
+                     "category":  "Desenvolvimento",
+                     "description":  "Linguagem Python 3.12."
+                 },
+                 {
+                     "name":  "Python 3.13",
+                     "wingetId":  "Python.Python.3.13",
+                     "category":  "Desenvolvimento",
+                     "description":  "Linguagem Python 3.13."
+                 },
+                 {
+                     "name":  "Node.js LTS",
+                     "wingetId":  "OpenJS.NodeJS.LTS",
+                     "category":  "Desenvolvimento",
+                     "description":  "JavaScript no servidor (versão de longo suporte)."
+                 },
+                 {
+                     "name":  "Node.js",
+                     "wingetId":  "OpenJS.NodeJS",
+                     "category":  "Desenvolvimento",
+                     "description":  "JavaScript no servidor (versão atual)."
+                 },
+                 {
+                     "name":  ".NET SDK 8",
+                     "wingetId":  "Microsoft.DotNet.SDK.8",
+                     "category":  "Desenvolvimento",
+                     "description":  "Kit de desenvolvimento .NET 8."
+                 },
+                 {
+                     "name":  ".NET SDK 9",
+                     "wingetId":  "Microsoft.DotNet.SDK.9",
+                     "category":  "Desenvolvimento",
+                     "description":  "Kit de desenvolvimento .NET 9."
+                 },
+                 {
+                     "name":  "Docker Desktop",
+                     "wingetId":  "Docker.DockerDesktop",
+                     "category":  "Desenvolvimento",
+                     "description":  "Contêineres no Windows."
+                 },
+                 {
+                     "name":  "JetBrains Toolbox",
+                     "wingetId":  "JetBrains.Toolbox",
+                     "category":  "Desenvolvimento",
+                     "description":  "Gerencia as IDEs da JetBrains."
+                 },
+                 {
+                     "name":  "IntelliJ IDEA Community",
+                     "wingetId":  "JetBrains.IntelliJIDEA.Community",
+                     "category":  "Desenvolvimento",
+                     "description":  "IDE para Java e Kotlin."
+                 },
+                 {
+                     "name":  "PyCharm Community",
+                     "wingetId":  "JetBrains.PyCharm.Community",
+                     "category":  "Desenvolvimento",
+                     "description":  "IDE para Python."
+                 },
+                 {
+                     "name":  "Visual Studio 2022 Community",
+                     "wingetId":  "Microsoft.VisualStudio.2022.Community",
+                     "category":  "Desenvolvimento",
+                     "description":  "IDE completa da Microsoft."
+                 },
+                 {
+                     "name":  "Postman",
+                     "wingetId":  "Postman.Postman",
+                     "category":  "Desenvolvimento",
+                     "description":  "Testes de APIs."
+                 },
+                 {
+                     "name":  "Insomnia",
+                     "wingetId":  "Insomnia.Insomnia",
+                     "category":  "Desenvolvimento",
+                     "description":  "Cliente de APIs REST e GraphQL."
+                 },
+                 {
+                     "name":  "Neovim",
+                     "wingetId":  "Neovim.Neovim",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de texto modal moderno."
+                 },
+                 {
+                     "name":  "Vim",
+                     "wingetId":  "vim.vim",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de texto clássico."
+                 },
+                 {
+                     "name":  "Sublime Text 4",
+                     "wingetId":  "SublimeHQ.SublimeText.4",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de código rápido."
+                 },
+                 {
+                     "name":  "Rustup",
+                     "wingetId":  "Rustlang.Rustup",
+                     "category":  "Desenvolvimento",
+                     "description":  "Instalador da linguagem Rust."
+                 },
+                 {
+                     "name":  "Go",
+                     "wingetId":  "GoLang.Go",
+                     "category":  "Desenvolvimento",
+                     "description":  "Linguagem Go."
+                 },
+                 {
+                     "name":  "CMake",
+                     "wingetId":  "Kitware.CMake",
+                     "category":  "Desenvolvimento",
+                     "description":  "Sistema de build multiplataforma."
+                 },
+                 {
+                     "name":  "PowerShell 7",
+                     "wingetId":  "Microsoft.PowerShell",
+                     "category":  "Desenvolvimento",
+                     "description":  "Shell e linguagem de automação moderna."
+                 },
+                 {
+                     "name":  "WinSCP",
+                     "wingetId":  "WinSCP.WinSCP",
+                     "category":  "Desenvolvimento",
+                     "description":  "Cliente SFTP e FTP."
+                 },
+                 {
+                     "name":  "PuTTY",
+                     "wingetId":  "PuTTY.PuTTY",
+                     "category":  "Desenvolvimento",
+                     "description":  "Cliente SSH e Telnet."
+                 },
+                 {
+                     "name":  "VirtualBox",
+                     "wingetId":  "Oracle.VirtualBox",
+                     "category":  "Desenvolvimento",
+                     "description":  "Máquinas virtuais."
+                 },
+                 {
+                     "name":  "HeidiSQL",
+                     "wingetId":  "HeidiSQL.HeidiSQL",
+                     "category":  "Desenvolvimento",
+                     "description":  "Cliente de MySQL, PostgreSQL e SQL Server."
+                 },
+                 {
+                     "name":  "Cursor",
+                     "wingetId":  "Anysphere.Cursor",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de código com IA."
+                 },
+                 {
+                     "name":  "Godot Engine",
+                     "wingetId":  "GodotEngine.GodotEngine",
+                     "category":  "Desenvolvimento",
+                     "description":  "Motor de jogos gratuito."
+                 },
+                 {
+                     "name":  "Unity Hub",
+                     "wingetId":  "Unity.UnityHub",
+                     "category":  "Desenvolvimento",
+                     "description":  "Gerencia versões e projetos do Unity."
+                 },
+                 {
+                     "name":  "Arduino IDE",
+                     "wingetId":  "ArduinoSA.IDE.stable",
+                     "category":  "Desenvolvimento",
+                     "description":  "Programação de placas Arduino."
+                 },
+                 {
+                     "name":  "Zed",
+                     "wingetId":  "ZedIndustries.Zed",
+                     "category":  "Desenvolvimento",
+                     "description":  "Editor de código colaborativo."
+                 },
+                 {
+                     "name":  "Vagrant",
+                     "wingetId":  "Hashicorp.Vagrant",
+                     "category":  "Desenvolvimento",
+                     "description":  "Ambientes de desenvolvimento reproduzíveis."
+                 },
+                 {
+                     "name":  "Bitwarden",
+                     "wingetId":  "Bitwarden.Bitwarden",
+                     "category":  "Segurança",
+                     "description":  "Gerenciador de senhas de código aberto."
+                 },
+                 {
+                     "name":  "KeePassXC",
+                     "wingetId":  "KeePassXCTeam.KeePassXC",
+                     "category":  "Segurança",
+                     "description":  "Gerenciador de senhas offline."
+                 },
+                 {
+                     "name":  "KeePass",
+                     "wingetId":  "DominikReichl.KeePass",
+                     "category":  "Segurança",
+                     "description":  "Gerenciador de senhas offline clássico."
+                 },
+                 {
+                     "name":  "1Password",
+                     "wingetId":  "AgileBits.1Password",
+                     "category":  "Segurança",
+                     "description":  "Gerenciador de senhas."
+                 },
+                 {
+                     "name":  "Malwarebytes",
+                     "wingetId":  "Malwarebytes.Malwarebytes",
+                     "category":  "Segurança",
+                     "description":  "Remoção de malware."
+                 },
+                 {
+                     "name":  "Proton VPN",
+                     "wingetId":  "Proton.ProtonVPN",
+                     "category":  "Segurança",
+                     "description":  "VPN com plano gratuito."
+                 },
+                 {
+                     "name":  "Proton Pass",
+                     "wingetId":  "Proton.ProtonPass",
+                     "category":  "Segurança",
+                     "description":  "Gerenciador de senhas da Proton."
+                 },
+                 {
+                     "name":  "Mullvad VPN",
+                     "wingetId":  "MullvadVPN.MullvadVPN",
+                     "category":  "Segurança",
+                     "description":  "VPN focada em privacidade."
+                 },
+                 {
+                     "name":  "WireGuard",
+                     "wingetId":  "WireGuard.WireGuard",
+                     "category":  "Segurança",
+                     "description":  "Cliente VPN WireGuard."
+                 },
+                 {
+                     "name":  "OpenVPN",
+                     "wingetId":  "OpenVPNTechnologies.OpenVPN",
+                     "category":  "Segurança",
+                     "description":  "Cliente VPN OpenVPN."
+                 },
+                 {
+                     "name":  "VeraCrypt",
+                     "wingetId":  "IDRIX.VeraCrypt",
+                     "category":  "Segurança",
+                     "description":  "Criptografia de discos e arquivos."
+                 },
+                 {
+                     "name":  "Cloudflare WARP",
+                     "wingetId":  "Cloudflare.Warp",
+                     "category":  "Segurança",
+                     "description":  "DNS 1.1.1.1 e VPN da Cloudflare."
+                 },
+                 {
+                     "name":  "Gpg4win",
+                     "wingetId":  "GnuPG.Gpg4win",
+                     "category":  "Segurança",
+                     "description":  "Criptografia e assinatura com GnuPG."
+                 },
+                 {
+                     "name":  "NordVPN",
+                     "wingetId":  "NordSecurity.NordVPN",
+                     "category":  "Segurança",
+                     "description":  "VPN comercial."
+                 },
+                 {
+                     "name":  "simplewall",
+                     "wingetId":  "Henry++.simplewall",
+                     "category":  "Segurança",
+                     "description":  "Interface simples para o Firewall do Windows."
+                 },
+                 {
+                     "name":  "Tailscale",
+                     "wingetId":  "Tailscale.Tailscale",
+                     "category":  "Segurança",
+                     "description":  "Rede privada entre seus dispositivos."
+                 },
+                 {
+                     "name":  "ZeroTier One",
+                     "wingetId":  "ZeroTier.ZeroTierOne",
+                     "category":  "Segurança",
+                     "description":  "Rede virtual entre dispositivos."
+                 },
+                 {
+                     "name":  "AdwCleaner",
+                     "wingetId":  "Malwarebytes.AdwCleaner",
+                     "category":  "Segurança",
+                     "description":  "Remove adware e barras de ferramentas."
+                 },
+                 {
+                     "name":  "GlassWire",
+                     "wingetId":  "GlassWire.GlassWire",
+                     "category":  "Segurança",
+                     "description":  "Monitor de rede e firewall."
+                 },
+                 {
+                     "name":  "LibreOffice",
+                     "wingetId":  "TheDocumentFoundation.LibreOffice",
+                     "category":  "Produtividade",
+                     "description":  "Pacote de escritório gratuito."
+                 },
+                 {
+                     "name":  "ONLYOFFICE",
+                     "wingetId":  "ONLYOFFICE.DesktopEditors",
+                     "category":  "Produtividade",
+                     "description":  "Editores de documentos compatíveis com Office."
+                 },
+                 {
+                     "name":  "WPS Office",
+                     "wingetId":  "Kingsoft.WPSOffice",
+                     "category":  "Produtividade",
+                     "description":  "Pacote de escritório."
+                 },
+                 {
+                     "name":  "Adobe Acrobat Reader",
+                     "wingetId":  "Adobe.Acrobat.Reader.64-bit",
+                     "category":  "Produtividade",
+                     "description":  "Leitor de PDF da Adobe."
+                 },
+                 {
+                     "name":  "SumatraPDF",
+                     "wingetId":  "SumatraPDF.SumatraPDF",
+                     "category":  "Produtividade",
+                     "description":  "Leitor de PDF muito leve."
+                 },
+                 {
+                     "name":  "Foxit PDF Reader",
+                     "wingetId":  "Foxit.FoxitReader",
+                     "category":  "Produtividade",
+                     "description":  "Leitor de PDF."
+                 },
+                 {
+                     "name":  "PDFsam Basic",
+                     "wingetId":  "PDFsam.PDFsam",
+                     "category":  "Produtividade",
+                     "description":  "Junta e divide arquivos PDF."
+                 },
+                 {
+                     "name":  "Okular",
+                     "wingetId":  "KDE.Okular",
+                     "category":  "Produtividade",
+                     "description":  "Leitor de documentos."
+                 },
+                 {
+                     "name":  "Notion",
+                     "wingetId":  "Notion.Notion",
+                     "category":  "Produtividade",
+                     "description":  "Notas, wikis e tarefas."
+                 },
+                 {
+                     "name":  "Obsidian",
+                     "wingetId":  "Obsidian.Obsidian",
+                     "category":  "Produtividade",
+                     "description":  "Notas em Markdown conectadas."
+                 },
+                 {
+                     "name":  "Joplin",
+                     "wingetId":  "Joplin.Joplin",
+                     "category":  "Produtividade",
+                     "description":  "Notas de código aberto com sincronização."
+                 },
+                 {
+                     "name":  "Logseq",
+                     "wingetId":  "Logseq.Logseq",
+                     "category":  "Produtividade",
+                     "description":  "Notas em tópicos e diário."
+                 },
+                 {
+                     "name":  "Evernote",
+                     "wingetId":  "Evernote.Evernote",
+                     "category":  "Produtividade",
+                     "description":  "Notas e organização."
+                 },
+                 {
+                     "name":  "Standard Notes",
+                     "wingetId":  "StandardNotes.StandardNotes",
+                     "category":  "Produtividade",
+                     "description":  "Notas criptografadas."
+                 },
+                 {
+                     "name":  "Anki",
+                     "wingetId":  "Anki.Anki",
+                     "category":  "Produtividade",
+                     "description":  "Cartões de memorização."
+                 },
+                 {
+                     "name":  "calibre",
+                     "wingetId":  "calibre.calibre",
+                     "category":  "Produtividade",
+                     "description":  "Organiza e converte e-books."
+                 },
+                 {
+                     "name":  "Figma",
+                     "wingetId":  "Figma.Figma",
+                     "category":  "Produtividade",
+                     "description":  "Design de interfaces."
+                 },
+                 {
+                     "name":  "Todoist",
+                     "wingetId":  "Doist.Todoist",
+                     "category":  "Produtividade",
+                     "description":  "Lista de tarefas."
+                 },
+                 {
+                     "name":  "Toggl Track",
+                     "wingetId":  "Toggl.TogglTrack",
+                     "category":  "Produtividade",
+                     "description":  "Controle de tempo."
+                 },
+                 {
+                     "name":  "Microsoft 365 (Office)",
+                     "wingetId":  "Microsoft.Office",
+                     "category":  "Produtividade",
+                     "description":  "Word, Excel e PowerPoint."
+                 },
+                 {
+                     "name":  "Miro",
+                     "wingetId":  "Miro.Miro",
+                     "category":  "Produtividade",
+                     "description":  "Quadro branco colaborativo."
+                 }
+             ]
+}

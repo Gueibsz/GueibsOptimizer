@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "games": [
+    {
+      "id": "cs2",
+      "name": "Counter-Strike 2",
+      "exeNames": [ "cs2.exe" ],
+      "antiCheat": "VAC",
+      "configNote": "o CS2 guarda as configurações de vídeo na nuvem da Steam; altere pelo menu do jogo.",
+      "general": [ "Opção de inicialização na Steam: -fullscreen (evite o modo janela)", "Limite de FPS: deixe sem limite ou em 2x a taxa do monitor (fps_max 0 / 400)", "NVIDIA Reflex: Ativado + Boost" ],
+      "tiers": {
+        "Entrada": [ "Resolução nativa ou 1280x960 esticada se o FPS cair abaixo de 100", "Qualidade de shader, texturas e efeitos: Baixa", "Anti-aliasing: desligado ou CMAA2", "Boost de contraste do jogador: Ativado" ],
+        "Medio": [ "Texturas: Média; sombras: Média", "MSAA 2x", "Shader, efeitos e partículas: Baixa" ],
+        "Alto": [ "Texturas e sombras: Alta", "MSAA 4x", "Efeitos: Média (menos fumaça e brilho atrapalhando)" ],
+        "Topo": [ "Tudo em Alto ou Muito alto; MSAA 8x", "Sombras dinâmicas: Todas", "Mantenha o FPS acima da taxa do monitor" ]
+      }
+    },
+    {
+      "id": "valorant",
+      "name": "VALORANT",
+      "exeNames": [ "valorant-win64-shipping.exe" ],
+      "antiCheat": "Vanguard",
+      "configNote": "o VALORANT sincroniza os gráficos com a sua conta Riot, então uma mudança no arquivo local poderia ser desfeita; altere pelo menu do jogo.",
+      "general": [ "Modo de tela: Tela cheia", "Limite de FPS: desligado ou um pouco acima da taxa do monitor", "NVIDIA Reflex: Ativado + Boost", "VSync: Desligado" ],
+      "tiers": {
+        "Entrada": [ "Qualidade de material, textura e detalhes: Baixa", "Anti-aliasing: Nenhum", "Melhorar a clareza: Desligado", "Vinheta e distorção: Desligado" ],
+        "Medio": [ "Material e textura: Média; detalhes: Baixa", "Anti-aliasing: MSAA 2x", "Filtragem anisotrópica: 4x" ],
+        "Alto": [ "Material e textura: Alta", "Anti-aliasing: MSAA 4x", "Filtragem anisotrópica: 8x", "Melhorar a clareza: Ativado" ],
+        "Topo": [ "Tudo em Alta", "MSAA 4x; anisotrópica 16x", "Sombras: Ativado" ]
+      }
+    },
+    {
+      "id": "fortnite",
+      "name": "Fortnite",
+      "exeNames": [ "fortniteclient-win64-shipping.exe" ],
+      "antiCheat": "Easy Anti-Cheat / BattlEye",
+      "general": [ "Modo de renderização: DirectX 12 (ou Performance em PCs fracos)", "Limite de quadros: igual ou acima da taxa do monitor", "NVIDIA Reflex: Ativado + Boost" ],
+      "tiers": {
+        "Entrada": [ "Modo de renderização: Desempenho (Performance)", "Distância de visualização: Média; malhas: Baixa", "Resolução 3D: 85-100%" ],
+        "Medio": [ "DirectX 12, predefinição Baixa/Média", "Texturas: Média; sombras: Desligado", "Nanite e Lumen: Desligado" ],
+        "Alto": [ "DirectX 12, predefinição Alta", "Sombras: Média; Lumen: Desligado em partidas competitivas", "TSR/DLSS em Qualidade" ],
+        "Topo": [ "Predefinição Épica para jogar casual", "Para competitivo: Alta sem Lumen e com Nanite desligado", "DLSS/TSR: Qualidade" ]
+      },
+      "configFile": {
+        "path": "%LocalAppData%\\FortniteGame\\Saved\\Config\\WindowsClient\\GameUserSettings.ini",
+        "format": "ini",
+        "settings": [
+          { "section": "ScalabilityGroups", "key": "sg.ViewDistanceQuality", "label": "Distância de visualização", "values": { "0": "Baixa", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "1", "Medio": "2", "Alto": "3", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.ShadowQuality", "label": "Sombras", "values": { "0": "Desligado", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.GlobalIlluminationQuality", "label": "Iluminação global", "values": { "0": "Desligado", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.ReflectionQuality", "label": "Reflexos", "values": { "0": "Desligado", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.AntiAliasingQuality", "label": "Anti-aliasing", "values": { "0": "Desligado", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "1", "Alto": "2", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.TextureQuality", "label": "Texturas", "values": { "0": "Baixa", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "2", "Alto": "3", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.EffectsQuality", "label": "Efeitos", "values": { "0": "Baixa", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "1", "Alto": "2", "Topo": "3" } },
+          { "section": "ScalabilityGroups", "key": "sg.PostProcessQuality", "label": "Pós-processamento", "values": { "0": "Baixa", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "2" } },
+          { "section": "ScalabilityGroups", "key": "sg.FoliageQuality", "label": "Vegetação", "values": { "0": "Baixa", "1": "Média", "2": "Alta", "3": "Épica" }, "tiers": { "Entrada": "0", "Medio": "1", "Alto": "2", "Topo": "3" } },
+          { "section": "/Script/FortniteGame.FortGameUserSettings", "key": "bUseVSync", "label": "VSync", "values": { "False": "Desligado", "True": "Ligado" }, "tiers": { "Entrada": "False", "Medio": "False", "Alto": "False", "Topo": "False" } }
+        ]
+      }
+    },
+    {
+      "id": "apex",
+      "name": "Apex Legends",
+      "exeNames": [ "r5apex.exe", "r5apex_dx12.exe" ],
+      "antiCheat": "Easy Anti-Cheat",
+      "general": [ "Modo de exibição: Tela cheia", "VSync: Desativado", "NVIDIA Reflex: Ativado + Boost" ],
+      "tiers": {
+        "Entrada": [ "Orçamento de streaming de texturas: Nenhum ou Baixo", "Sombras, oclusão ambiente e efeitos: Baixo/Desativado", "Escala de resolução adaptativa: ligada com alvo de FPS" ],
+        "Medio": [ "Texturas: Médio (3 GB)", "Sombras do sol: Baixo", "Anti-aliasing: TSAA" ],
+        "Alto": [ "Texturas: Alto (4-6 GB)", "Sombras: Médio", "Detalhe de modelo: Alto" ],
+        "Topo": [ "Texturas: Insano (8 GB+)", "Sombras: Alto", "Mantenha o FPS acima da taxa do monitor" ]
+      }
+    },
+    {
+      "id": "gtav",
+      "name": "GTA V",
+      "exeNames": [ "gta5.exe", "gta5_enhanced.exe" ],
+      "antiCheat": "BattlEye (GTA Online)",
+      "general": [ "VSync: Desligado se usar G-Sync/FreeSync ou limite de FPS", "Evite MSAA alto: é o que mais pesa" ],
+      "tiers": {
+        "Entrada": [ "Qualidade de textura: Normal", "MSAA: Desligado; FXAA: Ligado", "Sombras e grama: Normal", "Escala de distância: metade" ],
+        "Medio": [ "Texturas: Alta", "Sombras: Alta; grama: Alta", "MSAA: 2x" ],
+        "Alto": [ "Texturas: Muito alta", "Grama: Muito alta", "MSAA: 2x ou 4x" ],
+        "Topo": [ "Tudo em Muito alta", "MSAA 4x ou DLSS/FSR na versão Enhanced", "Ray tracing (Enhanced) se o FPS permitir" ]
+      }
+    },
+    {
+      "id": "roblox",
+      "name": "Roblox",
+      "exeNames": [ "robloxplayerbeta.exe" ],
+      "antiCheat": "Hyperion",
+      "general": [ "Use o menu do jogo: Configurações > Qualidade gráfica", "Não use \"FPS unlockers\" de terceiros (podem ser bloqueados)" ],
+      "tiers": {
+        "Entrada": [ "Modo gráfico: Manual, qualidade 1-3" ],
+        "Medio": [ "Qualidade gráfica 4-6" ],
+        "Alto": [ "Qualidade gráfica 7-8" ],
+        "Topo": [ "Qualidade gráfica 9-10; limite de FPS máximo disponível" ]
+      }
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft (Java)",
+      "exeNames": [ "javaw.exe", "minecraft.exe" ],
+      "antiCheat": null,
+      "general": [ "Considere mods de desempenho (ex.: Sodium) pelo seu launcher preferido", "Reserve 4 a 6 GB de RAM no launcher (mais que isso costuma piorar)" ],
+      "configFile": {
+        "path": "%AppData%\\.minecraft\\options.txt",
+        "format": "keyvalue",
+        "separator": ":",
+        "settings": [
+          { "key": "renderDistance", "label": "Distância de renderização", "values": {}, "tiers": { "Entrada": "6", "Medio": "10", "Alto": "16", "Topo": "24" } },
+          { "key": "simulationDistance", "label": "Distância de simulação", "values": {}, "tiers": { "Entrada": "5", "Medio": "8", "Alto": "10", "Topo": "12" } },
+          { "key": "graphicsMode", "label": "Gráficos", "values": { "0": "Rápidos", "1": "Bonitos", "2": "Fabulosos" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "1" } },
+          { "key": "entityShadows", "label": "Sombras de entidades", "values": { "false": "Desligado", "true": "Ligado" }, "tiers": { "Entrada": "false", "Medio": "false", "Alto": "true", "Topo": "true" } },
+          { "key": "particles", "label": "Partículas", "values": { "0": "Todas", "1": "Reduzidas", "2": "Mínimas" }, "tiers": { "Entrada": "2", "Medio": "1", "Alto": "0", "Topo": "0" } },
+          { "key": "biomeBlendRadius", "label": "Mistura de biomas", "values": {}, "tiers": { "Entrada": "0", "Medio": "1", "Alto": "2", "Topo": "3" } },
+          { "key": "enableVsync", "label": "VSync", "values": { "false": "Desligado", "true": "Ligado" }, "tiers": { "Entrada": "false", "Medio": "false", "Alto": "false", "Topo": "false" } },
+          { "key": "maxFps", "label": "FPS máximo", "values": { "260": "Ilimitado" }, "tiers": { "Entrada": "120", "Medio": "144", "Alto": "240", "Topo": "260" } }
+        ]
+      },
+      "tiers": {
+        "Entrada": [ "Distância de renderização 6, gráficos Rápidos, partículas mínimas" ],
+        "Medio": [ "Distância 10, gráficos Rápidos, partículas reduzidas" ],
+        "Alto": [ "Distância 16, gráficos Bonitos" ],
+        "Topo": [ "Distância 24, gráficos Bonitos" ]
+      }
+    },
+    {
+      "id": "lol",
+      "name": "League of Legends",
+      "exeNames": [ "league of legends.exe" ],
+      "antiCheat": "Vanguard",
+      "general": [ "Modo de janela: Tela cheia", "Limite de FPS: 144 ou mais (Sem limite pode aquecer à toa)" ],
+      "tiers": {
+        "Entrada": [ "Qualidade dos personagens, ambiente e efeitos: Muito baixa/Baixa", "Sombras: Desligado", "Anti-aliasing: Desligado" ],
+        "Medio": [ "Qualidade: Média", "Sombras: Baixa" ],
+        "Alto": [ "Qualidade: Alta", "Sombras: Média" ],
+        "Topo": [ "Qualidade: Muito alta", "Anti-aliasing: Ligado" ]
+      },
+      "configFile": {
+        "path": "{GameFolder}\\Config\\game.cfg",
+        "defaultFolder": "C:\\Riot Games\\League of Legends",
+        "format": "ini",
+        "settings": [
+          { "section": "Performance", "key": "CharacterQuality", "label": "Qualidade dos personagens", "values": { "0": "Muito baixa", "1": "Baixa", "2": "Média", "3": "Alta", "4": "Muito alta" }, "tiers": { "Entrada": "1", "Medio": "3", "Alto": "4", "Topo": "4" } },
+          { "section": "Performance", "key": "EnvironmentQuality", "label": "Qualidade do ambiente", "values": { "0": "Muito baixa", "1": "Baixa", "2": "Média", "3": "Alta", "4": "Muito alta" }, "tiers": { "Entrada": "1", "Medio": "2", "Alto": "3", "Topo": "4" } },
+          { "section": "Performance", "key": "EffectsQuality", "label": "Qualidade dos efeitos", "values": { "0": "Muito baixa", "1": "Baixa", "2": "Média", "3": "Alta", "4": "Muito alta" }, "tiers": { "Entrada": "1", "Medio": "2", "Alto": "3", "Topo": "4" } },
+          { "section": "Performance", "key": "ShadowQuality", "label": "Sombras", "values": { "0": "Desligado", "1": "Baixa", "2": "Média", "3": "Alta", "4": "Muito alta" }, "tiers": { "Entrada": "0", "Medio": "2", "Alto": "3", "Topo": "4" } },
+          { "section": "Performance", "key": "EnableFXAA", "label": "Anti-aliasing (FXAA)", "values": { "0": "Desligado", "1": "Ligado" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "1", "Topo": "1" } },
+          { "section": "General", "key": "WaitForVerticalSync", "label": "VSync", "values": { "0": "Desligado", "1": "Ligado" }, "tiers": { "Entrada": "0", "Medio": "0", "Alto": "0", "Topo": "0" } }
+        ]
+      }
+    },
+    {
+      "id": "eldenring",
+      "name": "ELDEN RING",
+      "exeNames": [ "eldenring.exe" ],
+      "antiCheat": "Easy Anti-Cheat",
+      "general": [ "O jogo é limitado a 60 FPS: priorize estabilidade em vez de qualidade máxima", "Desfoque de movimento e profundidade de campo: questão de gosto; desligados deixam a imagem mais nítida" ],
+      "tiers": {
+        "Entrada": [ "Predefinição Baixa", "Sombras e iluminação: Baixa", "Ray tracing: Desligado" ],
+        "Medio": [ "Predefinição Média", "Texturas: Alta (a VRAM aguenta)", "Ray tracing: Desligado" ],
+        "Alto": [ "Predefinição Alta", "Sombras: Alta", "Ray tracing: Desligado ou Baixo" ],
+        "Topo": [ "Predefinição Máxima", "Ray tracing: Médio ou Alto se o FPS ficar estável em 60" ]
+      },
+      "configFile": {
+        "path": "%AppData%\\EldenRing\\GraphicsConfig.xml",
+        "format": "xml",
+        "settings": [
+          { "key": "Auto-detectBestRenderingSettings", "label": "Detectar automaticamente", "hidden": true, "values": { "ON": "Ligado", "OFF": "Desligado" }, "tiers": { "Entrada": "OFF", "Medio": "OFF", "Alto": "OFF", "Topo": "OFF" } },
+          { "key": "QualitySetting", "label": "Predefinição", "hidden": true, "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima", "CUSTOM": "Personalizada" }, "tiers": { "Entrada": "CUSTOM", "Medio": "CUSTOM", "Alto": "CUSTOM", "Topo": "CUSTOM" } },
+          { "key": "TextureQuality", "label": "Texturas", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "HIGH", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "Antialiasing", "label": "Anti-aliasing", "values": { "OFF": "Desligado", "LOW": "Baixo", "MEDIUM": "Médio", "HIGH": "Alto", "MAXIMUM": "Máximo" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "SSAO", "label": "Oclusão de ambiente (SSAO)", "values": { "OFF": "Desligado", "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "DepthOfField", "label": "Profundidade de campo", "values": { "OFF": "Desligado", "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "OFF", "Medio": "LOW", "Alto": "MEDIUM", "Topo": "HIGH" } },
+          { "key": "MotionBlur", "label": "Desfoque de movimento", "values": { "OFF": "Desligado", "LOW": "Baixo", "MEDIUM": "Médio", "HIGH": "Alto", "MAXIMUM": "Máximo" }, "tiers": { "Entrada": "OFF", "Medio": "OFF", "Alto": "LOW", "Topo": "LOW" } },
+          { "key": "ShadowQuality", "label": "Sombras", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "LightingQuality", "label": "Iluminação", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "EffectsQuality", "label": "Efeitos", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "ReflectionQuality", "label": "Reflexos", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "LOW", "Alto": "MEDIUM", "Topo": "HIGH" } },
+          { "key": "WaterSurfaceQuality", "label": "Superfície da água", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "ShadeQuality", "label": "Sombreamento", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "VolumetricEffectQuality", "label": "Efeitos volumétricos", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "GrassQuality", "label": "Grama", "values": { "LOW": "Baixa", "MEDIUM": "Média", "HIGH": "Alta", "MAXIMUM": "Máxima" }, "tiers": { "Entrada": "LOW", "Medio": "MEDIUM", "Alto": "HIGH", "Topo": "MAXIMUM" } },
+          { "key": "RaytracingQuality", "label": "Ray tracing", "values": { "DISABLE": "Desligado", "LOW": "Baixo", "MEDIUM": "Médio", "HIGH": "Alto", "MAXIMUM": "Máximo" }, "tiers": { "Entrada": "DISABLE", "Medio": "DISABLE", "Alto": "DISABLE", "Topo": "MEDIUM" } }
+        ]
+      }
+    },
+    {
+      "id": "warzone",
+      "name": "Call of Duty: Warzone",
+      "exeNames": [ "cod.exe" ],
+      "antiCheat": "RICOCHET",
+      "general": [ "Modo de exibição: Tela cheia exclusiva", "NVIDIA Reflex: Ativado + Boost", "Streaming de texturas sob demanda: Desligado se a internet for limitada" ],
+      "tiers": {
+        "Entrada": [ "Predefinição Mínima", "Escala de renderização com FSR/DLSS Desempenho", "Sombras e oclusão: Desligado" ],
+        "Medio": [ "Predefinição Baixa", "DLSS/FSR Equilibrado", "Texturas: Normal" ],
+        "Alto": [ "Predefinição Equilibrada/Alta", "DLSS/FSR Qualidade", "Sombras: Normal" ],
+        "Topo": [ "Predefinição Ultra para casual", "Competitivo: Alta com sombras Normal e DLSS Qualidade" ]
+      }
+    }
+  ]
+}

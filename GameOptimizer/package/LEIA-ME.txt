@@ -1,0 +1,70 @@
+﻿GAMEOPTIMIZER — GUIA RÁPIDO
+===========================
+
+O que é
+-------
+Um otimizador de PC para jogos (Windows 10 e 11, 64 bits). Ele aplica ajustes
+do Windows, mostra sensores do hardware, mede FPS, testa rede/mouse/monitor e
+instala programas pelo winget. Tudo o que ele muda pode ser desfeito.
+
+Como abrir
+----------
+1. Extraia o .zip para uma pasta própria, por exemplo C:\Ferramentas\GueibsOptimizer
+   (não rode de dentro do .zip nem direto da pasta Downloads).
+2. Dê dois cliques em GueibsOptimizer.exe. O Windows vai pedir permissão de
+   administrador: é necessário para alterar configurações do sistema.
+3. Na primeira vez o Windows pode mostrar "O Windows protegeu o computador"
+   (SmartScreen). Isso acontece com qualquer programa sem certificado pago de
+   assinatura. Clique em "Mais informações" > "Executar assim mesmo".
+   Se preferir conferir o arquivo antes, compare o SHA-256 do exe com o que
+   está em SHA256SUMS.txt (PowerShell: Get-FileHash .\GueibsOptimizer.exe).
+
+Recomendação para a primeira vez
+--------------------------------
+Abra primeiro em MODO SIMULAÇÃO para ver o que seria alterado sem mudar nada:
+   - Clique com o botão direito no GueibsOptimizer.exe > "Criar atalho";
+   - Propriedades do atalho > no campo Destino, acrescente  --dry-run  no final;
+   - Abra pelo atalho. Uma faixa amarela indica que nada será aplicado.
+
+Uso normal
+----------
+- Início > "Boost em 1 Clique": cria um ponto de restauração do Windows e
+  aplica os ajustes recomendados (risco Baixo e Médio). Mostra a pontuação
+  antes e depois.
+- Otimizações: cada ajuste tem descrição, risco e botão Desfazer.
+- Restauração: histórico de tudo que mudou, com "Desfazer este" e
+  "Desfazer tudo", e atalho para o Restaurar Sistema do Windows.
+- Alguns ajustes só valem depois de sair e entrar na conta (mouse, teclado) ou
+  reiniciar (HAGS).
+
+Recursos opcionais (o app pergunta antes)
+----------------------------------------
+- FPS no overlay: em Overlay & Testes, clique em "Baixar PresentMon oficial"
+  (baixa da página oficial da Intel e confere a assinatura digital).
+- Temperatura da CPU: em Hardware, clique em "Instalar driver PawnIO"
+  (instalado pelo winget). Sem ele, GPU, RAM e discos funcionam normalmente.
+- Exclusão no Defender: o app oferece, uma única vez, excluir SOMENTE a pasta
+  dele. O Defender continua protegendo o resto do PC.
+
+O que o app NUNCA faz
+---------------------
+- Não desliga o Windows Defender, o Firewall nem o UAC.
+- Não injeta nada em jogos (seguro com anti-cheat). O FPS vem de eventos do
+  Windows lidos pelo PresentMon e o overlay é só uma janela transparente.
+- Não envia dados para lugar nenhum. Não tem telemetria.
+
+Overlay
+-------
+Ctrl+Shift+F10 mostra/oculta. Funciona com jogos em "tela cheia sem bordas" ou
+janela; em tela cheia exclusiva o Windows não mostra janelas por cima.
+
+Onde ficam os dados
+-------------------
+%AppData%\GueibsOptimizer  (backup dos valores originais, perfis, logs e
+configurações). Para remover o app: desfaça os ajustes em Restauração, feche o
+app e apague a pasta dele e a pasta acima.
+
+Aviso
+-----
+Projeto pessoal, sem garantia. Use por sua conta e risco; o ponto de
+restauração e o botão Desfazer existem justamente para voltar atrás.

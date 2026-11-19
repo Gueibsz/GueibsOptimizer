@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Build e testes (Windows, .NET 8)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: GameOptimizer
+    env:
+      DOTNET_NOLOGO: "true"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+      # Testes que precisam de internet, jogos ou hardware real ficam desligados.
+      GO_INTEGRATION: "0"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Instalar .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: GameOptimizer/global.json
+
+      - name: Restore
+        run: dotnet restore GueibsOptimizer.sln
+
+      - name: Build (Release)
+        run: dotnet build GueibsOptimizer.sln -c Release --no-restore
+
+      - name: Testes (sem admin, hardware real ou HKLM)
+        run: >
+          dotnet test GueibsOptimizer.sln -c Release --no-build
+          --filter "Category!=RequiresHardware&Category!=RequiresAdmin&Category!=RequiresHKLM"
+          --logger "trx;LogFileName=resultados.trx"
+          --results-directory TestResults
+
+      - name: Anotar testes que falharam
+        if: failure()
+        run: |
+          $trx = Get-ChildItem TestResults -Filter *.trx -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $trx) { Write-Host "::error::Sem arquivo .trx (falha antes dos testes)."; exit 0 }
+          [xml]$doc = Get-Content $trx.FullName
+          $failed = @($doc.TestRun.Results.UnitTestResult | Where-Object { $_.outcome -eq 'Failed' })
+          Write-Host "::error::$($failed.Count) teste(s) falharam"
+          foreach ($r in $failed | Select-Object -First 25) {
+            $msg = ($r.Output.ErrorInfo.Message -replace '\r?\n', ' | ')
+            if ($msg.Length -gt 600) { $msg = $msg.Substring(0, 600) }
+            $title = ($r.testName -replace '[,:%]', ' ')
+            if ($title.Length -gt 120) { $title = $title.Substring(0, 120) }
+            Write-Host "::error title=$title::[$title] $($msg -replace '%', '%25')"
+          }
+
+      - name: Enviar resultados dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-testes
+          path: GameOptimizer/TestResults/*.trx
+          if-no-files-found: ignore
+          retention-days: 14

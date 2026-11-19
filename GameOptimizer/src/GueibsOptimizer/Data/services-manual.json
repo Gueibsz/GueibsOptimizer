@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "notes": "Allowlist fechada (9.2). Só serviços que o Windows inicia sozinho quando precisa (gatilho/sob demanda) depois de ir para Manual. O tipo original é lido do registro e guardado antes de alterar; 'default' é usado só se não houver backup.",
+  "services": [
+    { "name": "MapsBroker", "default": "AutomaticDelayed", "reason": "Gerenciador de Mapas Baixados: só é usado pelo app Mapas para atualizar mapas offline." },
+    { "name": "TrkWks", "default": "Automatic", "reason": "Cliente de Rastreamento de Link Distribuído: mantém atalhos de arquivos movidos entre PCs de uma rede corporativa (NTFS)." },
+    { "name": "PcaSvc", "default": "Automatic", "reason": "Assistente de Compatibilidade de Programas: mostra avisos sobre programas antigos; o Windows o inicia quando necessário." },
+    { "name": "edgeupdate", "default": "AutomaticDelayed", "reason": "Atualizador do Microsoft Edge: o Edge continua se atualizando pelas tarefas agendadas e ao abrir o navegador." }
+  ]
+}

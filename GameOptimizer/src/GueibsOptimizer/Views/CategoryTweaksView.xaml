@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="GueibsOptimizer.Views.CategoryTweaksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:GueibsOptimizer.Core"
+             xmlns:c="clr-namespace:GueibsOptimizer.Views.Controls"
+             Loaded="OnLoaded">
+    <DockPanel Margin="28,24">
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TitleText}">
+                    <TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Title" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text>
+                </TextBlock>
+                <c:InfoButton Margin="4,0,0,0" VerticalAlignment="Center">
+                    <c:InfoButton.Title><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Title" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></c:InfoButton.Title>
+                    <c:InfoButton.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="InfoText" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></c:InfoButton.Text>
+                </c:InfoButton>
+            </StackPanel>
+            <TextBlock Style="{StaticResource SubtitleText}">
+                <TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Subtitle" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text>
+            </TextBlock>
+            <TextBlock Foreground="{DynamicResource AccentTextBrush}" FontSize="12" Margin="0,6,0,0" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="Summary" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Style="{StaticResource SubtitleText}" Text="{l:T 'Nenhum ajuste nesta categoria nesta versão do Windows.'}"
+                           Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVisibility}}" />
+                <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource TweakCard}" />
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>
