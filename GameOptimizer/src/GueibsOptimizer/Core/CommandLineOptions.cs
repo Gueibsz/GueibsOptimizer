@@ -1,4 +1,4 @@
-namespace GueibsOptimizer.Core;
+﻿namespace GueibsOptimizer.Core;
 
 /// <summary>Ações sem janela chamadas pelo instalador/desinstalador.</summary>
 public enum SetupCommand
@@ -6,8 +6,9 @@ public enum SetupCommand
     None,
     AutoStartOff,      // --autostart-off     apaga a tarefa de início com o Windows deixada por versões antigas
     DefenderAdd,       // --defender-add      exclui SOMENTE a pasta do app no Defender
-    UninstallCleanup,  // --uninstall-cleanup apaga a tarefa de início, a revisão semanal e a exclusão do Defender
-    MigrateLegacy      // --migrate-legacy    leva tarefas e plano da versão antiga (GameOptimizer) para os nomes novos
+    UninstallCleanup,  // --uninstall-cleanup apaga a tarefa de início, a revisão semanal, a exclusão do Defender e os componentes do app
+    MigrateLegacy,     // --migrate-legacy    leva tarefas e plano da versão antiga (GameOptimizer) para os nomes novos
+    InstallComponents  // --install-components pawnio,presentmon  baixa componentes do app de fontes oficiais
 }
 
 /// <summary>
@@ -16,7 +17,7 @@ public enum SetupCommand
 ///   --dry-run --report  sem janela: grava em log (e no console, se houver) o que o Boost alteraria
 ///   --weekly            revisão semanal silenciosa (Fase 2)
 ///   --autostart         aberto pela tarefa de logon: inicia minimizado
-///   --autostart-off / --defender-add / --uninstall-cleanup / --migrate-legacy  (instalador)
+///   --autostart-off / --defender-add / --uninstall-cleanup / --migrate-legacy / --install-components &lt;lista&gt;  (instalador)
 /// </summary>
 public sealed record CommandLineOptions(bool DryRun, bool Report, bool Weekly, IReadOnlyList<string> Unknown)
 {
@@ -38,10 +39,13 @@ public sealed record CommandLineOptions(bool DryRun, bool Report, bool Weekly, I
     public string? ReportPath { get; init; }
     public string? BaselinePath { get; init; }
 
+    /// <summary>--install-components: só nomes conhecidos (pawnio, presentmon); o resto é ignorado.</summary>
+    public IReadOnlyList<string> Components { get; init; } = [];
+
     public static CommandLineOptions Parse(IEnumerable<string> args)
     {
         bool dryRun = false, report = false, weekly = false, autoStart = false, elevated = false, selfTest = false;
-        string? screenshots = null, suite = null, reportPath = null, baseline = null;
+        string? screenshots = null, suite = null, reportPath = null, baseline = null, components = null;
         var setup = SetupCommand.None;
         var unknown = new List<string>();
         var list = args.ToList();
@@ -77,6 +81,10 @@ public sealed record CommandLineOptions(bool DryRun, bool Report, bool Weekly, I
                 case "--defender-add": setup = SetupCommand.DefenderAdd; break;
                 case "--uninstall-cleanup": setup = SetupCommand.UninstallCleanup; break;
                 case "--migrate-legacy": setup = SetupCommand.MigrateLegacy; break;
+                case "--install-components":
+                    setup = SetupCommand.InstallComponents;
+                    if (HasValue()) components = list[++i];
+                    break;
                 case "": break;
                 default: unknown.Add(raw); break;
             }
@@ -90,7 +98,8 @@ public sealed record CommandLineOptions(bool DryRun, bool Report, bool Weekly, I
         return new CommandLineOptions(dryRun, report, weekly, unknown)
         {
             AutoStart = autoStart, Setup = setup, Elevated = elevated, ScreenshotsDir = screenshots,
-            SelfTest = selfTest, Suite = suite, ReportPath = reportPath, BaselinePath = baseline
+            SelfTest = selfTest, Suite = suite, ReportPath = reportPath, BaselinePath = baseline,
+            Components = Services.AppComponentsInstaller.ParseList(components)
         };
     }
 }

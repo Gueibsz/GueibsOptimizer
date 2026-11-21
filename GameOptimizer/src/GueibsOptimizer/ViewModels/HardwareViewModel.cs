@@ -44,7 +44,7 @@ public sealed partial class HardwareViewModel : ObservableObject, ITabbedPage
     private readonly Logger _logger;
     private bool _active;
 
-    public const string PawnIOWingetId = "namazso.PawnIO";
+    public const string PawnIOWingetId = AppComponentsInstaller.PawnIOWingetId;
     private readonly WingetService _winget;
 
     public HardwareViewModel(HardwareMonitorService monitor, SystemInfoService info, CheckupService checkup,
@@ -154,6 +154,8 @@ public sealed partial class HardwareViewModel : ObservableObject, ITabbedPage
                 _dialogs.Error("PawnIO", $"Não foi possível instalar: {result.Message}");
                 return;
             }
+            if (result.Outcome is InstallOutcome.Installed or InstallOutcome.RebootRequired)
+                ComponentsState.MarkPawnIOInstalledByApp(); // a desinstalação do app remove o PawnIO junto
             // Reabre a biblioteca de sensores para carregar o driver recém-instalado.
             _monitor.Release();
             _monitor.Acquire();

@@ -372,9 +372,20 @@ public partial class App : Application
                     await new WeeklyReviewService(ctx.Shell, logger).DisableAsync();
                     if ((await defender.GetStatusAsync()).ExclusionPresent && await defender.RemoveExclusionAsync() is not null) exit = 1;
                     if (!options.DryRun) LegacyMigration.RemoveLegacyTasks();
+                    // Componentes instalados junto com o app saem junto: PresentMon baixado pelo app e PawnIO (se foi o app que instalou).
+                    var uninstallSettings = AppSettings.Load();
+                    if (await new AppComponentsInstaller(new WingetService(ctx.Shell, logger),
+                            new PresentMonDownloader(logger, uninstallSettings, options.DryRun),
+                            new FpsService(logger, uninstallSettings).Locate, logger, options.DryRun).UninstallAsync() != 0) exit = 1;
                     break;
                 case SetupCommand.MigrateLegacy:
                     if (!options.DryRun) await LegacyMigration.MigrateSystemAsync(ctx.Shell, logger, exe);
+                    break;
+                case SetupCommand.InstallComponents:
+                    var settings = AppSettings.Load();
+                    var fps = new FpsService(logger, settings);
+                    exit = await new AppComponentsInstaller(new WingetService(ctx.Shell, logger),
+                        new PresentMonDownloader(logger, settings, options.DryRun), fps.Locate, logger, options.DryRun).InstallAsync(options.Components);
                     break;
             }
             logger.Info($"Comando de instalação {options.Setup}: {(exit == 0 ? "ok" : "com erros")}.");

@@ -37,13 +37,37 @@
 2. Execute o instalador. Ele pede permissão de administrador, porque o app precisa dela para alterar o Windows.
 3. Abra o **Gueibs Optimizer** pelo menu Iniciar.
 
+### 🧩 Componentes instalados junto (obrigatórios)
+
+Durante a instalação, o instalador **sempre baixa e instala, de forma nativa, os dois componentes que o app usa**. Não há opção para desmarcar, e eles aparecem listados na tela "Pronto para instalar":
+
+| Componente | Para que serve | De onde vem |
+|---|---|---|
+| Driver **PawnIO** | Temperatura, clock e potência da CPU no Hardware Monitor | winget, pacote `namazso.PawnIO` (driver assinado) |
+| **Intel PresentMon** | Contador de FPS do overlay (eventos ETW, sem injeção) | Release oficial da Intel no GitHub ([GameTechDev/PresentMon](https://github.com/GameTechDev/PresentMon)), com a assinatura digital da Intel verificada |
+
+- Os arquivos **não vêm embutidos** no instalador: são baixados na hora, sempre da fonte oficial. Por isso a instalação precisa de internet.
+- Se o download falhar (sem internet ou sem winget), o app é instalado mesmo assim e oferece o componente de novo na tela correspondente.
+- **Na desinstalação, os dois saem junto.** O PresentMon baixado pelo app é apagado. O PawnIO é desinstalado **se foi o Gueibs Optimizer que o instalou**. Se ele já existia antes, porque o Fan Control ou o Libre Hardware Monitor o instalaram por exemplo, continua no PC para não quebrar esses programas.
+
+### 🔄 Atualizar de uma versão antiga
+
+**Basta baixar e rodar o instalador da versão mais recente.** Não precisa desinstalar antes. O instalador reconhece a versão instalada, inclusive as antigas chamadas GameOptimizer. A tela "Pronto para instalar" mostra *"Atualização: a versão X instalada será atualizada para a Y"*. Ele então:
+
+- fecha o app, se estiver aberto, e atualiza os arquivos na mesma pasta;
+- **mantém** as configurações, os perfis, os jogos e o histórico da Restauração, com os valores originais para desfazer;
+- migra o que versões antigas deixaram: nomes antigos de dados, tarefas e plano de energia, além do exe e dos atalhos antigos;
+- instala os componentes que estiverem faltando.
+
+Os ajustes já aplicados continuam aplicados e podem ser desfeitos normalmente pela versão nova.
+
 **Requisitos:** Windows 10 (2004 ou mais novo) ou Windows 11, **x64**, conta de administrador. Para instalar programas pelo catálogo, o **winget** (Instalador de Aplicativo da Microsoft Store).
 
 > [!NOTE]
 > O instalador **não tem assinatura de código** (o certificado é pago). Na primeira execução, o SmartScreen mostra "O Windows protegeu o computador": clique em **Mais informações → Executar assim mesmo**. Alguns antivírus podem acusar um **falso positivo**, comum em otimizadores porque eles alteram registro e serviços. Para conferir o arquivo, compare o SHA-256 com o `.sha256` publicado no release:
 >
 > ```powershell
-> Get-FileHash .\GueibsOptimizer-Setup-2.4.exe -Algorithm SHA256
+> Get-FileHash .\GueibsOptimizer-Setup-2.5.exe -Algorithm SHA256
 > ```
 >
 > Se preferir, compile você mesmo (veja abaixo).
@@ -228,9 +252,9 @@ Releases são automáticos: ao enviar uma tag `v*` (ex.: `v2.2`), o workflow [`r
 
 ## ⚠️ Limitações conhecidas
 
-- **O FPS precisa do PresentMon de console**, que não vem no repositório. O botão "Baixar PresentMon oficial" busca a release de [GameTechDev/PresentMon](https://github.com/GameTechDev/PresentMon) e só aceita o arquivo com assinatura válida da Intel. Também dá para apontar um `.exe` manualmente.
+- **O FPS precisa do PresentMon de console**, que não vem no repositório. O instalador o baixa automaticamente. No `.zip`, ou se o download falhar, o botão "Baixar PresentMon oficial" busca a release de [GameTechDev/PresentMon](https://github.com/GameTechDev/PresentMon) e só aceita o arquivo com assinatura válida da Intel. Também dá para apontar um `.exe` manualmente.
 - **O overlay não aparece sobre jogos em tela cheia exclusiva.** Use tela cheia sem bordas ou janela.
-- **Temperatura, clock e potência da CPU** exigem o driver **PawnIO** (o app oferece instalar pelo winget). Sem ele, GPU, RAM e discos continuam funcionando.
+- **Temperatura, clock e potência da CPU** exigem o driver **PawnIO**: o instalador o instala pelo winget, e o app oferece de novo se tiver falhado. Sem ele, GPU, RAM e discos continuam funcionando.
 - **Dual channel e XMP/EXPO são estimativas**, porque o Windows não informa o modo real.
 - **O link PCIe cai em repouso** por economia de energia. Meça com um jogo aberto.
 - **Polling de 4000/8000 Hz** pode ser medido abaixo do real em alguns sistemas.
@@ -259,7 +283,7 @@ O Gueibs Optimizer é **software livre e de código aberto**, distribuído sob a
 
 A única condição é manter o aviso de copyright e o texto da licença nas cópias. O software é fornecido **"como está", sem garantia de nenhum tipo**. Todo o código está neste repositório, sem partes fechadas e sem telemetria. Para relatar falhas de segurança, veja o [SECURITY.md](SECURITY.md). As licenças das bibliotecas usadas (CommunityToolkit.Mvvm, LibreHardwareMonitorLib, System.Management) estão em [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-Nenhum binário de terceiros fica no repositório. O usuário baixa, se quiser, o Intel PresentMon, o PawnIO, o Inno Setup e os programas do catálogo. Os ícones do app são originais, gerados por `tools/make-icon.ps1`. A lista de ajustes do [WinUtil](https://github.com/ChrisTitusTech/winutil) (MIT) serviu só de referência; o código é original.
+Nenhum binário de terceiros fica no repositório. O Intel PresentMon e o PawnIO são baixados pelo instalador, das fontes oficiais, no momento da instalação. O Inno Setup e os programas do catálogo são baixados pelo usuário, se quiser. Os ícones do app são originais, gerados por `tools/make-icon.ps1`. A lista de ajustes do [WinUtil](https://github.com/ChrisTitusTech/winutil) (MIT) serviu só de referência; o código é original.
 
 ---
 
@@ -271,6 +295,8 @@ Nenhum binário de terceiros fica no repositório. O usuário baixa, se quiser, 
 > It changes Windows (registry, services, scheduled tasks, power plan, installed apps, network settings). Every tweak stores the previous value and can be undone, but **you use it at your own risk**, with no warranty. Try `--dry-run` first and keep a restore point.
 
 - **Download:** get `GueibsOptimizer-Setup-<version>.exe` from [Releases](https://github.com/Gueibsz/GueibsOptimizer/releases/latest). The installer is **not code-signed**: SmartScreen and some antivirus products may flag it (false positive). Check the SHA-256 against the release `.sha256` file, or build it yourself.
+- **Bundled components (mandatory):** during setup the installer always downloads and installs the **PawnIO** driver (winget `namazso.PawnIO`, CPU sensors) and **Intel PresentMon** (official Intel release, signature verified, FPS counter). They are not embedded in the installer and need internet; if a download fails, the app still installs and offers it again. Both are removed on uninstall (PawnIO only if Gueibs Optimizer installed it).
+- **Updating:** just run the latest installer over the installed version, with no need to uninstall first. It detects the installed version, keeps settings, profiles and the restore history, and migrates items from older versions.
 - **Features:** live 0–100 score read from the real system state, one-click Boost with measured before/after numbers, performance levels up to an optional **Extreme** level (High-risk, performance-only tweaks, double confirmation, never touching security), power, Game Mode, GPU and input tweaks, privacy and AI (telemetry, Copilot, Recall), cleanup, startup manager, DISM/SFC maintenance, Store app debloat with a protected list, DNS, optional features, safe Windows Update modes, FPS overlay without injection (PresentMon/ETW), network, mouse polling and monitor tests, hardware monitor, profiles and a winget app installer (264 validated IDs). UI in Portuguese, English and Spanish.
 - **Rollback:** previous values (with the registry type and "did not exist" state) are saved to `%AppData%\GueibsOptimizer\backup.json` and restored in reverse order. Removing Store apps is not fully reversible.
 - **Requirements:** Windows 10 2004+ or 11 x64, administrator rights, winget for app installs, .NET 8 SDK to build.

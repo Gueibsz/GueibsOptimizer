@@ -39,10 +39,16 @@ Uso normal
 
 Recursos opcionais (o app pergunta antes)
 ----------------------------------------
-- FPS no overlay: em Overlay & Testes, clique em "Baixar PresentMon oficial"
-  (baixa da página oficial da Intel e confere a assinatura digital).
-- Temperatura da CPU: em Hardware, clique em "Instalar driver PawnIO"
-  (instalado pelo winget). Sem ele, GPU, RAM e discos funcionam normalmente.
+- PresentMon (FPS no overlay) e driver PawnIO (temperatura da CPU): o
+  instalador .exe SEMPRE baixa os dois, das fontes oficiais (Intel, com a
+  assinatura conferida, e winget). No .zip, ou se o download falhar, use
+  "Baixar PresentMon oficial" em Overlay & Testes e "Instalar driver PawnIO"
+  em Hardware. Sem o PawnIO, GPU, RAM e discos funcionam normalmente.
+  Ao desinstalar o app, os dois saem junto (o PawnIO só se foi o app que o
+  instalou; se outro programa já o usava, ele fica).
+- Atualizar: basta rodar o instalador da versão mais nova por cima. Ele
+  reconhece a versão instalada e mantém configurações, perfis e o histórico
+  da Restauração. Não precisa desinstalar antes.
 - Exclusão no Defender: o app oferece, uma única vez, excluir SOMENTE a pasta
   dele. O Defender continua protegendo o resto do PC.
 
@@ -66,5 +72,6 @@ app e apague a pasta dele e a pasta acima.
 
 Aviso
 -----
-Projeto pessoal, sem garantia. Use por sua conta e risco; o ponto de
+Projeto de código aberto sob a licença MIT (arquivo LICENSE no repositório),
+fornecido "como está", sem garantia. Use por sua conta e risco; o ponto de
 restauração e o botão Desfazer existem justamente para voltar atrás.
