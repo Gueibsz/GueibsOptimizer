@@ -114,7 +114,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource CardTitle}" Text="{l:T 'Nível de desempenho'}" />
                             <c:InfoButton Title="{l:T 'Nível de desempenho'}" Margin="0,-6,0,0"
-                                          Text="{l:T 'Cada nível é um conjunto fixo de ajustes do app, e cada nível inclui o anterior. Baixo: risco Baixo de Energia e Jogos. Médio: + risco Baixo de GPU e Periféricos. Alto: todos os ajustes de risco Baixo. Máximo: + risco Médio (o mesmo conjunto do Boost) e pede confirmação. Ajustes de risco Alto nunca entram em um nível. O nível atual é calculado lendo o estado real do Windows. Aplicar um nível cria um ponto de restauração antes e não desfaz ajustes já aplicados. O resultado depende do hardware.'}" />
+                                          Text="{l:T 'Cada nível é um conjunto fixo de ajustes do app, e cada nível inclui o anterior. Baixo: risco Baixo de Energia e Jogos. Médio: + risco Baixo de GPU e Periféricos. Alto: todos os ajustes de risco Baixo. Máximo: + risco Médio (o mesmo conjunto do Boost) e pede confirmação. Extremo: + ajustes agressivos de risco Alto escolhidos só por desempenho (nunca desligam proteções do Windows), fora do Boost e com confirmação dupla. Os demais ajustes de risco Alto nunca entram em um nível. O nível atual é calculado lendo o estado real do Windows. Aplicar um nível cria um ponto de restauração antes e não desfaz ajustes já aplicados. O resultado depende do hardware.'}" />
                             <Border Style="{StaticResource Badge}" BorderThickness="1" BorderBrush="{DynamicResource AccentBrush}" Margin="10,0,0,4" VerticalAlignment="Center">
                                 <TextBlock Foreground="{DynamicResource AccentTextBrush}" FontWeight="SemiBold" FontSize="12" AutomationProperties.Name="Nível atual" ><TextBlock.Text><MultiBinding Converter="{StaticResource Tr}" Mode="OneWay"><Binding Path="CurrentLevelText" Mode="OneWay" /><Binding Source="{x:Static l:LocalizationService.Instance}" Path="Version" /></MultiBinding></TextBlock.Text></TextBlock>
                             </Border>
@@ -146,6 +146,8 @@
                                         </TextBlock>
                                         <TextBlock FontSize="11.5" Foreground="{DynamicResource SuccessBrush}" Text="{l:T 'atual'}"
                                                    Visibility="{Binding IsCurrent, Converter={StaticResource BoolToVisibility}}" />
+                                        <TextBlock FontSize="11.5" FontWeight="SemiBold" Foreground="{DynamicResource DangerBrush}" Text="{l:T 'risco Alto'}"
+                                                   Visibility="{Binding IsExtreme, Converter={StaticResource BoolToVisibility}}" />
                                     </StackPanel>
                                 </Button>
                             </DataTemplate>

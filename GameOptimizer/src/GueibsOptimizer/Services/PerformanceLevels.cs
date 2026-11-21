@@ -13,31 +13,35 @@ public interface ILeveledTweak
     PerformanceLevel Level { get; }
 }
 
-/// <summary>Níveis de desempenho. Cada nível inclui o anterior; nenhum inclui ajustes de risco Alto.</summary>
+/// <summary>Níveis de desempenho. Cada nível inclui o anterior; só o Extremo inclui ajustes de risco Alto (fora do Boost).</summary>
 public enum PerformanceLevel
 {
     Baixo = 1,
     Medio = 2,
     Alto = 3,
-    Maximo = 4
+    Maximo = 4,
+    /// <summary>Máximo + ajustes agressivos de desempenho (risco Alto, nunca no Boost). Não desliga proteções do Windows.</summary>
+    Extremo = 5
 }
 
 /// <summary>
 /// Mapeamento nível → ajustes (documentado e visível na interface), sempre filtrando o TweakRegistry:
 /// Baixo = risco Baixo de Energia e Jogos; Médio = Baixo + risco Baixo de GPU e Periféricos;
 /// Alto = todos os de risco Baixo (inclui Windows e Privacidade); Máximo = Alto + risco Médio (igual ao Boost).
-/// Ajustes de preferência (InBoost = false) e de risco Alto nunca entram em nível.
+/// Extremo = Máximo + ajustes declarados com nível Extremo (risco Alto, fora do Boost; só desempenho, nunca segurança).
+/// Fora disso, ajustes de preferência (InBoost = false) e de risco Alto nunca entram em nível.
 /// </summary>
 public static class PerformanceLevels
 {
-    public static readonly PerformanceLevel[] All = [PerformanceLevel.Baixo, PerformanceLevel.Medio, PerformanceLevel.Alto, PerformanceLevel.Maximo];
+    public static readonly PerformanceLevel[] All = [PerformanceLevel.Baixo, PerformanceLevel.Medio, PerformanceLevel.Alto, PerformanceLevel.Maximo, PerformanceLevel.Extremo];
 
     public static bool Includes(PerformanceLevel level, ITweak tweak)
     {
+        if (IsExtreme(tweak)) return level == PerformanceLevel.Extremo;
         if (!tweak.InBoost || tweak.Risk == TweakRisk.High) return false;
         // Ajustes declarativos (9.1) trazem o nível explícito no tweaks.json.
         if (tweak is ILeveledTweak leveled) return level >= leveled.Level;
-        if (tweak.Risk == TweakRisk.Medium) return level == PerformanceLevel.Maximo;
+        if (tweak.Risk == TweakRisk.Medium) return level >= PerformanceLevel.Maximo;
         return level switch
         {
             PerformanceLevel.Baixo => tweak.Category is TweakCategory.Power or TweakCategory.Gaming,
@@ -61,12 +65,17 @@ public static class PerformanceLevels
         {
             var inLevel = list.Where(s => s.Applicable && Includes(level, s.Tweak)).ToList();
             if (inLevel.Count == 0 || inLevel.Any(s => !s.Applied)) break;
+            // Extremo só é o nível atual se ele tiver itens próprios (senão seria igual ao Máximo).
+            if (level == PerformanceLevel.Extremo && !inLevel.Any(s => IsExtreme(s.Tweak))) break;
             current = level;
         }
         return current;
     }
 
-    public static bool RequiresConfirmation(PerformanceLevel level) => level == PerformanceLevel.Maximo;
+    /// <summary>Ajuste exclusivo do nível Extremo (só entra quando esse nível é escolhido de propósito).</summary>
+    public static bool IsExtreme(ITweak tweak) => tweak is ILeveledTweak { Level: PerformanceLevel.Extremo };
+
+    public static bool RequiresConfirmation(PerformanceLevel level) => level >= PerformanceLevel.Maximo;
 
     public static string Text(PerformanceLevel? level) => level switch
     {
@@ -74,6 +83,7 @@ public static class PerformanceLevels
         PerformanceLevel.Medio => "Médio",
         PerformanceLevel.Alto => "Alto",
         PerformanceLevel.Maximo => "Máximo",
+        PerformanceLevel.Extremo => "Extremo",
         _ => "Abaixo do Baixo"
     };
 
@@ -82,7 +92,8 @@ public static class PerformanceLevels
         PerformanceLevel.Baixo => "Ajustes de risco Baixo de Energia e Jogos (plano de energia, Modo de Jogo e prioridades).",
         PerformanceLevel.Medio => "Nível Baixo + ajustes de risco Baixo de GPU e Periféricos (HAGS, Game DVR, aceleração do mouse, teclado).",
         PerformanceLevel.Alto => "Todos os ajustes de risco Baixo, incluindo Windows e Privacidade.",
-        _ => "Nível Alto + ajustes de risco Médio. É o mesmo conjunto do Boost e pede confirmação."
+        PerformanceLevel.Maximo => "Nível Alto + ajustes de risco Médio. É o mesmo conjunto do Boost e pede confirmação.",
+        _ => "Nível Máximo + ajustes agressivos de desempenho, de risco Alto: desligam recursos do Windows (pesquisa, SysMain, relatórios de erro, economia de energia em segundo plano) para sobrar mais para o jogo. Não desliga Defender, Firewall, UAC nem proteções do processador. Fica fora do Boost e pede confirmação dupla."
     };
 }
 

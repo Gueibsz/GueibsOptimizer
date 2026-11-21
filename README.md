@@ -9,6 +9,7 @@
 [![Release](https://img.shields.io/github/v/release/Gueibsz/GueibsOptimizer?label=vers%C3%A3o)](https://github.com/Gueibsz/GueibsOptimizer/releases/latest)
 [![CI](https://github.com/Gueibsz/GueibsOptimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/Gueibsz/GueibsOptimizer/actions/workflows/ci.yml)
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)](LICENSE)
+[![Código aberto](https://img.shields.io/badge/c%C3%B3digo-aberto-brightgreen.svg)](#-código-aberto-licença-e-créditos)
 ![Windows 10/11 x64](https://img.shields.io/badge/Windows-10%20%7C%2011%20x64-0078D6)
 ![.NET 8](https://img.shields.io/badge/.NET-8-512BD4)
 
@@ -42,7 +43,7 @@
 > O instalador **não tem assinatura de código** (o certificado é pago). Na primeira execução, o SmartScreen mostra "O Windows protegeu o computador": clique em **Mais informações → Executar assim mesmo**. Alguns antivírus podem acusar um **falso positivo**, comum em otimizadores porque eles alteram registro e serviços. Para conferir o arquivo, compare o SHA-256 com o `.sha256` publicado no release:
 >
 > ```powershell
-> Get-FileHash .\GueibsOptimizer-Setup-2.2.1.exe -Algorithm SHA256
+> Get-FileHash .\GueibsOptimizer-Setup-2.4.exe -Algorithm SHA256
 > ```
 >
 > Se preferir, compile você mesmo (veja abaixo).
@@ -51,7 +52,7 @@
 
 | Área | O que tem |
 |---|---|
-| **Painel** | Pontuação de 0 a 100 lida do sistema, **Boost em 1 clique** com resumo "antes → depois" medido, níveis Baixo/Médio/Alto/Máximo, cartões de RAM, CPU, limpeza e pontos de restauração |
+| **Painel** | Pontuação de 0 a 100 lida do sistema, **Boost em 1 clique** com resumo "antes → depois" medido, níveis Baixo/Médio/Alto/Máximo e **Extremo** (opcional, só desempenho), cartões de RAM, CPU, limpeza e pontos de restauração |
 | **Otimizações** | Plano de energia, Modo de Jogo, GPU (HAGS, Game DVR), mouse e teclado, privacidade e IA (telemetria, Copilot, Recall, anúncios), preferências do Explorer, DNS, recursos opcionais e modos seguros do Windows Update |
 | **Windows** | Limpeza com prévia do tamanho, inicialização limpa (desativa sem apagar), manutenção (CHKDSK /scan com reparo, DISM, SFC), correções de rede, Windows Update, Store e cache de ícones |
 | **Debloat** | Remoção dos apps da Store que você marcar, com lista de protegidos que nunca entram e predefinições Leve/Equilibrado/Agressivo |
@@ -151,6 +152,22 @@ Os ajustes que contam pontos somam 100. Os que não se aplicam à sua versão do
 
 </details>
 
+<details>
+<summary><b>Nível Extremo (risco Alto, só desempenho)</b></summary>
+
+Escolhido no Painel em **Nível de desempenho > Extremo**. Fica fora do Boost em 1 clique e da pontuação, e pede **duas confirmações** que listam o que muda e o que se perde. Não mexe em Defender, Firewall, UAC, Windows Update nem nas proteções do processador.
+
+| Ajuste | O que faz | Risco | O que você perde |
+|---|---|---|---|
+| Desligar a indexação da Pesquisa | Serviço WSearch desativado | Alto | Pesquisa do Windows lenta e sem conteúdo de arquivos |
+| Desligar o SysMain | Serviço SysMain desativado | Alto | Programas abrem mais devagar em HDD |
+| Otimização de Entrega sem compartilhamento | Política DODownloadMode = 0 | Alto | Cada PC da casa baixa as atualizações da internet |
+| Desligar o Power Throttling | Política PowerThrottlingOff = 1 | Alto | Mais consumo e calor; bateria dura menos |
+| Agendador multimídia todo para o jogo | MMCSS SystemResponsiveness = 10 e NetworkThrottlingIndex = 0xFFFFFFFF | Alto | Downloads e chamadas mais lentos durante o jogo |
+| Desligar o Relatório de Erros | Política WER Disabled = 1 e serviço WerSvc desativado | Alto | Sem relatórios quando um jogo trava |
+
+</details>
+
 A chave exata de cada ajuste aparece no botão **i** de cada cartão e em [`Data/tweaks.json`](GameOptimizer/src/GueibsOptimizer/Data/tweaks.json).
 
 ## ⌨️ Opções de linha de comando
@@ -232,9 +249,15 @@ Releases são automáticos: ao enviar uma tag `v*` (ex.: `v2.2`), o workflow [`r
 
 Sugestões e correções são bem-vindas. Leia o [CONTRIBUTING.md](CONTRIBUTING.md) e use os modelos de issue para bugs (informe a versão do Windows) e sugestões.
 
-## 📄 Licença e créditos
+## 📄 Código aberto, licença e créditos
 
-Distribuído sob a licença **MIT**: veja a [LICENSE](LICENSE). As licenças das bibliotecas usadas (CommunityToolkit.Mvvm, LibreHardwareMonitorLib, System.Management) estão em [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+O Gueibs Optimizer é **software livre e de código aberto**, distribuído sob a [licença MIT](LICENSE). Na prática, você pode:
+
+- **usar** o app de graça, em casa ou no trabalho;
+- **estudar e modificar** o código-fonte;
+- **redistribuir** cópias, originais ou modificadas, inclusive em projetos comerciais.
+
+A única condição é manter o aviso de copyright e o texto da licença nas cópias. O software é fornecido **"como está", sem garantia de nenhum tipo**. Todo o código está neste repositório, sem partes fechadas e sem telemetria. Para relatar falhas de segurança, veja o [SECURITY.md](SECURITY.md). As licenças das bibliotecas usadas (CommunityToolkit.Mvvm, LibreHardwareMonitorLib, System.Management) estão em [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 Nenhum binário de terceiros fica no repositório. O usuário baixa, se quiser, o Intel PresentMon, o PawnIO, o Inno Setup e os programas do catálogo. Os ícones do app são originais, gerados por `tools/make-icon.ps1`. A lista de ajustes do [WinUtil](https://github.com/ChrisTitusTech/winutil) (MIT) serviu só de referência; o código é original.
 
@@ -242,13 +265,13 @@ Nenhum binário de terceiros fica no repositório. O usuário baixa, se quiser, 
 
 ## 🌎 English
 
-**Gueibs Optimizer** is a gaming PC optimizer for Windows 10/11 x64, written in C# / .NET 8 / WPF and released under the MIT license.
+**Gueibs Optimizer** is a gaming PC optimizer for Windows 10/11 x64, written in C# / .NET 8 / WPF. It is **free and open-source software** under the [MIT license](LICENSE): you can use, study, modify and redistribute it (including commercially) as long as the copyright notice and license text are kept. It comes **as is, without warranty**.
 
 > [!WARNING]
 > It changes Windows (registry, services, scheduled tasks, power plan, installed apps, network settings). Every tweak stores the previous value and can be undone, but **you use it at your own risk**, with no warranty. Try `--dry-run` first and keep a restore point.
 
 - **Download:** get `GueibsOptimizer-Setup-<version>.exe` from [Releases](https://github.com/Gueibsz/GueibsOptimizer/releases/latest). The installer is **not code-signed**: SmartScreen and some antivirus products may flag it (false positive). Check the SHA-256 against the release `.sha256` file, or build it yourself.
-- **Features:** live 0–100 score read from the real system state, one-click Boost with measured before/after numbers, power, Game Mode, GPU and input tweaks, privacy and AI (telemetry, Copilot, Recall), cleanup, startup manager, DISM/SFC maintenance, Store app debloat with a protected list, DNS, optional features, safe Windows Update modes, FPS overlay without injection (PresentMon/ETW), network, mouse polling and monitor tests, hardware monitor, profiles and a winget app installer (264 validated IDs). UI in Portuguese, English and Spanish.
+- **Features:** live 0–100 score read from the real system state, one-click Boost with measured before/after numbers, performance levels up to an optional **Extreme** level (High-risk, performance-only tweaks, double confirmation, never touching security), power, Game Mode, GPU and input tweaks, privacy and AI (telemetry, Copilot, Recall), cleanup, startup manager, DISM/SFC maintenance, Store app debloat with a protected list, DNS, optional features, safe Windows Update modes, FPS overlay without injection (PresentMon/ETW), network, mouse polling and monitor tests, hardware monitor, profiles and a winget app installer (264 validated IDs). UI in Portuguese, English and Spanish.
 - **Rollback:** previous values (with the registry type and "did not exist" state) are saved to `%AppData%\GueibsOptimizer\backup.json` and restored in reverse order. Removing Store apps is not fully reversible.
 - **Requirements:** Windows 10 2004+ or 11 x64, administrator rights, winget for app installs, .NET 8 SDK to build.
 - **Build:** `cd GameOptimizer`, then `dotnet build GueibsOptimizer.sln -c Release` and `dotnet test GueibsOptimizer.sln -c Release`.

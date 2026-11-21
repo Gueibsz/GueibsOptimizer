@@ -24,7 +24,7 @@ public class TweakCatalogTests
         var registry = TweakRegistry.CreateDefault(key.CreateContext(dryRun: true));
         // "Windows" é igual nos dois idiomas; as demais categorias precisam de texto em português.
         Assert.All(registry.All.Where(t => t.Category != TweakCategory.Windows), t => Assert.NotEqual(t.Category.ToString(), TweakText.CategoryText(t.Category)));
-        Assert.DoesNotContain(registry.All, t => t.Risk == TweakRisk.High);
+        Assert.DoesNotContain(registry.All, t => t.Risk == TweakRisk.High && !PerformanceLevels.IsExtreme(t));
     }
 
     [Fact]

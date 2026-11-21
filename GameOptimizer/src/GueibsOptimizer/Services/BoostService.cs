@@ -45,9 +45,12 @@ public sealed class BoostService(
         CancellationToken ct = default,
         Func<ITweak, bool>? selector = null)
     {
+        // Ajustes do nível Extremo só entram quando esse nível é pedido explicitamente (nunca no Boost em 1 clique).
+        bool explicitSelection = selector is not null;
         selector ??= TweakText.IsRecommended;
         var before = await scoreService.EvaluateAsync(registry.All).ConfigureAwait(false);
-        var candidates = before.States.Where(s => selector(s.Tweak) && TweakText.IsRecommended(s.Tweak)).ToList();
+        var candidates = before.States.Where(s => selector(s.Tweak) &&
+            (TweakText.IsRecommended(s.Tweak) || (explicitSelection && PerformanceLevels.IsExtreme(s.Tweak)))).ToList();
         int total = candidates.Count + 1;
 
         progress?.Report(new BoostProgress(0, total, "Criando ponto de restauração..."));

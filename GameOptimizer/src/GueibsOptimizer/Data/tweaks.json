@@ -342,6 +342,100 @@
       "notice": "Em PCs de empresa gerenciados remotamente, não desative.",
       "info": { "long": "Coloca o serviço LMS em Desativado; o tipo original fica guardado para o desfazer.", "benefit": "Um serviço a menos em PCs domésticos.", "risk": "Médio: o gerenciamento remoto Intel AMT deixa de funcionar. Fora do Boost.", "notes": "Não aparece em PCs ligados a um domínio." },
       "services": [ { "name": "LMS", "startup": "Disabled", "default": "Automatic" } ]
+    },
+    {
+      "id": "extreme.search-indexing-off",
+      "category": "Windows", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: desligar a indexação da Pesquisa do Windows",
+      "description": "Desativa o serviço Windows Search (WSearch), que lê e indexa seus arquivos em segundo plano.",
+      "notice": "A pesquisa do Menu Iniciar, do Explorador e do Outlook fica bem mais lenta e pode não achar conteúdo dentro dos arquivos.",
+      "info": {
+        "long": "Coloca o serviço WSearch em Desativado. O indexador deixa de rodar, então não há leitura de disco nem uso de CPU dele no meio do jogo (ele costuma acordar quando o PC fica parado ou quando muitos arquivos mudam, como ao instalar ou atualizar jogos).",
+        "benefit": "Menos atividade de disco e CPU em segundo plano, principalmente logo após instalar ou atualizar jogos. Ganho maior em HDD e PCs com pouca CPU; em PCs fortes com SSD, a diferença em FPS costuma ser pequena.",
+        "risk": "Alto (perda de função): a pesquisa do Windows passa a varrer as pastas na hora, fica lenta e não encontra texto dentro de documentos e e-mails. Não afeta a segurança do Windows.",
+        "notes": "O tipo de inicialização original fica guardado; Desfazer volta o serviço para Automático (atraso) e o Windows reconstrói o índice sozinho."
+      },
+      "services": [ { "name": "WSearch", "startup": "Disabled", "default": "AutomaticDelayed" } ]
+    },
+    {
+      "id": "extreme.sysmain-off",
+      "category": "Windows", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: desligar o SysMain (Superfetch)",
+      "description": "Desativa o serviço SysMain, que pré-carrega na RAM os programas que você mais usa.",
+      "notice": "Em HDD os programas e o Windows podem abrir mais devagar.",
+      "info": {
+        "long": "Coloca o serviço SysMain em Desativado. Ele monitora o uso, pré-carrega programas na memória e reorganiza dados em segundo plano.",
+        "benefit": "Menos uso de disco e de RAM em segundo plano e menos variação durante o jogo, principalmente em PCs com pouca RAM. Em SSD rápido o SysMain ajuda pouco, então desligar quase não custa nada.",
+        "risk": "Alto (perda de função): programas e o próprio Windows podem abrir mais devagar, sobretudo em HDD. Não afeta a segurança do Windows.",
+        "notes": "Desfazer volta o serviço para Automático."
+      },
+      "services": [ { "name": "SysMain", "startup": "Disabled", "default": "Automatic" } ]
+    },
+    {
+      "id": "extreme.delivery-optimization-p2p-off",
+      "category": "Windows", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: Otimização de Entrega sem compartilhamento (política)",
+      "description": "Diretiva de Grupo que faz o Windows baixar atualizações só dos servidores da Microsoft, sem enviar nem receber partes de outros PCs.",
+      "notice": "As atualizações continuam chegando normalmente; só deixam de ser compartilhadas entre PCs.",
+      "info": {
+        "long": "Grava a política DODownloadMode = 0 (\"Somente HTTP, sem pareamento\") em Diretiva de Grupo > Componentes do Windows > Otimização de Entrega. O Windows Update continua funcionando.",
+        "benefit": "O Windows para de usar sua internet para enviar partes de atualizações a outros PCs, o que evita uploads em segundo plano que aumentam o ping no meio da partida.",
+        "risk": "Alto (perda de função): em casas ou escritórios com vários PCs, cada um baixa tudo da internet, o que gasta mais dados. A segurança e as atualizações não são afetadas.",
+        "notes": "Valor documentado pela Microsoft (Policy CSP DeliveryOptimization/DODownloadMode). Desfazer remove a política."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization", "name": "DODownloadMode", "type": "DWord", "value": 0, "default": null }
+      ]
+    },
+    {
+      "id": "extreme.power-throttling-off",
+      "category": "Power", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: desligar o Power Throttling (política)",
+      "description": "Diretiva de Grupo que impede o Windows de colocar processos em segundo plano no modo de economia (EcoQoS / núcleos de eficiência).",
+      "notice": "Mais consumo de energia e calor. Em notebook, a bateria dura menos.",
+      "info": {
+        "long": "Grava a política \"Desativar o Power Throttling\" (PowerThrottlingOff = 1) em Diretiva de Grupo > Sistema > Gerenciamento de Energia > Configurações de Power Throttling. Com ela, nenhum processo é rebaixado para frequência baixa ou para os núcleos de eficiência (E-cores) só por estar em segundo plano.",
+        "benefit": "Programas que o jogo usa em segundo plano (Discord, gravação, overlays, launchers) não são desacelerados. Faz mais diferença em processadores híbridos (Intel 12ª geração ou mais nova) e em notebooks.",
+        "risk": "Alto: maior consumo, mais calor e ventoinha mais alta; em notebook a bateria pode durar bem menos. Não afeta a segurança do Windows.",
+        "notes": "Política documentada pela Microsoft (Power Throttling). Desfazer remove a política."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Power\\PowerThrottling", "name": "PowerThrottlingOff", "type": "DWord", "value": 1, "default": null }
+      ]
+    },
+    {
+      "id": "extreme.mmcss-games",
+      "category": "Gaming", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: agendador multimídia todo para o jogo",
+      "description": "Reserva o mínimo possível de CPU para tarefas comuns quando há multimídia ou jogo rodando e desliga o limite de rede do agendador multimídia.",
+      "notice": "Downloads, chamadas e programas em segundo plano podem ficar mais lentos enquanto o jogo roda.",
+      "info": {
+        "long": "No serviço de agendamento multimídia (MMCSS): SystemResponsiveness = 10 (o padrão reserva 20% da CPU para tarefas de baixa prioridade; 10 é o mínimo aceito pelo Windows) e NetworkThrottlingIndex = 0xFFFFFFFF (desliga o limite de pacotes de rede aplicado durante a reprodução de mídia).",
+        "benefit": "Mais tempo de CPU para os threads do jogo registrados no MMCSS e nenhum limite de rede vindo do agendador multimídia. O ganho é pequeno e depende do jogo; aparece mais em CPUs com poucos núcleos.",
+        "risk": "Alto: programas em segundo plano (download, gravação, chamadas de voz) recebem menos CPU e podem engasgar. Não afeta a segurança do Windows.",
+        "notes": "Valores documentados pela Microsoft (Multimedia Class Scheduler Service). Desfazer volta os valores anteriores (padrão: 20 e 10)."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "name": "SystemResponsiveness", "type": "DWord", "value": 10, "default": 20 },
+        { "hive": "HKLM", "path": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "name": "NetworkThrottlingIndex", "type": "DWord", "value": 4294967295, "default": 10 }
+      ]
+    },
+    {
+      "id": "extreme.error-reporting-off",
+      "category": "Windows", "risk": "High", "points": 0, "level": "Extremo", "inBoost": false,
+      "name": "Extremo: desligar o Relatório de Erros do Windows (política)",
+      "description": "Diretiva de Grupo que desliga o Relatório de Erros do Windows (WER) e desativa o serviço dele.",
+      "notice": "Quando um jogo ou programa travar, o Windows não gera nem envia relatório; fica mais difícil descobrir a causa de travamentos.",
+      "info": {
+        "long": "Grava a política \"Desativar o Relatório de Erros do Windows\" (Disabled = 1) em Diretiva de Grupo > Componentes do Windows > Relatório de Erros do Windows e coloca o serviço WerSvc em Desativado.",
+        "benefit": "Depois de um travamento, o Windows não fica gerando arquivos de despejo e enviando relatórios em segundo plano (isso pode ocupar CPU e disco por minutos). Também não aparecem as janelas \"procurando uma solução\".",
+        "risk": "Alto (perda de função): sem relatórios de falha para você, para a Microsoft e para os desenvolvedores dos jogos; a Central de Confiabilidade fica com menos informação. Não desliga nenhuma proteção.",
+        "notes": "Política documentada pela Microsoft (Windows Error Reporting). Desfazer remove a política e volta o serviço para Manual."
+      },
+      "registry": [
+        { "hive": "HKLM", "path": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "type": "DWord", "value": 1, "default": null }
+      ],
+      "services": [ { "name": "WerSvc", "startup": "Disabled", "default": "Manual" } ]
     }
   ]
 }

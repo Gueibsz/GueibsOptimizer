@@ -66,7 +66,8 @@ public class Phase84Tests
         {
             var set = PerformanceLevels.TweaksFor(level, tweaks);
             Assert.NotEmpty(set);
-            Assert.DoesNotContain(set, t => t.Risk == TweakRisk.High);
+            if (level < PerformanceLevel.Extremo) Assert.DoesNotContain(set, t => t.Risk == TweakRisk.High);
+            else Assert.All(set.Where(t => t.Risk == TweakRisk.High), t => Assert.True(PerformanceLevels.IsExtreme(t), t.Id));
             if (previous is { } p) Assert.Superset(PerformanceLevels.TweaksFor(p, tweaks).Select(t => t.Id).ToHashSet(), set.Select(t => t.Id).ToHashSet());
             previous = level;
         }

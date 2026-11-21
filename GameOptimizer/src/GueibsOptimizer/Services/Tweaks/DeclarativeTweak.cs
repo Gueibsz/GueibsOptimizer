@@ -23,7 +23,7 @@ public sealed class DeclarativeDefinition
     public string Category { get; set; } = string.Empty;
     public string Risk { get; set; } = string.Empty;
     public int Points { get; set; }
-    /// <summary>Nível da Fase 8.4: Baixo, Medio, Alto ou Maximo (Minimal/Standard/Advanced do WinUtil = Baixo/Médio/Alto).</summary>
+    /// <summary>Nível da Fase 8.4: Baixo, Medio, Alto, Maximo ou Extremo (Minimal/Standard/Advanced do WinUtil = Baixo/Médio/Alto).</summary>
     public string Level { get; set; } = string.Empty;
     public bool InBoost { get; set; }
     /// <summary>Versões do Windows em que existe: [10], [11] ou [10, 11].</summary>
@@ -115,7 +115,7 @@ public static partial class DeclarativeTweakLoader
         AllowTrailingCommas = true
     };
 
-    public static readonly string[] Levels = ["Baixo", "Medio", "Alto", "Maximo"];
+    public static readonly string[] Levels = ["Baixo", "Medio", "Alto", "Maximo", "Extremo"];
     public static readonly string[] StartupTypes = ["Automatic", "AutomaticDelayed", "Manual", "Disabled"];
     public static readonly string[] RegistryTypes = ["DWord", "QWord", "String", "ExpandString"];
 
@@ -151,6 +151,10 @@ public static partial class DeclarativeTweakLoader
         if (!Levels.Contains(d.Level, StringComparer.OrdinalIgnoreCase)) Err($"nível inválido '{d.Level}'");
         if (d.Points < 0 || d.Points > 20) Err("pontos fora de 0 a 20");
         if (d.InBoost && risk == TweakRisk.High) Err("ajuste de risco Alto não pode entrar no Boost");
+        // Extremo: sempre risco Alto, fora do Boost, sem pontos (a pontuação 0-100 é dos níveis seguros) e com aviso explícito.
+        if (string.Equals(d.Level, "Extremo", StringComparison.OrdinalIgnoreCase) &&
+            (risk != TweakRisk.High || d.InBoost || d.Points != 0 || string.IsNullOrWhiteSpace(d.Info?.Risk)))
+            Err("nível Extremo exige risco High, inBoost false, points 0 e info.risk preenchido");
         if (d.WindowsVersions.Count == 0 || d.WindowsVersions.Any(v => v is not (10 or 11))) Err("windowsVersions deve conter 10 e/ou 11");
         if (string.IsNullOrWhiteSpace(d.Name) || string.IsNullOrWhiteSpace(d.Description)) Err("nome e descrição são obrigatórios");
         if (d.Registry.Count + d.Services.Count + d.ScheduledTasks.Count + d.Commands.Count == 0) Err("nenhuma ação");
