@@ -956,7 +956,8 @@ public sealed class SelfTestRunner
         var commands = new[]
         {
             new IntegrityCommand(IntegrityTool.Dism, "DISM (só verificar)", "DISM.exe", ["/Online", "/Cleanup-Image", "/CheckHealth"], false),
-            IntegrityCommands.For(IntegrityTool.ChkdskScan),
+            // Autoteste só verifica: CHKDSK sem /scan (leitura), diferente da revisão, que repara.
+            new IntegrityCommand(IntegrityTool.ChkdskScan, "CHKDSK (só verificar)", "chkdsk.exe", [IntegrityCommands.SystemDrive], false),
             new IntegrityCommand(IntegrityTool.Sfc, "SFC (só verificar)", "sfc.exe", ["/verifyonly"], true)
         };
         foreach (var cmd in commands)

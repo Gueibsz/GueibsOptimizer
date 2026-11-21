@@ -14,7 +14,7 @@ public sealed record MaintenanceToolCard(string Key, string Title, string Descri
 
 public sealed record IntegrityStepLine(string Title, string Outcome, string Summary, bool IsProblem);
 
-/// <summary>Fase 8.5: revisão de integridade (CHKDSK leitura, DISM, SFC) e ferramentas avulsas, com saída, cancelar e resumo.</summary>
+/// <summary>Fase 8.5: revisão de integridade (CHKDSK /scan com reparo, DISM, SFC) e ferramentas avulsas, com saída, cancelar e resumo.</summary>
 public sealed partial class WindowsViewModel
 {
     private IntegrityToolRunner? _tools;
@@ -46,7 +46,7 @@ public sealed partial class WindowsViewModel
         ToolCards.Add(new("full", "Reparo completo", "DISM repara a imagem do Windows e, em seguida, o SFC corrige os arquivos de sistema.", "15 a 30 min", IntegrityCommands.FullRepair));
         ToolCards.Add(new("sfc", "SFC", "Verifica os arquivos protegidos do Windows e troca os corrompidos.", "5 a 15 min", [IntegrityTool.Sfc]));
         ToolCards.Add(new("dism", "DISM", "Verifica e repara a imagem do Windows usada pelo SFC (usa a internet).", "5 a 20 min", [IntegrityTool.Dism]));
-        ToolCards.Add(new("chkdsk", $"CHKDSK {IntegrityCommands.SystemDrive}", "Verifica o sistema de arquivos em modo leitura (sem /f): não altera nada.", "2 a 10 min", [IntegrityTool.ChkdskScan]));
+        ToolCards.Add(new("chkdsk", $"CHKDSK {IntegrityCommands.SystemDrive}", "Verifica e repara o sistema de arquivos com o Windows em uso (/scan), sem reiniciar. Se sobrar algo, oferece agendar o reparo na próxima inicialização.", "2 a 10 min", [IntegrityTool.ChkdskScan]));
         UpdateLastReviewText();
     }
 
@@ -77,7 +77,7 @@ public sealed partial class WindowsViewModel
     {
         if (!_dialogs.Confirm("Revisão semanal de integridade",
                 "Serão executados, nesta ordem:\n\n" + WeeklyCommandText +
-                "\n\nO CHKDSK roda só em modo leitura (sem /f). Estimativa: 10 a 30 minutos. Você pode cancelar a qualquer momento. Continuar?"))
+                "\n\nO CHKDSK verifica e repara o disco com o Windows em uso (/scan). Se sobrar algo que só pode ser reparado com o disco livre, o reparo é agendado para a próxima inicialização. Estimativa: 10 a 30 minutos. Você pode cancelar a qualquer momento. Continuar?"))
             return;
         await RunSequenceAsync(IntegrityCommands.WeeklyReview, CreateRestorePointFirst, isWeeklyReview: true);
     }
@@ -134,7 +134,12 @@ public sealed partial class WindowsViewModel
                 results.Add(result);
                 ToolSteps.Add(new IntegrityStepLine(command.Title, IntegrityCommands.OutcomeText(result.Outcome), result.Summary,
                     result.Outcome is IntegrityOutcome.Failed or IntegrityOutcome.ErrorsFound));
-                if (result.OfferChkdskRepair) CanScheduleChkdsk = true;
+                if (result.OfferChkdskRepair)
+                {
+                    // Na revisão o usuário já confirmou o reparo completo: agenda direto. Na ferramenta avulsa, oferece o botão.
+                    if (isWeeklyReview) ToolSteps.Add(await ScheduleRepairStepAsync());
+                    else CanScheduleChkdsk = true;
+                }
                 if (result.Outcome == IntegrityOutcome.Cancelled) break;
             }
 
@@ -167,6 +172,18 @@ public sealed partial class WindowsViewModel
         var text = ToolOutput.Length == 0 ? line : ToolOutput + Environment.NewLine + line;
         var parts = text.Split(Environment.NewLine);
         ToolOutput = parts.Length > 400 ? string.Join(Environment.NewLine, parts[^400..]) : text;
+    }
+
+    /// <summary>Marca o disco para o reparo na próxima inicialização e devolve a linha do resumo.</summary>
+    private async Task<IntegrityStepLine> ScheduleRepairStepAsync()
+    {
+        const string Title = "Agendar reparo do disco na próxima inicialização";
+        if (_shell is null) return new(Title, "Falhou", "Indisponível.", true);
+        var r = await _shell.RunMutatingAsync("Agendar reparo do disco no próximo boot", "fsutil.exe", IntegrityCommands.ScheduleRepairArguments(IntegrityCommands.SystemDrive));
+        if (r.Simulated) return new(Title, "Simulado", "Simulação: nada foi agendado.", false);
+        return r.Success
+            ? new(Title, "OK", "O reparo será feito na próxima inicialização. Reinicie quando puder.", false)
+            : new(Title, "Falhou", $"Não foi possível agendar o reparo: {r.StdErr.Trim()}{r.StdOut.Trim()}", true);
     }
 
     private bool CanSchedule() => CanScheduleChkdsk && !IsToolRunning;

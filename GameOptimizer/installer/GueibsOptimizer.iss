@@ -4,7 +4,7 @@
 ; Saída: dist\GueibsOptimizer-Setup-<versão>.exe
 
 #ifndef AppVersion
-  #define AppVersion "2.2.1"
+  #define AppVersion "2.3"
 #endif
 #ifndef SourceExe
   #define SourceExe "..\dist\GueibsOptimizer.exe"

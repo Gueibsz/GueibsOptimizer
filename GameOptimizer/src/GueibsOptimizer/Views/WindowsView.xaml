@@ -19,7 +19,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource SectionText}" Text="{l:T 'Revisão semanal de integridade'}" />
                             <c:InfoButton Title="{l:T 'Revisão semanal de integridade'}" Margin="0,-6,0,0"
-                                          Text="{l:T 'Recomendada uma vez por semana. Executa, nesta ordem: CHKDSK em modo leitura (sem /f, não altera o disco), DISM /RestoreHealth (repara a imagem do Windows usando o Windows Update) e SFC /scannow (troca arquivos de sistema corrompidos pela cópia boa). O DISM vem antes do SFC para o SFC usar a imagem já reparada. Leva de 10 a 30 minutos; dá para cancelar. Se o CHKDSK achar erros, o app oferece agendar o reparo na próxima inicialização, sempre com confirmação. Não é a mesma coisa que a Limpeza semanal automática.'}" />
+                                          Text="{l:T 'Recomendada uma vez por semana. Executa, nesta ordem: CHKDSK /scan (verifica e repara o disco com o Windows em uso), DISM /RestoreHealth (repara a imagem do Windows usando o Windows Update) e SFC /scannow (troca arquivos de sistema corrompidos pela cópia boa). O DISM vem antes do SFC para o SFC usar a imagem já reparada. Leva de 10 a 30 minutos; dá para cancelar. Se sobrar algo que só pode ser reparado com o disco livre, o reparo é agendado para a próxima inicialização. Não é a mesma coisa que a Limpeza semanal automática.'}" />
                         </StackPanel>
                     </DockPanel>
                     <TextBlock Style="{StaticResource SubtitleText}" Text="{l:T 'Verifica o disco e os arquivos do Windows. Estimativa: 10 a 30 minutos.'}" />

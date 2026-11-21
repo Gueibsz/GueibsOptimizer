@@ -6,9 +6,10 @@ namespace GueibsOptimizer.Tests;
 public class Phase85Tests
 {
     [Fact]
-    public void CommandsAreExactAndChkdskIsReadOnly()
+    public void CommandsAreExactAndChkdskRepairsOnline()
     {
-        Assert.Equal("chkdsk C:", IntegrityCommands.For(IntegrityTool.ChkdskScan, "C:").Display);
+        Assert.Equal("chkdsk C: /scan", IntegrityCommands.For(IntegrityTool.ChkdskScan, "C:").Display);
+        // /scan repara online; /f e /r no disco do sistema travariam pedindo "S/N" para agendar (o agendamento usa fsutil).
         Assert.DoesNotContain(IntegrityCommands.For(IntegrityTool.ChkdskScan).Arguments, a => a.StartsWith("/f", StringComparison.OrdinalIgnoreCase) || a.StartsWith("/r", StringComparison.OrdinalIgnoreCase));
         Assert.Equal("sfc /scannow", IntegrityCommands.For(IntegrityTool.Sfc).Display);
         Assert.Equal("DISM /Online /Cleanup-Image /RestoreHealth", IntegrityCommands.For(IntegrityTool.Dism).Display);
@@ -29,6 +30,9 @@ public class Phase85Tests
     [InlineData(IntegrityTool.ChkdskScan, 0, "O Windows verificou o sistema de arquivos e não encontrou problemas.", IntegrityOutcome.Ok, false)]
     [InlineData(IntegrityTool.ChkdskScan, 3, "Windows has scanned the file system and found problems.", IntegrityOutcome.ErrorsFound, false)]
     [InlineData(IntegrityTool.ChkdskScan, 3, "Acesso negado porque você não tem privilégios suficientes.", IntegrityOutcome.Failed, false)]
+    [InlineData(IntegrityTool.ChkdskScan, 1, "Windows has made corrections to the file system.", IntegrityOutcome.Repaired, false)]
+    [InlineData(IntegrityTool.ChkdskScan, 0, "Windows has made corrections to the file system.", IntegrityOutcome.Repaired, false)]
+    [InlineData(IntegrityTool.ChkdskScan, 0, "Please run chkdsk /spotfix to fix the issues.", IntegrityOutcome.ErrorsFound, false)]
     public void InterpretsExitCodesAndOutput(IntegrityTool tool, int code, string output, IntegrityOutcome expected, bool reboot)
     {
         var r = IntegrityCommands.Interpret(tool, code, output);
@@ -71,7 +75,7 @@ public class Phase85Tests
                 (IntegrityTool.Sfc, 0, "unable to fix"), (IntegrityTool.Sfc, 0, "pending system repair"), (IntegrityTool.Sfc, 0, ""),
                 (IntegrityTool.Dism, 0, ""), (IntegrityTool.Dism, 0, "corruption was repaired"), (IntegrityTool.Dism, 3010, ""),
                 (IntegrityTool.ChkdskScan, 0, ""), (IntegrityTool.ChkdskScan, 3, "found problems"), (IntegrityTool.ChkdskScan, 2, ""),
-                (IntegrityTool.ChkdskScan, 3, "access denied")
+                (IntegrityTool.ChkdskScan, 3, "access denied"), (IntegrityTool.ChkdskScan, 1, "")
             }.Select(x => IntegrityCommands.Interpret(x.Item1, x.Item2, x.Item3).Summary));
         var missing = keys.Where(k => !table.ContainsKey(k)).ToList();
         Assert.True(missing.Count == 0, $"{language}: " + string.Join(" | ", missing));

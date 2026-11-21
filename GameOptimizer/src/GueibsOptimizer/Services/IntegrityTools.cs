@@ -7,7 +7,10 @@ namespace GueibsOptimizer.Services;
 
 public enum IntegrityTool
 {
-    /// <summary>CHKDSK em modo leitura (sem /f): só verifica, não altera o disco.</summary>
+    /// <summary>
+    /// CHKDSK /scan: verifica e repara o NTFS com o Windows em uso (reparo online, sem reiniciar). O que só pode ser
+    /// reparado com o volume livre fica para a próxima inicialização (fsutil dirty set).
+    /// </summary>
     ChkdskScan,
     Dism,
     Sfc
@@ -41,12 +44,12 @@ public static class IntegrityCommands
 
     public static IntegrityCommand For(IntegrityTool tool, string? drive = null) => tool switch
     {
-        IntegrityTool.ChkdskScan => new(tool, "Verificar disco (CHKDSK, só leitura)", "chkdsk.exe", [drive ?? SystemDrive], false),
+        IntegrityTool.ChkdskScan => new(tool, "Verificar e reparar disco (CHKDSK)", "chkdsk.exe", [drive ?? SystemDrive, "/scan"], false),
         IntegrityTool.Dism => new(tool, "DISM (reparar a imagem do Windows)", "DISM.exe", ["/Online", "/Cleanup-Image", "/RestoreHealth"], false),
         _ => new(tool, "SFC (verificar arquivos de sistema)", "sfc.exe", ["/scannow"], true)
     };
 
-    /// <summary>Revisão semanal: CHKDSK (leitura) → DISM → SFC. DISM antes do SFC para o SFC usar a imagem já reparada.</summary>
+    /// <summary>Revisão semanal: CHKDSK /scan (com reparo) → DISM → SFC. DISM antes do SFC para o SFC usar a imagem já reparada.</summary>
     public static readonly IntegrityTool[] WeeklyReview = [IntegrityTool.ChkdskScan, IntegrityTool.Dism, IntegrityTool.Sfc];
 
     /// <summary>Reparo completo: DISM → SFC.</summary>
@@ -73,17 +76,21 @@ public static class IntegrityCommands
 
     private static IntegrityResult InterpretChkdsk(int code, string t, string raw)
     {
-        // Códigos do chkdsk: 0 = sem erros; 1 = erros corrigidos; 2 = limpeza sem /f; 3 = não pôde verificar ou há erros que pedem /f.
+        // Códigos do chkdsk: 0 = sem erros; 1 = erros corrigidos; 2 = só limpeza; 3 = não pôde verificar ou há erros que só
+        // podem ser reparados com o volume livre (o /scan pede /spotfix).
         if (Has(t, "access denied", "acesso negado", "acceso denegado"))
             return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Failed, code, "O CHKDSK precisa de permissão de administrador.", false, raw);
         bool noProblems = Has(t, "found no problems", "não encontrou problemas", "no encontró problemas", "no encontró ningún problema");
-        bool problems = !noProblems && Has(t, "found problems", "encontrou problemas", "encontró problemas");
-        if (code == 0 && !problems)
-            return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Ok, code, "Disco verificado: nenhum problema encontrado.", false, raw);
-        if (code == 3 || problems)
+        bool needsOffline = !noProblems && Has(t, "found problems", "encontrou problemas", "encontró problemas", "spotfix");
+        bool corrected = Has(t, "made corrections", "fez correções", "realizó correcciones", "ha realizado correcciones");
+        if (code == 3 || needsOffline)
             return new(IntegrityTool.ChkdskScan, IntegrityOutcome.ErrorsFound, code,
-                "O CHKDSK encontrou problemas no sistema de arquivos. O reparo precisa ser feito na próxima inicialização.", false, raw);
-        if (code is 1 or 2)
+                "O CHKDSK reparou o que dava com o Windows em uso; o restante precisa ser reparado na próxima inicialização.", false, raw);
+        if (code == 1 || corrected)
+            return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Repaired, code, "Disco verificado: o CHKDSK corrigiu problemas no sistema de arquivos.", false, raw);
+        if (code == 0)
+            return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Ok, code, "Disco verificado: nenhum problema encontrado.", false, raw);
+        if (code == 2)
             return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Ok, code, "Disco verificado: só itens de manutenção menores, sem erros.", false, raw);
         return new(IntegrityTool.ChkdskScan, IntegrityOutcome.Failed, code, $"O CHKDSK não pôde concluir (código {code}).", false, raw);
     }
@@ -173,11 +180,11 @@ public static class MaintenanceReport
         var days = IntegrityCommands.DaysSince(lastReview, DateTime.Now);
         w.WriteLine(days is { } d ? $"Última revisão: há {d} dia(s)." : "Última revisão: nunca feita.");
         w.WriteLine(IntegrityCommands.IsReviewDue(lastReview, DateTime.Now) ? "O Painel mostra o aviso de revisão (mais de 7 dias)." : "Revisão em dia.");
-        w.WriteLine("Revisão semanal executaria (CHKDSK só leitura, sem /f):");
+        w.WriteLine("Revisão semanal executaria (CHKDSK /scan verifica e repara com o Windows em uso):");
         foreach (var tool in IntegrityCommands.WeeklyReview) w.WriteLine($"  - {IntegrityCommands.For(tool).Display}");
         w.WriteLine("Reparo completo executaria:");
         foreach (var tool in IntegrityCommands.FullRepair) w.WriteLine($"  - {IntegrityCommands.For(tool).Display}");
-        w.WriteLine($"Se o CHKDSK achar erros, o agendamento (com confirmação) seria: fsutil {string.Join(" ", IntegrityCommands.ScheduleRepairArguments(IntegrityCommands.SystemDrive))}");
+        w.WriteLine($"Se sobrar reparo que exige o disco livre, a revisão agenda para a próxima inicialização: fsutil {string.Join(" ", IntegrityCommands.ScheduleRepairArguments(IntegrityCommands.SystemDrive))}");
         return Task.CompletedTask;
     }
 }

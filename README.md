@@ -53,7 +53,7 @@
 |---|---|
 | **Painel** | Pontuação de 0 a 100 lida do sistema, **Boost em 1 clique** com resumo "antes → depois" medido, níveis Baixo/Médio/Alto/Máximo, cartões de RAM, CPU, limpeza e pontos de restauração |
 | **Otimizações** | Plano de energia, Modo de Jogo, GPU (HAGS, Game DVR), mouse e teclado, privacidade e IA (telemetria, Copilot, Recall, anúncios), preferências do Explorer, DNS, recursos opcionais e modos seguros do Windows Update |
-| **Windows** | Limpeza com prévia do tamanho, inicialização limpa (desativa sem apagar), manutenção (CHKDSK em leitura, DISM, SFC), correções de rede, Windows Update, Store e cache de ícones |
+| **Windows** | Limpeza com prévia do tamanho, inicialização limpa (desativa sem apagar), manutenção (CHKDSK /scan com reparo, DISM, SFC), correções de rede, Windows Update, Store e cache de ícones |
 | **Debloat** | Remoção dos apps da Store que você marcar, com lista de protegidos que nunca entram e predefinições Leve/Equilibrado/Agressivo |
 | **Ferramentas** | Overlay de FPS e 1% low sem injeção, ping e teste de velocidade, polling rate do mouse (Raw Input), teste do monitor (UFO, ghosting), Hardware Monitor e Check-up (dual channel, XMP/EXPO, PCIe) |
 | **Meu PC** | Processador, caches, placa-mãe, slots de memória, GPU e discos, com diagrama e exportação em .txt, .html e .json (sem números de série por padrão) |
