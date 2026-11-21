@@ -1,0 +1,18 @@
+{
+  "Driver da placa de vídeo": "Graphics card driver",
+  "Não foi possível ler a placa de vídeo.": "Could not read the graphics card.",
+  "Confira no Gerenciador de Dispositivos > Adaptadores de vídeo.": "Check in Device Manager > Display adapters.",
+  "Atualize pelo Windows Update ou pelo site do fabricante da placa.": "Update it through Windows Update or the card maker's website.",
+  "Baixe o driver mais recente na página oficial da {0}: {1}": "Download the latest driver from the official {0} page: {1}",
+  "{0}: driver {1}, data desconhecida.": "{0}: driver {1}, unknown date.",
+  "{0}: driver {1} de {2}, com cerca de {3} meses. Drivers novos trazem correções e otimizações para jogos recentes.": "{0}: driver {1} from {2}, about {3} months old. New drivers bring fixes and optimizations for recent games.",
+  "{0}: driver {1} de {2}.": "{0}: driver {1} from {2}.",
+  "Driver de chipset AMD (estimativa)": "AMD chipset driver (estimate)",
+  "Drivers de chipset da AMD encontrados ({0}), por exemplo: {1}.": "AMD chipset drivers found ({0}), for example: {1}.",
+  "Para atualizar, use a página oficial da AMD: {0}": "To update, use the official AMD page: {0}",
+  "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. Nos Ryzen X3D ele é essencial para os jogos usarem o cache 3D.": "No AMD chipset driver found: Windows seems to be using the generic drivers. On Ryzen X3D it is essential for games to use the 3D cache.",
+  "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. No Ryzen, o driver de chipset traz o gerenciamento de energia e o agendamento corretos.": "No AMD chipset driver found: Windows seems to be using the generic drivers. On Ryzen, the chipset driver brings the correct power management and scheduling.",
+  "Instale o AMD Chipset Software pela página oficial da AMD ({0}): escolha Chipsets e o soquete da sua placa-mãe.": "Install AMD Chipset Software from the official AMD page ({0}): choose Chipsets and your motherboard socket.",
+  "AMD Ryzen: a velocidade da memória pesa mais no Ryzen (Infinity Fabric). Ative o perfil EXPO/DOCP na BIOS e mantenha o driver de chipset AMD atualizado (veja o Check-up).": "AMD Ryzen: memory speed matters more on Ryzen (Infinity Fabric). Enable the EXPO/DOCP profile in the BIOS and keep the AMD chipset driver up to date (see the Check-up).",
+  "Vídeo integrado Radeon: memória rápida em dual channel aumenta muito o FPS; em algumas placas dá para reservar mais memória de vídeo na BIOS (UMA Frame Buffer Size).": "Radeon integrated graphics: fast dual-channel memory greatly increases FPS; on some boards you can reserve more video memory in the BIOS (UMA Frame Buffer Size)."
+}

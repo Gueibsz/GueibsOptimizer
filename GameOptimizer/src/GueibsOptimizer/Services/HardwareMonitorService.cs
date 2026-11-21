@@ -13,7 +13,7 @@ public sealed record HardwareSummary(
     public static HardwareSummary From(HardwareSnapshot s)
     {
         var cpu = s.All.Where(r => r.Kind == HardwareKind.Cpu).ToList();
-        var gpu = s.All.Where(r => r.Kind == HardwareKind.Gpu).ToList();
+        var gpu = MainGpu(s.All.Where(r => r.Kind == HardwareKind.Gpu));
         // O LibreHardwareMonitor expõe "Total Memory" e "Virtual Memory" com os mesmos nomes de sensor
         // ("Memory Used"/"Memory Available"); a memória virtual (RAM + arquivo de paginação) não é a RAM física.
         var mem = s.All.Where(r => r.Kind == HardwareKind.Memory
@@ -23,7 +23,9 @@ public sealed record HardwareSummary(
                              .Select(r => r.Value).DefaultIfEmpty(null).Max();
 
         return new HardwareSummary(
-            Pick(cpu, "Temperature", "CPU Package", "Core (Tctl/Tdie)", "Core (Tdie)", "Core Average", "Core Max"),
+            // Intel: "CPU Package". AMD Ryzen: "Core (Tctl/Tdie)"; nos Ryzen com deslocamento (1000/2000 X) o Tdie é o real e o Tctl vem somado.
+            Pick(cpu, "Temperature", "CPU Package", "Core (Tctl/Tdie)", "Core (Tdie)", "CCDs Average (Tdie)", "CCD1 (Tdie)", "Core (Tctl)",
+                "Core Average", "Core Max"),
             Pick(cpu, "Load", "CPU Total"),
             Pick(cpu, "Power", "CPU Package", "Package"),
             cpuClock,
@@ -36,6 +38,26 @@ public sealed record HardwareSummary(
             Pick(mem, "Load", "Memory"),
             Pick(mem, "Data", "Memory Used"),
             Pick(mem, "Data", "Memory Available"));
+    }
+
+    /// <summary>
+    /// Sensores só da placa de vídeo principal. Ryzen 7000/9000 e Intel com vídeo integrado têm duas GPUs no
+    /// LibreHardwareMonitor; sem isso o cartão poderia mostrar a integrada. Ordem: dedicada, real (não virtual), mais VRAM.
+    /// </summary>
+    public static List<HardwareReading> MainGpu(IEnumerable<HardwareReading> gpuReadings)
+    {
+        var groups = gpuReadings.GroupBy(r => r.Hardware).ToList();
+        if (groups.Count <= 1) return groups.SelectMany(g => g).ToList();
+        static float Vram(IEnumerable<HardwareReading> g) => g
+            .Where(r => r.SensorType == "SmallData" && r.Value is not null &&
+                        (r.Sensor.Equals("GPU Memory Total", StringComparison.OrdinalIgnoreCase) ||
+                         r.Sensor.Equals("D3D Dedicated Memory Total", StringComparison.OrdinalIgnoreCase)))
+            .Select(r => r.Value!.Value).DefaultIfEmpty(0).Max();
+        return groups
+            .OrderBy(g => HardwareNameParser.ParseGpu(g.Key).IsIntegrated)
+            .ThenBy(g => HardwareDetectionService.IsVirtualAdapter(g.Key))
+            .ThenByDescending(g => Vram(g))
+            .First().ToList();
     }
 
     /// <summary>Primeiro sensor do tipo cujo nome bate com a preferência; senão o primeiro do tipo.</summary>

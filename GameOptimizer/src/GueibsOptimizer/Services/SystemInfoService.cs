@@ -91,12 +91,30 @@ public sealed partial class SystemInfoService(Logger logger)
             .Select(r => new MemoryModule(Str(r[0]), Str(r[1]), ToULong(r[2]), ToInt(r[3]), ToInt(r[4]), Str(r[5]), Str(r[6]), ToInt(r[7])))
             .ToList();
 
+    public string ReadCpuName() => ReadCpu()?.Name ?? string.Empty;
+
+    /// <summary>
+    /// Nomes dos dispositivos do sistema com driver fornecido pela AMD (pacote AMD Chipset Software: PSP, GPIO, SMBus, PPM...).
+    /// Drivers genéricos que vêm com o Windows têm a Microsoft como fornecedora e não entram.
+    /// </summary>
+    public IReadOnlyList<string> ReadAmdSystemDrivers() =>
+        Query("Win32_PnPSignedDriver", "DeviceName", "DeviceClass", "DriverProviderName")
+            .Where(r => Str(r[1]).Equals("SYSTEM", StringComparison.OrdinalIgnoreCase) && IsAmdProvider(Str(r[2])))
+            .Select(r => Str(r[0]))
+            .Where(n => n.Length > 0)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+    public static bool IsAmdProvider(string provider) =>
+        provider.Contains("Advanced Micro Devices", StringComparison.OrdinalIgnoreCase) ||
+        provider.Trim().Equals("AMD", StringComparison.OrdinalIgnoreCase);
+
     private static CpuInfo? ReadCpu() =>
         Query("Win32_Processor", "Name", "NumberOfCores", "NumberOfLogicalProcessors", "MaxClockSpeed")
             .Select(r => new CpuInfo(Str(r[0]), ToInt(r[1]), ToInt(r[2]), ToInt(r[3])))
             .FirstOrDefault();
 
-    private IReadOnlyList<GpuInfo> ReadGpus()
+    public IReadOnlyList<GpuInfo> ReadGpus()
     {
         var vram = ReadVramByAdapter();
         return Query("Win32_VideoController", "Name", "DriverVersion", "DriverDate")

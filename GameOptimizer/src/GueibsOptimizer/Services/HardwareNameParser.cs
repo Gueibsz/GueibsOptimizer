@@ -37,6 +37,14 @@ public static partial class HardwareNameParser
     [GeneratedRegex(@"\bArc\s*([AB])(\d{3})", RegexOptions.IgnoreCase)]
     private static partial Regex IntelArc();
 
+    // Radeon dedicadas sem o padrão "RX 1234": RX Vega 56/64, Radeon VII e Radeon Pro (estação de trabalho).
+    [GeneratedRegex(@"\bRX\s*Vega\s*(56|64)\b|\bRadeon\s+(VII)\b|\bRadeon\s+Pro\s+([A-Z]{0,2}\d{3,4}[A-Z]{0,2})", RegexOptions.IgnoreCase)]
+    private static partial Regex RadeonOtherDiscrete();
+
+    // Ryzen de portáteis de jogo (ROG Ally, Legion Go): "Ryzen Z1 Extreme", "Ryzen Z2 Go".
+    [GeneratedRegex(@"Ryzen\s+(Z\d)\s*(Extreme|Go|A)?\b", RegexOptions.IgnoreCase)]
+    private static partial Regex RyzenZ();
+
     public static string Clean(string name) =>
         Regex.Replace(Trademarks().Replace(name, string.Empty), @"\s+", " ").Trim();
 
@@ -83,6 +91,13 @@ public static partial class HardwareNameParser
             string brand = ai ? $"Ryzen AI {tier}" : $"Ryzen {tier}";
             string friendly = ai ? $"AMD Ryzen AI {tier} {model}" : $"AMD Ryzen {tier} {model} (série {series}000)";
             return new CpuIdentity(HardwareVendor.Amd, brand, model, series, clock, x3d, false, friendly);
+        }
+
+        var ryzenZ = RyzenZ().Match(name);
+        if (ryzenZ.Success)
+        {
+            string model = (ryzenZ.Groups[1].Value.ToUpperInvariant() + " " + ryzenZ.Groups[2].Value).Trim();
+            return new CpuIdentity(HardwareVendor.Amd, "Ryzen", model, null, clock, false, false, $"AMD Ryzen {model}");
         }
 
         var intelOther = IntelOther().Match(name);
@@ -136,6 +151,21 @@ public static partial class HardwareNameParser
             string suffix = rx.Groups[2].Value.ToUpperInvariant();
             string model = (digits + " " + suffix).Trim();
             return new GpuIdentity(HardwareVendor.Amd, "Radeon RX", model, false, false, AmdIndex(digits, suffix), $"AMD Radeon RX {model}");
+        }
+
+        var radeonOther = RadeonOtherDiscrete().Match(name);
+        if (radeonOther.Success)
+        {
+            // Índices aproximados: Vega 56/64 e Radeon VII ficam perto das RX 5600/5700; Radeon Pro conta como intermediária.
+            if (radeonOther.Groups[1].Success)
+            {
+                string vega = radeonOther.Groups[1].Value;
+                return new GpuIdentity(HardwareVendor.Amd, "Radeon RX Vega", vega, false, false, vega == "64" ? 2.5 : 2, $"AMD Radeon RX Vega {vega}");
+            }
+            if (radeonOther.Groups[2].Success)
+                return new GpuIdentity(HardwareVendor.Amd, "Radeon VII", string.Empty, false, false, 3, "AMD Radeon VII");
+            string pro = radeonOther.Groups[3].Value.ToUpperInvariant();
+            return new GpuIdentity(HardwareVendor.Amd, "Radeon Pro", pro, false, false, 3, $"AMD Radeon Pro {pro}");
         }
 
         var arc = IntelArc().Match(name);

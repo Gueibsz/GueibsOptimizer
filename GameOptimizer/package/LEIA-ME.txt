@@ -39,7 +39,8 @@ Uso normal
 
 Recursos opcionais (o app pergunta antes)
 ----------------------------------------
-- PresentMon (FPS no overlay) e driver PawnIO (temperatura da CPU): o
+- PresentMon (FPS no overlay, qualquer placa de vídeo) e driver PawnIO
+  (temperatura da CPU Intel ou AMD Ryzen): o
   instalador .exe SEMPRE baixa os dois, das fontes oficiais (Intel, com a
   assinatura conferida, e winget). No .zip, ou se o download falhar, use
   "Baixar PresentMon oficial" em Overlay & Testes e "Instalar driver PawnIO"

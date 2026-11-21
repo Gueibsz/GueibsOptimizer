@@ -72,6 +72,10 @@ public static class PcTierClassifier
             list.Add("NVIDIA: ative o NVIDIA Reflex (\"Ativado\" ou \"Ativado + Boost\") nos jogos que oferecem, como CS2, Valorant e Fortnite, para reduzir a latência.");
         if (gpu.Vendor == HardwareVendor.Amd && !gpu.IsIntegrated)
             list.Add("AMD Radeon: o Radeon Anti-Lag no Adrenalin reduz a latência em jogos competitivos.");
+        if (cpu.Vendor == HardwareVendor.Amd && cpu.Brand.StartsWith("Ryzen", StringComparison.Ordinal))
+            list.Add("AMD Ryzen: a velocidade da memória pesa mais no Ryzen (Infinity Fabric). Ative o perfil EXPO/DOCP na BIOS e mantenha o driver de chipset AMD atualizado (veja o Check-up).");
+        if (gpu.Vendor == HardwareVendor.Amd && gpu.IsIntegrated)
+            list.Add("Vídeo integrado Radeon: memória rápida em dual channel aumenta muito o FPS; em algumas placas dá para reservar mais memória de vídeo na BIOS (UMA Frame Buffer Size).");
         if (isLaptop && hybridGraphics)
             list.Add("Notebook com vídeo híbrido: em Meus Jogos, defina a GPU de alto desempenho para cada jogo e jogue na tomada.");
         else if (isLaptop)

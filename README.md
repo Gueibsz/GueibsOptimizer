@@ -47,6 +47,8 @@ Durante a instalação, o instalador **sempre baixa e instala, de forma nativa, 
 | **Intel PresentMon** | Contador de FPS do overlay (eventos ETW, sem injeção) | Release oficial da Intel no GitHub ([GameTechDev/PresentMon](https://github.com/GameTechDev/PresentMon)), com a assinatura digital da Intel verificada |
 
 - Os arquivos **não vêm embutidos** no instalador: são baixados na hora, sempre da fonte oficial. Por isso a instalação precisa de internet.
+- Os dois servem para **qualquer fabricante**. O PawnIO lê os sensores de processadores Intel e AMD Ryzen. O PresentMon, apesar de ser da Intel, mede o FPS com placas NVIDIA, AMD e Intel.
+- Drivers de vídeo e de chipset (NVIDIA, AMD, Intel) **não** são instalados pelo app, porque não há pacote oficial deles no winget. O Check-up avisa quando o driver está antigo ou faltando e mostra a página oficial do fabricante.
 - Se o download falhar (sem internet ou sem winget), o app é instalado mesmo assim e oferece o componente de novo na tela correspondente.
 - **Na desinstalação, os dois saem junto.** O PresentMon baixado pelo app é apagado. O PawnIO é desinstalado **se foi o Gueibs Optimizer que o instalou**. Se ele já existia antes, porque o Fan Control ou o Libre Hardware Monitor o instalaram por exemplo, continua no PC para não quebrar esses programas.
 
@@ -67,7 +69,7 @@ Os ajustes já aplicados continuam aplicados e podem ser desfeitos normalmente p
 > O instalador **não tem assinatura de código** (o certificado é pago). Na primeira execução, o SmartScreen mostra "O Windows protegeu o computador": clique em **Mais informações → Executar assim mesmo**. Alguns antivírus podem acusar um **falso positivo**, comum em otimizadores porque eles alteram registro e serviços. Para conferir o arquivo, compare o SHA-256 com o `.sha256` publicado no release:
 >
 > ```powershell
-> Get-FileHash .\GueibsOptimizer-Setup-2.5.exe -Algorithm SHA256
+> Get-FileHash .\GueibsOptimizer-Setup-2.6.exe -Algorithm SHA256
 > ```
 >
 > Se preferir, compile você mesmo (veja abaixo).
@@ -80,7 +82,8 @@ Os ajustes já aplicados continuam aplicados e podem ser desfeitos normalmente p
 | **Otimizações** | Plano de energia, Modo de Jogo, GPU (HAGS, Game DVR), mouse e teclado, privacidade e IA (telemetria, Copilot, Recall, anúncios), preferências do Explorer, DNS, recursos opcionais e modos seguros do Windows Update |
 | **Windows** | Limpeza com prévia do tamanho, inicialização limpa (desativa sem apagar), manutenção (CHKDSK /scan com reparo, DISM, SFC), correções de rede, Windows Update, Store e cache de ícones |
 | **Debloat** | Remoção dos apps da Store que você marcar, com lista de protegidos que nunca entram e predefinições Leve/Equilibrado/Agressivo |
-| **Ferramentas** | Overlay de FPS e 1% low sem injeção, ping e teste de velocidade, polling rate do mouse (Raw Input), teste do monitor (UFO, ghosting), Hardware Monitor e Check-up (dual channel, XMP/EXPO, PCIe) |
+| **Ferramentas** | Overlay de FPS e 1% low sem injeção, ping e teste de velocidade, polling rate do mouse (Raw Input), teste do monitor (UFO, ghosting), Hardware Monitor e Check-up (dual channel, XMP/EXPO, PCIe, driver de vídeo e driver de chipset AMD) |
+| **Intel, AMD e NVIDIA** | Reconhece processadores Intel (Core, Core Ultra) e AMD (Ryzen, Ryzen X3D, Ryzen AI, Ryzen Z de portáteis, Threadripper, Athlon), placas NVIDIA GeForce, AMD Radeon (RX, Vega, VII, Pro e integradas) e Intel Arc. Os sensores mostram a placa de vídeo dedicada mesmo com vídeo integrado, e o Check-up indica a página oficial de drivers de cada fabricante |
 | **Meu PC** | Processador, caches, placa-mãe, slots de memória, GPU e discos, com diagrama e exportação em .txt, .html e .json (sem números de série por padrão) |
 | **Meus Jogos** | Detecção de jogos da Steam, Epic e outros launchers, GPU de alto desempenho e prioridade por jogo e presets gráficos por nível do PC |
 | **Instalar Apps** | Catálogo de 264 programas com IDs do winget validados, instalação em fila, atualização em 1 clique e assistente para Windows recém-formatado |
@@ -295,7 +298,8 @@ Nenhum binário de terceiros fica no repositório. O Intel PresentMon e o PawnIO
 > It changes Windows (registry, services, scheduled tasks, power plan, installed apps, network settings). Every tweak stores the previous value and can be undone, but **you use it at your own risk**, with no warranty. Try `--dry-run` first and keep a restore point.
 
 - **Download:** get `GueibsOptimizer-Setup-<version>.exe` from [Releases](https://github.com/Gueibsz/GueibsOptimizer/releases/latest). The installer is **not code-signed**: SmartScreen and some antivirus products may flag it (false positive). Check the SHA-256 against the release `.sha256` file, or build it yourself.
-- **Bundled components (mandatory):** during setup the installer always downloads and installs the **PawnIO** driver (winget `namazso.PawnIO`, CPU sensors) and **Intel PresentMon** (official Intel release, signature verified, FPS counter). They are not embedded in the installer and need internet; if a download fails, the app still installs and offers it again. Both are removed on uninstall (PawnIO only if Gueibs Optimizer installed it).
+- **Bundled components (mandatory):** during setup the installer always downloads and installs the **PawnIO** driver (winget `namazso.PawnIO`, CPU sensors) and **Intel PresentMon** (official Intel release, signature verified, FPS counter). They are not embedded in the installer and need internet; if a download fails, the app still installs and offers it again. Both are removed on uninstall (PawnIO only if Gueibs Optimizer installed it). Both work with any vendor: PawnIO reads Intel and AMD Ryzen sensors, and PresentMon measures FPS on NVIDIA, AMD and Intel graphics.
+- **Intel, AMD and NVIDIA:** recognizes Intel Core/Core Ultra and AMD Ryzen (X3D, AI, Z handheld), Threadripper and Athlon CPUs, and NVIDIA GeForce, AMD Radeon (RX, Vega, VII, Pro, integrated) and Intel Arc graphics. Sensors follow the dedicated GPU even when an integrated one exists. The Check-up verifies the graphics driver (any vendor) and the AMD chipset driver, pointing to each vendor's official driver page (drivers are not downloaded by the app).
 - **Updating:** just run the latest installer over the installed version, with no need to uninstall first. It detects the installed version, keeps settings, profiles and the restore history, and migrates items from older versions.
 - **Features:** live 0–100 score read from the real system state, one-click Boost with measured before/after numbers, performance levels up to an optional **Extreme** level (High-risk, performance-only tweaks, double confirmation, never touching security), power, Game Mode, GPU and input tweaks, privacy and AI (telemetry, Copilot, Recall), cleanup, startup manager, DISM/SFC maintenance, Store app debloat with a protected list, DNS, optional features, safe Windows Update modes, FPS overlay without injection (PresentMon/ETW), network, mouse polling and monitor tests, hardware monitor, profiles and a winget app installer (264 validated IDs). UI in Portuguese, English and Spanish.
 - **Rollback:** previous values (with the registry type and "did not exist" state) are saved to `%AppData%\GueibsOptimizer\backup.json` and restored in reverse order. Removing Store apps is not fully reversible.

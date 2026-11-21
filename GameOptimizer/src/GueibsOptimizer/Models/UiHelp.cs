@@ -44,7 +44,7 @@ public static class UiHelp
     public const string OverlayEdit =
         "Enquanto ligado, o overlay recebe o mouse para você arrastá-lo. Ao desligar, a posição é salva e ele volta a deixar o clique passar.";
     public const string Fps =
-        "Mede o programa em primeiro plano com o PresentMon da Intel, que lê eventos do Windows (ETW); nada é injetado. FPS médio e 1%/0.1% low são calculados nos últimos 10 segundos. " +
+        "Mede o programa em primeiro plano com o PresentMon da Intel, que lê eventos do Windows (ETW); nada é injetado. Funciona com qualquer placa de vídeo (NVIDIA, AMD ou Intel). FPS médio e 1%/0.1% low são calculados nos últimos 10 segundos. " +
         "1% low é o FPS médio dos 1% quadros mais lentos: mostra as travadas que a média esconde.";
     public const string PresentMonDownload =
         "Baixa a versão de console do PresentMon da página oficial de releases da Intel no GitHub (GameTechDev). O arquivo só é usado se a assinatura digital for válida e da Intel Corporation; caso contrário, é apagado. Fica em %AppData%\\GueibsOptimizer\\tools.";
@@ -63,12 +63,12 @@ public static class UiHelp
 
     // --- Hardware ---
     public const string PawnIO =
-        "O LibreHardwareMonitor precisa do driver PawnIO para ler temperatura, clock e potência da CPU. Ele é instalado pelo winget (pacote namazso.PawnIO), assinado digitalmente, o mesmo usado pelo Fan Control e pelo Libre Hardware Monitor. " +
+        "O LibreHardwareMonitor precisa do driver PawnIO para ler temperatura, clock e potência da CPU, tanto Intel quanto AMD Ryzen. Ele é instalado pelo winget (pacote namazso.PawnIO), assinado digitalmente, o mesmo usado pelo Fan Control e pelo Libre Hardware Monitor. " +
         "Por ser um driver, só instale se confiar na fonte. Pode ser removido em Configurações > Aplicativos.";
     public const string CopySummary =
         "Copia o resumo do PC (CPU, GPU com VRAM, memória, placa-mãe, discos, Windows, monitores) para a área de transferência, para colar em fóruns ou pedir ajuda. Não inclui nome de usuário nem números de série.";
     public const string RefreshInfo =
         "Lê de novo as informações do PC pelo WMI e pelo registro. Útil depois de trocar uma peça ou atualizar o driver de vídeo.";
     public const string Checkup =
-        "Verifica dual channel e XMP/EXPO (estimativas, porque o Windows não informa o modo real), o link PCIe da placa de vídeo, o plano de energia, o Modo de Jogo, o HAGS e a taxa de atualização dos monitores. Só lê, não altera nada.";
+        "Verifica dual channel e XMP/EXPO (estimativas, porque o Windows não informa o modo real), o link PCIe e o driver da placa de vídeo (NVIDIA, AMD ou Intel), o driver de chipset AMD nos processadores Ryzen, o plano de energia, o Modo de Jogo, o HAGS e a taxa de atualização dos monitores. Só lê, não altera nada.";
 }

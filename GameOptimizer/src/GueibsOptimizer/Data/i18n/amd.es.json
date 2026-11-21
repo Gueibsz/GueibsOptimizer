@@ -1,0 +1,18 @@
+{
+  "Driver da placa de vídeo": "Controlador de la tarjeta gráfica",
+  "Não foi possível ler a placa de vídeo.": "No se pudo leer la tarjeta gráfica.",
+  "Confira no Gerenciador de Dispositivos > Adaptadores de vídeo.": "Revísalo en Administrador de dispositivos > Adaptadores de pantalla.",
+  "Atualize pelo Windows Update ou pelo site do fabricante da placa.": "Actualízalo con Windows Update o en el sitio del fabricante de la tarjeta.",
+  "Baixe o driver mais recente na página oficial da {0}: {1}": "Descarga el controlador más reciente en la página oficial de {0}: {1}",
+  "{0}: driver {1}, data desconhecida.": "{0}: controlador {1}, fecha desconocida.",
+  "{0}: driver {1} de {2}, com cerca de {3} meses. Drivers novos trazem correções e otimizações para jogos recentes.": "{0}: controlador {1} del {2}, con unos {3} meses. Los controladores nuevos traen correcciones y optimizaciones para juegos recientes.",
+  "{0}: driver {1} de {2}.": "{0}: controlador {1} del {2}.",
+  "Driver de chipset AMD (estimativa)": "Controlador de chipset AMD (estimación)",
+  "Drivers de chipset da AMD encontrados ({0}), por exemplo: {1}.": "Controladores de chipset de AMD encontrados ({0}), por ejemplo: {1}.",
+  "Para atualizar, use a página oficial da AMD: {0}": "Para actualizar, usa la página oficial de AMD: {0}",
+  "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. Nos Ryzen X3D ele é essencial para os jogos usarem o cache 3D.": "No se encontró ningún controlador de chipset de AMD: Windows parece usar los controladores genéricos. En los Ryzen X3D es esencial para que los juegos usen la caché 3D.",
+  "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. No Ryzen, o driver de chipset traz o gerenciamento de energia e o agendamento corretos.": "No se encontró ningún controlador de chipset de AMD: Windows parece usar los controladores genéricos. En Ryzen, el controlador de chipset aporta la gestión de energía y la planificación correctas.",
+  "Instale o AMD Chipset Software pela página oficial da AMD ({0}): escolha Chipsets e o soquete da sua placa-mãe.": "Instala AMD Chipset Software desde la página oficial de AMD ({0}): elige Chipsets y el socket de tu placa base.",
+  "AMD Ryzen: a velocidade da memória pesa mais no Ryzen (Infinity Fabric). Ative o perfil EXPO/DOCP na BIOS e mantenha o driver de chipset AMD atualizado (veja o Check-up).": "AMD Ryzen: la velocidad de la memoria pesa más en Ryzen (Infinity Fabric). Activa el perfil EXPO/DOCP en la BIOS y mantén actualizado el controlador de chipset AMD (mira el Check-up).",
+  "Vídeo integrado Radeon: memória rápida em dual channel aumenta muito o FPS; em algumas placas dá para reservar mais memória de vídeo na BIOS (UMA Frame Buffer Size).": "Gráficos integrados Radeon: la memoria rápida en dual channel aumenta mucho los FPS; en algunas placas se puede reservar más memoria de vídeo en la BIOS (UMA Frame Buffer Size)."
+}

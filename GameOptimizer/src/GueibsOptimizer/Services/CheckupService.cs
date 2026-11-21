@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 using GueibsOptimizer.Core;
 using GueibsOptimizer.Models;
@@ -135,6 +136,83 @@ public static partial class CheckupRules
         }
     }
 
+    // Páginas oficiais de drivers (só abertas/indicadas; o app não baixa drivers de vídeo nem de chipset).
+    public const string NvidiaDriversUrl = "https://www.nvidia.com/Download/index.aspx";
+    public const string AmdDriversUrl = "https://www.amd.com/en/support/download/drivers.html";
+    public const string IntelDriversUrl = "https://www.intel.com/content/www/us/en/support/detect.html";
+
+    public static string? DriversUrl(HardwareVendor vendor) => vendor switch
+    {
+        HardwareVendor.Nvidia => NvidiaDriversUrl,
+        HardwareVendor.Amd => AmdDriversUrl,
+        HardwareVendor.Intel => IntelDriversUrl,
+        _ => null
+    };
+
+    private static string VendorName(HardwareVendor vendor) => vendor switch
+    {
+        HardwareVendor.Nvidia => "NVIDIA",
+        HardwareVendor.Amd => "AMD",
+        HardwareVendor.Intel => "Intel",
+        _ => "fabricante"
+    };
+
+    /// <summary>Driver da placa de vídeo principal (NVIDIA, AMD ou Intel): mais de 6 meses vira "Atenção".</summary>
+    public static CheckItem GpuDriver(IReadOnlyList<GpuInfo> gpus, DateTime today)
+    {
+        const string title = "Driver da placa de vídeo";
+        var main = gpus.Where(g => !g.IsVirtual)
+            .Select(g => (Info: g, Id: HardwareNameParser.ParseGpu(g.Name)))
+            .OrderBy(p => p.Id.IsIntegrated)
+            .ThenByDescending(p => p.Id.PerformanceIndex)
+            .FirstOrDefault();
+        if (main.Info is null)
+            return new(title, CheckStatus.Attention, "Não foi possível ler a placa de vídeo.",
+                "Confira no Gerenciador de Dispositivos > Adaptadores de vídeo.");
+
+        var url = DriversUrl(main.Id.Vendor);
+        string fix = url is null
+            ? "Atualize pelo Windows Update ou pelo site do fabricante da placa."
+            : $"Baixe o driver mais recente na página oficial da {VendorName(main.Id.Vendor)}: {url}";
+        string name = main.Info.Name;
+        string version = string.IsNullOrWhiteSpace(main.Info.Driver) ? "—" : main.Info.Driver;
+
+        if (!TryParseDriverDate(main.Info.DriverDate, out var date))
+            return new(title, CheckStatus.Attention,
+                $"{name}: driver {version}, data desconhecida.", fix);
+
+        int months = (int)((today - date).TotalDays / 30.44);
+        if (months >= 6)
+            return new(title, CheckStatus.Attention,
+                $"{name}: driver {version} de {date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}, com cerca de {months} meses. Drivers novos trazem correções e otimizações para jogos recentes.",
+                fix);
+        return new(title, CheckStatus.Ok,
+            $"{name}: driver {version} de {date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}.",
+            "Nada a fazer.");
+    }
+
+    public static bool TryParseDriverDate(string text, out DateTime date) =>
+        DateTime.TryParseExact(text, ["dd/MM/yyyy", "yyyyMMdd"], CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+    /// <summary>
+    /// Driver de chipset da AMD (só em processadores AMD). Estimativa: procura drivers do sistema cujo fornecedor é a AMD;
+    /// os drivers genéricos que vêm com o Windows têm a Microsoft como fornecedora.
+    /// </summary>
+    public static CheckItem? AmdChipset(CpuIdentity cpu, IReadOnlyList<string> amdSystemDrivers)
+    {
+        if (cpu.Vendor != HardwareVendor.Amd) return null;
+        const string title = "Driver de chipset AMD (estimativa)";
+        if (amdSystemDrivers.Count > 0)
+            return new(title, CheckStatus.Ok,
+                $"Drivers de chipset da AMD encontrados ({amdSystemDrivers.Count}), por exemplo: {amdSystemDrivers[0]}.",
+                $"Para atualizar, use a página oficial da AMD: {AmdDriversUrl}");
+        return new(title, CheckStatus.Attention,
+            cpu.IsX3D
+                ? "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. Nos Ryzen X3D ele é essencial para os jogos usarem o cache 3D."
+                : "Nenhum driver de chipset da AMD encontrado: o Windows parece usar os drivers genéricos. No Ryzen, o driver de chipset traz o gerenciamento de energia e o agendamento corretos.",
+            $"Instale o AMD Chipset Software pela página oficial da AMD ({AmdDriversUrl}): escolha Chipsets e o soquete da sua placa-mãe.");
+    }
+
     /// <summary>Converte o valor do DEVPKEY de velocidade de link (1 = 2.5 GT/s ... 5 = 32 GT/s) em geração.</summary>
     public static int GenFromLinkSpeed(int value) => value is >= 1 and <= 6 ? value : 0;
 }
@@ -150,6 +228,18 @@ public sealed class CheckupService(TweakRegistry registry, SystemInfoService inf
         });
         var links = await ReadPcieAsync();
         var monitors = await Task.Run(DisplayInfo.Monitors);
+        var (gpus, cpu, amdDrivers) = await Task.Run(() =>
+        {
+            IReadOnlyList<GpuInfo> g = [];
+            CpuIdentity c = HardwareNameParser.ParseCpu(string.Empty);
+            IReadOnlyList<string> d = [];
+            try { g = info.ReadGpus(); } catch (Exception ex) { logger.Warn($"GPU: {ex.Message}"); }
+            try { c = HardwareNameParser.ParseCpu(info.ReadCpuName()); } catch (Exception ex) { logger.Warn($"CPU: {ex.Message}"); }
+            if (c.Vendor == HardwareVendor.Amd)
+                try { d = info.ReadAmdSystemDrivers(); } catch (Exception ex) { logger.Warn($"Drivers AMD: {ex.Message}"); }
+            return (g, c, d);
+        });
+        var amdChipset = CheckupRules.AmdChipset(cpu, amdDrivers);
 
         var tweakChecks = await Task.Run(() => new[]
         {
@@ -166,6 +256,8 @@ public sealed class CheckupService(TweakRegistry registry, SystemInfoService inf
             CheckupRules.DualChannel(memory),
             CheckupRules.Xmp(memory),
             CheckupRules.Pcie(links),
+            CheckupRules.GpuDriver(gpus, DateTime.Today),
+            .. (amdChipset is null ? Array.Empty<CheckItem>() : [amdChipset]),
             .. tweakChecks,
             CheckupRules.RefreshRate(monitors)
         ];
